@@ -3766,6 +3766,8 @@ class MusicService :
         )
 
     private fun ensureForegroundChannelExists() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
+
         val nm = getSystemService(NotificationManager::class.java)
         nm?.createNotificationChannel(
             NotificationChannel(

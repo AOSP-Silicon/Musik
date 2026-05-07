@@ -300,7 +300,7 @@ fun AboutScreen(
                             color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f)
                         ) {
                             Text(
-                                text = BuildConfig.ARCHITECTURE.uppercase(),
+                                text = android.os.Build.SUPPORTED_ABIS.firstOrNull()?.uppercase() ?: "UNIVERSAL",
                                 style = MaterialTheme.typography.labelMedium,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.onSecondaryContainer,

@@ -6,6 +6,7 @@
 package com.metrolist.music.utils
 
 import com.metrolist.music.BuildConfig
+import com.metrolist.music.utils.DeviceInfo
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
@@ -73,7 +74,7 @@ object Updater {
      * Get the current app's architecture and variant
      */
     private fun getCurrentAppVariant(): Pair<String, String> {
-        val architecture = BuildConfig.ARCHITECTURE
+        val architecture = DeviceInfo.ARCHITECTURE
         val variant = if (BuildConfig.CAST_AVAILABLE) "gms" else "foss"
         return architecture to variant
     }

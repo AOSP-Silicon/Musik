@@ -37,6 +37,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.metrolist.music.BuildConfig
+import com.metrolist.music.utils.DeviceInfo
 import com.metrolist.music.LocalPlayerAwareWindowInsets
 import com.metrolist.music.R
 import com.metrolist.music.constants.CheckForUpdatesKey
@@ -122,7 +123,7 @@ fun UpdaterScreen(
                             Text(stringResource(R.string.version_format, BuildConfig.VERSION_NAME))
                         },
                         description = {
-                            val arch = BuildConfig.ARCHITECTURE
+                            val arch = DeviceInfo.ARCHITECTURE
                             val variant = if (BuildConfig.CAST_AVAILABLE) "GMS" else "FOSS"
                             Text("$arch - $variant")
                         },

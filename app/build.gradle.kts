@@ -117,6 +117,15 @@ android {
         manifestPlaceholders["discordAppId"] = ""
     }
 
+    splits {
+	abi {
+            isEnable = true
+	    reset()
+	    include("arm64-v8a", "armeabi-v7a")
+	    isUniversalApk = true
+	}
+    }
+
     flavorDimensions += listOf("variant")
     productFlavors {
         // FOSS - Updater, but no gcast or rpc

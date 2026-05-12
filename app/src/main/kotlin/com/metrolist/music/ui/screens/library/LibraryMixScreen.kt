@@ -6,9 +6,13 @@
 package com.metrolist.music.ui.screens.library
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -19,6 +23,7 @@ import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
@@ -46,6 +51,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
@@ -53,6 +60,8 @@ import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -441,6 +450,15 @@ fun LibraryMixScreen(
         }
     }
 
+
+    val libraryOverviewContent = @Composable {
+        LibraryOverviewHeader(
+            songCount = songs.value.size,
+            albumCount = albums.value.size,
+            playlistCount = playlist.value.size,
+        )
+    }
+
     val isRefreshing by viewModel.isRefreshing.collectAsStateWithLifecycle()
     val pullRefreshState = rememberPullToRefreshState()
 
@@ -465,6 +483,13 @@ fun LibraryMixScreen(
                         contentType = CONTENT_TYPE_HEADER,
                     ) {
                         filterContent()
+                    }
+
+                    item(
+                        key = "library_overview",
+                        contentType = CONTENT_TYPE_HEADER,
+                    ) {
+                        libraryOverviewContent()
                     }
 
                     item(
@@ -797,6 +822,14 @@ fun LibraryMixScreen(
                     }
 
                     item(
+                        key = "library_overview",
+                        span = { GridItemSpan(maxLineSpan) },
+                        contentType = CONTENT_TYPE_HEADER,
+                    ) {
+                        libraryOverviewContent()
+                    }
+
+                    item(
                         key = "header",
                         span = { GridItemSpan(maxLineSpan) },
                         contentType = CONTENT_TYPE_HEADER,
@@ -1086,5 +1119,129 @@ fun LibraryMixScreen(
                     .align(Alignment.TopCenter)
                     .padding(LocalPlayerAwareWindowInsets.current.asPaddingValues()),
         )
+    }
+}
+
+@Composable
+private fun LibraryOverviewHeader(
+    songCount: Int,
+    albumCount: Int,
+    playlistCount: Int,
+    modifier: Modifier = Modifier,
+) {
+    val colorScheme = MaterialTheme.colorScheme
+
+    Box(
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 10.dp)
+                .clip(RoundedCornerShape(32.dp))
+                .background(
+                    Brush.linearGradient(
+                        listOf(
+                            colorScheme.primary.copy(alpha = 0.24f),
+                            colorScheme.primaryContainer.copy(alpha = 0.18f),
+                            colorScheme.surfaceContainerHigh,
+                        ),
+                    ),
+                ).border(
+                    width = 1.dp,
+                    color = colorScheme.outline.copy(alpha = 0.16f),
+                    shape = RoundedCornerShape(32.dp),
+                ),
+    ) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = Modifier.padding(20.dp),
+        ) {
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(
+                    text = stringResource(R.string.filter_library),
+                    color = colorScheme.onSurface,
+                    style = MaterialTheme.typography.headlineLarge,
+                    fontWeight = FontWeight.ExtraBold,
+                )
+                Text(
+                    text = "${songCount} ${stringResource(R.string.songs)} • " +
+                        "${albumCount} ${stringResource(R.string.albums)} • " +
+                        "${playlistCount} ${stringResource(R.string.playlists)}",
+                    color = colorScheme.onSurface.copy(alpha = 0.72f),
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                LibraryStatPill(
+                    value = playlistCount,
+                    label = stringResource(R.string.playlists),
+                    icon = R.drawable.playlist_play,
+                    modifier = Modifier.weight(1f),
+                )
+                LibraryStatPill(
+                    value = songCount,
+                    label = stringResource(R.string.songs),
+                    icon = R.drawable.music_note,
+                    modifier = Modifier.weight(1f),
+                )
+                LibraryStatPill(
+                    value = albumCount,
+                    label = stringResource(R.string.albums),
+                    icon = R.drawable.album,
+                    modifier = Modifier.weight(1f),
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun LibraryStatPill(
+    value: Int,
+    label: String,
+    icon: Int,
+    modifier: Modifier = Modifier,
+) {
+    val colorScheme = MaterialTheme.colorScheme
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        modifier =
+            modifier
+                .clip(RoundedCornerShape(22.dp))
+                .background(colorScheme.surface.copy(alpha = 0.58f))
+                .border(
+                    width = 1.dp,
+                    color = colorScheme.outline.copy(alpha = 0.12f),
+                    shape = RoundedCornerShape(22.dp),
+                ).padding(horizontal = 12.dp, vertical = 10.dp),
+    ) {
+        Icon(
+            painter = painterResource(icon),
+            contentDescription = null,
+            tint = colorScheme.primary,
+            modifier = Modifier.size(18.dp),
+        )
+        Column {
+            Text(
+                text = value.toString(),
+                color = colorScheme.onSurface,
+                style = MaterialTheme.typography.labelLarge,
+                fontWeight = FontWeight.Bold,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+            )
+            Text(
+                text = label,
+                color = colorScheme.onSurface.copy(alpha = 0.68f),
+                style = MaterialTheme.typography.labelSmall,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+            )
+        }
     }
 }

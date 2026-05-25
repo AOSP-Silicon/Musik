@@ -37,9 +37,9 @@ object PlayerSliderColors {
         val inactiveTrackColor = when (playerBackground) {
             PlayerBackgroundStyle.DEFAULT -> {
                 if (useDarkTheme) {
-                    MaterialTheme.colorScheme.outline.copy(alpha = 0.4f)
+                    Color.White.copy(alpha = 0.4f)
                 } else {
-                    MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+                    Color.Black.copy(alpha = 0.4f)
                 }
             }
             PlayerBackgroundStyle.BLUR, PlayerBackgroundStyle.GRADIENT -> {

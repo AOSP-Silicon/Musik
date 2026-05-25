@@ -32,6 +32,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.add
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -105,6 +106,9 @@ import com.metrolist.music.LocalPlayerConnection
 import com.metrolist.music.R
 import com.metrolist.music.constants.ListItemHeight
 import com.metrolist.music.constants.PlayerBackgroundStyle
+import com.metrolist.music.constants.PlayerCornerRadius
+import com.metrolist.music.constants.PlayerHorizontalPadding
+import com.metrolist.music.constants.PlayerVerticalPadding
 import com.metrolist.music.constants.QueueEditLockKey
 import com.metrolist.music.constants.UseNewPlayerDesignKey
 import com.metrolist.music.extensions.metadata
@@ -156,9 +160,11 @@ fun Queue(
     textButtonColor: Color,
     iconButtonColor: Color,
     pureBlack: Boolean,
+    useDarkTheme: Boolean,
     showInlineLyrics: Boolean,
     playerBackground: PlayerBackgroundStyle = PlayerBackgroundStyle.DEFAULT,
     onToggleLyrics: () -> Unit = {},
+    nowPlayingPanelColor: Color,
 ) {
     val navController = LocalNavController.current
     val context = LocalContext.current
@@ -266,17 +272,20 @@ fun Queue(
             if (useNewPlayerDesign) {
                 // New design
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
                     modifier =
                         Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 30.dp, vertical = 12.dp)
+                            .fillMaxHeight()
+                            .padding(horizontal = PlayerHorizontalPadding, vertical = 8.dp)
                             .windowInsetsPadding(
                                 WindowInsets.systemBars.only(
                                     WindowInsetsSides.Bottom + WindowInsetsSides.Horizontal,
                                 ),
-                            ),
+                            )
+                            .clip(RoundedCornerShape(PlayerCornerRadius))
+                            .background(nowPlayingPanelColor),
                 ) {
                     val buttonSize = 42.dp
                     val iconSize = 24.dp
@@ -296,6 +305,8 @@ fun Queue(
                             bottomEnd = 50.dp,
                         )
 
+                    Spacer(modifier = Modifier.width(6.dp))
+
                     PlayerQueueButton(
                         icon = R.drawable.queue_music,
                         onClick = { state.expandSoft() },
@@ -307,7 +318,10 @@ fun Queue(
                         iconSize = iconSize,
                         textBackgroundColor = TextBackgroundColor,
                         playerBackground = playerBackground,
+                        useDarkTheme = useDarkTheme,
                     )
+
+                    Spacer(modifier = Modifier.width(6.dp))
 
                     PlayerQueueButton(
                         icon = R.drawable.bedtime,
@@ -328,7 +342,10 @@ fun Queue(
                         iconSize = iconSize,
                         textBackgroundColor = TextBackgroundColor,
                         playerBackground = playerBackground,
+                        useDarkTheme = useDarkTheme,
                     )
+
+                    Spacer(modifier = Modifier.width(6.dp))
 
                     val shuffleModeEnabled by playerConnection.shuffleModeEnabled.collectAsStateWithLifecycle()
                     PlayerQueueButton(
@@ -345,7 +362,10 @@ fun Queue(
                         iconSize = iconSize,
                         textBackgroundColor = TextBackgroundColor,
                         playerBackground = playerBackground,
+                        useDarkTheme = useDarkTheme,
                     )
+
+                    Spacer(modifier = Modifier.width(6.dp))
 
                     PlayerQueueButton(
                         icon = R.drawable.lyrics,
@@ -358,7 +378,10 @@ fun Queue(
                         iconSize = iconSize,
                         textBackgroundColor = TextBackgroundColor,
                         playerBackground = playerBackground,
+                        useDarkTheme = useDarkTheme,
                     )
+
+                    Spacer(modifier = Modifier.width(6.dp))
 
                     PlayerQueueButton(
                         icon =
@@ -379,6 +402,7 @@ fun Queue(
                         iconSize = iconSize,
                         textBackgroundColor = TextBackgroundColor,
                         playerBackground = playerBackground,
+                        useDarkTheme = useDarkTheme,
                     )
 
                     Spacer(modifier = Modifier.weight(1f))
@@ -414,6 +438,7 @@ fun Queue(
                             tint = iconButtonColor,
                         )
                     }
+                    Spacer(modifier = Modifier.width(6.dp))
                 }
             } else {
                 // Old design
@@ -423,11 +448,13 @@ fun Queue(
                     modifier =
                         Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 30.dp, vertical = 12.dp)
+                            .padding(horizontal = PlayerHorizontalPadding, vertical = PlayerVerticalPadding)
                             .windowInsetsPadding(
                                 WindowInsets.systemBars
-                                    .only(WindowInsetsSides.Bottom + WindowInsetsSides.Horizontal),
-                            ),
+                                    .only(WindowInsetsSides.Bottom + WindowInsetsSides.Horizontal)
+                            )
+                            .clip(RoundedCornerShape(PlayerCornerRadius))
+                            .background(nowPlayingPanelColor),
                 ) {
                     TextButton(
                         onClick = { state.expandSoft() },
@@ -1282,6 +1309,7 @@ private fun PlayerQueueButton(
     iconSize: androidx.compose.ui.unit.Dp,
     textBackgroundColor: Color,
     playerBackground: PlayerBackgroundStyle,
+    useDarkTheme: Boolean,
 ) {
     val buttonModifier =
         Modifier
@@ -1332,7 +1360,11 @@ private fun PlayerQueueButton(
                         }
 
                         PlayerBackgroundStyle.DEFAULT -> {
-                            MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                            if (useDarkTheme) {
+                                Color.White.copy(alpha = 0.7f)
+                            } else {
+                                Color.Black.copy(alpha = 0.8f)
+                            }
                         }
                     }
                 }

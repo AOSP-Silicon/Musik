@@ -146,7 +146,9 @@ import com.metrolist.music.constants.PlayerBackgroundStyle
 import com.metrolist.music.constants.PlayerBackgroundStyleKey
 import com.metrolist.music.constants.PlayerButtonsStyle
 import com.metrolist.music.constants.PlayerButtonsStyleKey
+import com.metrolist.music.constants.PlayerCornerRadius
 import com.metrolist.music.constants.PlayerHorizontalPadding
+import com.metrolist.music.constants.PlayerVerticalPadding
 import com.metrolist.music.constants.QueuePeekHeight
 import com.metrolist.music.constants.SleepTimerDefaultKey
 import com.metrolist.music.constants.SleepTimerFadeOutKey
@@ -162,6 +164,7 @@ import com.metrolist.music.extensions.togglePlayPause
 import com.metrolist.music.extensions.toggleRepeatMode
 import com.metrolist.music.listentogether.RoomRole
 import com.metrolist.music.models.MediaMetadata
+import com.metrolist.music.ui.component.AnimatedGradientBackground
 import com.metrolist.music.ui.component.BottomSheet
 import com.metrolist.music.ui.component.BottomSheetState
 import com.metrolist.music.ui.component.LocalBottomSheetPageState
@@ -198,6 +201,22 @@ import androidx.datastore.preferences.core.edit
 import com.metrolist.music.constants.SleepTimerFadeOutKey
 import com.metrolist.music.constants.SleepTimerStopAfterCurrentSongKey
 
+@Composable
+private fun NowPlayingPanel(
+    panelColor: Color,
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit,
+) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = PlayerHorizontalPadding)
+            .clip(RoundedCornerShape(PlayerCornerRadius))
+            .background(panelColor)
+            .padding(vertical = PlayerVerticalPadding),
+        content = content,
+    )
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -401,7 +420,7 @@ fun BottomSheetPlayer(
     val fallbackColor = MaterialTheme.colorScheme.surface.toArgb()
 
     LaunchedEffect(mediaMetadata?.id, playerBackground) {
-        if (playerBackground == PlayerBackgroundStyle.GRADIENT) {
+        if (playerBackground == PlayerBackgroundStyle.BLUR || playerBackground == PlayerBackgroundStyle.DEFAULT || playerBackground == PlayerBackgroundStyle.GRADIENT) {
             val currentMetadata = mediaMetadata
             if (currentMetadata != null && currentMetadata.thumbnailUrl != null) {
                 val cachedColors = gradientColorsCache[currentMetadata.id]
@@ -496,9 +515,9 @@ fun BottomSheetPlayer(
                 when (playerButtonsStyle) {
                     PlayerButtonsStyle.DEFAULT -> {
                         if (useDarkTheme) {
-                            Pair(Color.White, Color.Black)
+                            Pair(Color.White.copy(alpha = 0.7f), Color.Black)
                         } else {
-                            Pair(Color.Black, Color.White)
+                            Pair(Color.Black.copy(alpha = 0.8f), Color.White)
                         }
                     }
 
@@ -552,8 +571,8 @@ fun BottomSheetPlayer(
                 when (playerButtonsStyle) {
                     PlayerButtonsStyle.DEFAULT -> {
                         Pair(
-                            MaterialTheme.colorScheme.surfaceContainerHighest,
-                            MaterialTheme.colorScheme.onSurface,
+                            if (useDarkTheme) Color.White.copy(alpha = 0.7f) else Color.Black.copy(alpha = 0.8f),
+                            if (useDarkTheme) Color.Black else Color.White,
                         )
                     }
 
@@ -817,6 +836,15 @@ fun BottomSheetPlayer(
 
     val backgroundAlpha = state.progress.coerceIn(0f, 1f)
 
+    val nowPlayingPanelColor =
+        when (playerBackground) {
+            PlayerBackgroundStyle.DEFAULT, PlayerBackgroundStyle.BLUR, PlayerBackgroundStyle.GRADIENT -> {
+                gradientColors.firstOrNull()?.copy(alpha = 0.4f) ?: MaterialTheme.colorScheme.surface
+            }
+        }
+
+    val nowPlayingPanelShape = RoundedCornerShape(PlayerCornerRadius)
+
     BottomSheet(
         state = state,
         modifier = modifier,
@@ -899,7 +927,10 @@ fun BottomSheetPlayer(
                     }
 
                     else -> {
-                        PlayerBackgroundStyle.DEFAULT
+                        AnimatedGradientBackground(
+                            isActive = effectiveIsPlaying,
+                            modifier = Modifier.fillMaxSize()
+                        )
                     }
                 }
             }
@@ -1886,7 +1917,9 @@ fun BottomSheetPlayer(
                         Spacer(Modifier.weight(1f))
 
                         mediaMetadata?.let {
-                            controlsContent(it)
+                            NowPlayingPanel(panelColor = nowPlayingPanelColor) {
+                                controlsContent(it)
+                            }
                         }
 
                         Spacer(Modifier.weight(1f))
@@ -1937,11 +1970,15 @@ fun BottomSheetPlayer(
                         }
                     }
 
+                    Spacer(Modifier.height(4.dp))
+
                     mediaMetadata?.let {
-                        controlsContent(it)
+                        NowPlayingPanel(panelColor = nowPlayingPanelColor) {
+                            controlsContent(it)
+                        }
                     }
 
-                    Spacer(Modifier.height(30.dp))
+                    Spacer(Modifier.height(4.dp))
                 }
             }
         }
@@ -1965,11 +2002,13 @@ fun BottomSheetPlayer(
                 textButtonColor = textButtonColor,
                 iconButtonColor = iconButtonColor,
                 pureBlack = pureBlack,
+                useDarkTheme = useDarkTheme,
                 showInlineLyrics = showInlineLyrics,
                 playerBackground = playerBackground,
                 onToggleLyrics = {
                     showInlineLyrics = !showInlineLyrics
                 },
+                nowPlayingPanelColor = nowPlayingPanelColor,
             )
         }
     }

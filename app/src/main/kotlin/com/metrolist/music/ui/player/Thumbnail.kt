@@ -76,6 +76,7 @@ import com.metrolist.music.constants.CropAlbumArtKey
 import com.metrolist.music.constants.HidePlayerThumbnailKey
 import com.metrolist.music.constants.PlayerBackgroundStyle
 import com.metrolist.music.constants.PlayerBackgroundStyleKey
+import com.metrolist.music.constants.PlayerCornerRadius
 import com.metrolist.music.constants.PlayerHorizontalPadding
 import com.metrolist.music.constants.SeekExtraSeconds
 import com.metrolist.music.constants.SwipeThumbnailKey
@@ -117,7 +118,7 @@ private fun calculateThumbnailDimensions(
     containerWidth: Dp,
     containerHeight: Dp = containerWidth,
     horizontalPadding: Dp = PlayerHorizontalPadding,
-    cornerRadius: Dp = ThumbnailCornerRadius,
+    cornerRadius: Dp = PlayerCornerRadius,
     isLandscape: Boolean = false
 ): ThumbnailDimensions {
     // In landscape, use height as the constraining dimension for a square thumbnail
@@ -130,7 +131,7 @@ private fun calculateThumbnailDimensions(
         itemWidth = containerWidth,
         containerSize = containerWidth,
         thumbnailSize = effectiveSize,
-        cornerRadius = cornerRadius * 2
+        cornerRadius = cornerRadius
     )
 }
 

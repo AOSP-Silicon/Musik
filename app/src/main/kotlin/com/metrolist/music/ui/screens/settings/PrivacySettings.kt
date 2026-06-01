@@ -36,6 +36,7 @@ import com.metrolist.music.LocalDatabase
 import com.metrolist.music.LocalPlayerAwareWindowInsets
 import com.metrolist.music.R
 import com.metrolist.music.constants.DisableScreenshotKey
+import com.metrolist.music.constants.EnableDebugLogsKey
 import com.metrolist.music.constants.PauseListenHistoryKey
 import com.metrolist.music.constants.PauseSearchHistoryKey
 import com.metrolist.music.ui.component.DefaultDialog
@@ -43,13 +44,19 @@ import com.metrolist.music.ui.component.IconButton
 import com.metrolist.music.ui.component.Material3SettingsGroup
 import com.metrolist.music.ui.component.Material3SettingsItem
 import com.metrolist.music.ui.utils.backToMain
+import com.metrolist.music.utils.LoggingTree
 import com.metrolist.music.utils.rememberPreference
+import androidx.core.content.FileProvider
+import java.io.File
+import android.content.Intent
+import androidx.compose.ui.platform.LocalContext
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PrivacySettings(
     navController: NavController
 ) {
+    val context = LocalContext.current
     val database = LocalDatabase.current
     val (pauseListenHistory, onPauseListenHistoryChange) = rememberPreference(
         key = PauseListenHistoryKey,
@@ -63,6 +70,25 @@ fun PrivacySettings(
         key = DisableScreenshotKey,
         defaultValue = false
     )
+    val (enableDebugLogs, onEnableDebugLogsChange) = rememberPreference(
+        key = EnableDebugLogsKey,
+        defaultValue = false
+    )
+
+    // Helper to share logs
+    val shareLogs = {
+        val logFile = File(context.cacheDir, "app_logs.txt")
+        // Just share existing file
+        val uri = FileProvider.getUriForFile(context, "${context.packageName}.FileProvider", logFile)
+        val intent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_STREAM, uri)
+            putExtra(Intent.EXTRA_SUBJECT, "App Logs - ${context.packageName}")
+            putExtra(Intent.EXTRA_TITLE, "App Logs")
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+        context.startActivity(Intent.createChooser(intent, "Share Logs"))
+    }
 
     var showClearListenHistoryDialog by remember {
         mutableStateOf(false)
@@ -220,7 +246,7 @@ fun PrivacySettings(
 
         Material3SettingsGroup(
             title = stringResource(R.string.misc),
-            items = listOf(
+            items = listOfNotNull(
                 Material3SettingsItem(
                     icon = painterResource(R.drawable.screenshot),
                     title = { Text(stringResource(R.string.disable_screenshot)) },
@@ -241,7 +267,35 @@ fun PrivacySettings(
                         )
                     },
                     onClick = { onDisableScreenshotChange(!disableScreenshot) }
-                )
+                ),
+                Material3SettingsItem(
+                    icon = painterResource(R.drawable.bug_report),
+                    title = { Text("Debug Logging") },
+                    description = { Text("Capture and share application logs") },
+                    trailingContent = {
+                        Switch(
+                            checked = enableDebugLogs,
+                            onCheckedChange = onEnableDebugLogsChange,
+                            thumbContent = {
+                                Icon(
+                                    painter = painterResource(
+                                        id = if (enableDebugLogs) R.drawable.check else R.drawable.close
+                                    ),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(androidx.compose.material3.SwitchDefaults.IconSize)
+                                )
+                            }
+                        )
+                    },
+                    onClick = { onEnableDebugLogsChange(!enableDebugLogs) }
+                ),
+                if (enableDebugLogs) {
+                    Material3SettingsItem(
+                        icon = painterResource(R.drawable.share),
+                        title = { Text("Share Debug Logs") },
+                        onClick = { shareLogs() }
+                    )
+                } else null
             )
         )
         Spacer(modifier = Modifier.height(16.dp))

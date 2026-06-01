@@ -82,6 +82,17 @@ class App :
         CipherDeobfuscator.initialize(this)
 
         Timber.plant(Timber.DebugTree())
+        com.metrolist.music.utils.LoggingTree.initialize(cacheDir)
+        Timber.plant(com.metrolist.music.utils.LoggingTree)
+        
+        // Observe logging preference
+        applicationScope.launch {
+            dataStore.data.map { it[EnableDebugLogsKey] ?: false }
+                .distinctUntilChanged()
+                .collect { enabled ->
+                    com.metrolist.music.utils.LoggingTree.isEnabled = enabled
+                }
+        }
 
         // Pre-read Coil cache size on background to avoid runBlocking in newImageLoader
         applicationScope.launch(Dispatchers.IO) {

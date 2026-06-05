@@ -47,7 +47,7 @@ jobs:
             -keyalg RSA \
             -keysize 2048 \
             -validity 10000 \
-            -dname "CN=Metrolist PR ${{ github.event.number }},O=Metrolist,C=US"
+            -dname "CN=Musik PR ${{ github.event.number }},O=Musik,C=US"
 
       - name: Save PR debug keystore
         if: steps.pr_keystore.outputs.cache-hit != 'true'
@@ -60,15 +60,20 @@ jobs:
         run: ./gradlew --console=plain assembleFossDebug :app:lintFossDebug --warning-mode summary
         env:
           GITHUB_EVENT_NAME: ${{ github.event_name }}
-          METROLIST_APPLICATION_ID: com.metrolist.music.pr.p${{ github.event.number }}
-          METROLIST_APP_NAME: Metrolist PR ${{ github.event.number }}
+          METROLIST_APPLICATION_ID: com.metrolist.musik.pr.p${{ github.event.number }}
+          METROLIST_APP_NAME: Musik PR ${{ github.event.number }}
           METROLIST_DEBUG_KEYSTORE_PATH: pr-debug.keystore
           PULL_REQUEST: "true"
           LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
           LASTFM_SECRET: ${{ secrets.LASTFM_SECRET }}
 
+      - name: Set artifact name
+        run: |
+         echo "ARTIFACT_NAME=musik-universal-debug-pr-${GITHUB_SHA::7}-$(date +'%d%m%y')" >> $GITHUB_ENV
+
       - name: Upload APK
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v4
         with:
-          name: app-universal-debug-pr-${{ github.event.number }}
-          path: app/build/outputs/apk/foss/debug/*.apk
+          name: ${{ env.ARTIFACT_NAME }}
+          path: app/build/outputs/apk/foss/debug/*universal*.apk
+          if-no-files-found: error

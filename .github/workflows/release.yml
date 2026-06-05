@@ -216,7 +216,6 @@ jobs:
               echo ""
               git log --pretty=format:"- %s" --no-merges | head -50 | grep -vi "$SKIP_PATTERNS" || true
               echo ""
-              echo "[View full changelog](https://github.com/${{ github.repository }}/commits/$CURRENT_TAG)"
             } > release_notes.md
           elif [ "$LATEST_RELEASE" = "$CURRENT_TAG" ]; then
             echo "# Re-release: Musik v${VERSION}" > release_notes.md

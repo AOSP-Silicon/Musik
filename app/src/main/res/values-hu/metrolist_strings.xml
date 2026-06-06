@@ -191,7 +191,7 @@
     <string name="enable_scrobbling">Scrobbling engedélyezése</string>
     <string name="lastfm_now_playing">Jelenleg játszott státusz megosztása</string>
     <string name="last_fm_send_likes">Kedveltek és nem kedveltek szinkronizálása</string>
-    <string name="last_fm_send_likes_description">A Metrolist-ben kedvelt és nem kedvelt dalok hasonlóan jelennek meg Last-fm-en is</string>
+    <string name="last_fm_send_likes_description">A Musik-ben kedvelt és nem kedvelt dalok hasonlóan jelennek meg Last-fm-en is</string>
     <string name="logging_in">Bejelentkezés…</string>
     <string name="scrobbling_configuration">Scrobbling konfigurálása</string>
     <string name="scrobble_min_track_duration">Bizonyos mp-nél hosszabb számok scrobble-olása</string>
@@ -259,7 +259,7 @@
     <string name="export_option_save">Mentés a Dokumentumokba</string>
     <string name="changelog">Változásnapló</string>
     <string name="changelog_empty">Változtatásnapló nem elérhető</string>
-    <string name="github_releases_url">https://github.com/MetrolistGroup/Metrolist/releases</string>
+    <string name="github_releases_url">https://github.com/AOSP-Silicon/Musik/releases</string>
     <string name="list_bullet">•</string>
     <string name="view_on_github">Megtekintés GitHub-on</string>
     <string name="current_version">Jelenlegi verzió</string>
@@ -415,7 +415,7 @@
     <string name="crash_description">Váratlan hiba történt. Kérjük, ossza meg az összeomlási jelentést, hogy megoldahassuk a problémát</string>
     <string name="crash_share_logs">Naplók megosztása</string>
     <string name="crash_share_title">Összeomlási jelentés megosztása</string>
-    <string name="crash_report_subject">Metrolist összeomlási jelentés</string>
+    <string name="crash_report_subject">Musik összeomlási jelentés</string>
     <string name="crash_close">Bezárás</string>
     <string name="crash_no_log">Nincs elérhető összeomlási jelentés</string>
     <string name="palette_dynamic">Dinamikus</string>
@@ -459,7 +459,7 @@
     <string name="clear_recognition_history_confirm">Biztosan törölni akarja a felismerési előzményeket?</string>
     <string name="delete_from_history">Törlés az előzményekből</string>
     <string name="re_listen">Újrahallgatás</string>
-    <string name="play_on_app">Lejátszás Metrolist-en</string>
+    <string name="play_on_app">Lejátszás Musik-en</string>
     <string name="qs_tile_music_recognizer">Zenefelismerés</string>
     <string name="map_csv_columns">CSV oszlopok kiosztása</string>
     <string name="first_row_is_header">Az első sor a fejléc</string>
@@ -478,7 +478,7 @@
     <string name="discord_buttons">Gombok</string>
     <string name="discord_button_1">1. gomb</string>
     <string name="discord_button_2">2. gomb</string>
-    <string name="discord_information_warning">A Metrolist elküldi az aktuálisan lejátszott dalodat a Discord Gateway-jére, hogy frissítse a Rich Presence-edet. Minden adat közvetlenül az eszközödről a Discordra kerül – nincsenek harmadik féltől származó szerverek. A tokened az eszközön marad, és soha nem kerül megosztásra. A felhasználói token használata Gateway-kapcsolatokhoz azonban hivatalosan nem támogatott, és sértheti a Discord Szolgáltatási Feltételeit. A saját belátásod szerint járj el!</string>
+    <string name="discord_information_warning">A Musik elküldi az aktuálisan lejátszott dalodat a Discord Gateway-jére, hogy frissítse a Rich Presence-edet. Minden adat közvetlenül az eszközödről a Discordra kerül – nincsenek harmadik féltől származó szerverek. A tokened az eszközön marad, és soha nem kerül megosztásra. A felhasználói token használata Gateway-kapcsolatokhoz azonban hivatalosan nem támogatott, és sértheti a Discord Szolgáltatási Feltételeit. A saját belátásod szerint járj el!</string>
     <string name="discord_activity_type">Tevékenységi típus</string>
     <string name="discord_activity_playing">Lejátszás alatt</string>
     <string name="discord_activity_listening">Hallgatás</string>
@@ -520,7 +520,7 @@
     <string name="like_what_i_do">Tetszik, amit csinálok?</string>
     <string name="buy_mo_a_coffee">Hívjon meg egy kávéra!</string>
     <string name="community_and_info">Közösség &amp; információ</string>
-    <string name="metrolist">METROLIST</string>
+    <string name="metrolist">MUSIK</string>
     <string name="wanna_play_favorite_song">Játszuk a kedvenc dalukat?</string>
     <string name="yeah">Naná!</string>
     <string name="stands_with_palestine">Ez a projekt Palesztina mellett áll 🇵🇸</string>
@@ -596,7 +596,7 @@
     <string name="plays">játssza</string>
     <string name="casting_to">Átküldés %s-re</string>
     <string name="progress_percent">Állapot %s%%</string>
-    <string name="listening_to_metrolist">Metrolist-en hallgat</string>
+    <string name="listening_to_metrolist">Musik-en hallgat</string>
     <string name="open">Megnyitás</string>
     <string name="failed_to_create_image">%s kép létrehozása sikertelen</string>
     <string name="copied_title">Cím másolva</string>
@@ -611,13 +611,13 @@
     <string name="view_channel">Csatorna megtekintése</string>
     <string name="album_art">Lemezborító</string>
     <string name="no_song_playing">Nincs lejátszott dal</string>
-    <string name="tap_to_open">Koppintson a Metrolist megnyitásához</string>
+    <string name="tap_to_open">Koppintson a Musik megnyitásához</string>
     <string name="previous">Előző</string>
     <string name="play_pause">Lejátszás/Szünet</string>
     <string name="next">Következő</string>
     <string name="like">Kedvel</string>
     <string name="not_playing">Nincs lejátszott dal</string>
-    <string name="tap_to_play">Koppintson a Metrolist megnyitásához</string>
+    <string name="tap_to_play">Koppintson a Musik megnyitásához</string>
     <string name="widget_description">Zene widget lejátszási vezérlőkkel</string>
     <string name="turntable_widget_description">Kerek lejátszó widget lejátszás vezérlőkkel és kedveléssel</string>
     <string name="widget_music_player">Zene Lejátszó</string>
@@ -765,7 +765,7 @@
     <string name="recognition_notification_processing">Azonosítás…</string>
     <string name="recognition_notification_no_match">Nincs találat</string>
     <string name="recognition_notification_failed">Felismerés sikertelen</string>
-    <string name="listen_on_metrolist">Meghallgatás Metrolist-en</string>
+    <string name="listen_on_metrolist">Meghallgatás Musik-en</string>
     <string name="android_auto">Android Auto</string>
     <string name="android_auto_visible_sections">Látható részek</string>
     <string name="android_auto_reorder_hint">Koppintson egy szakaszra az engedélyezéséhez vagy letiltásához.\nNyomja meg hosszan a fogót az átrendezéshez. Alapértelmezés szerint az első szakasz jelenik meg</string>

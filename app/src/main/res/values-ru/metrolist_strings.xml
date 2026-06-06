@@ -180,7 +180,7 @@
     <string name="scrobble_delay_minutes">Задержка скробблинга (в минутах)</string>
     <string name="swipe_song_to_remove">Свайп - удалить трек из плейлиста</string>
     <string name="last_fm_send_likes">Синхронизировать отметки «Нравится»</string>
-    <string name="last_fm_send_likes_description">Добавлять или убирать отметку «Любимое» на Last.fm, когда ставится или снимается отметка «Нравится» в Metrolist</string>
+    <string name="last_fm_send_likes_description">Добавлять или убирать отметку «Любимое» на Last.fm, когда ставится или снимается отметка «Нравится» в Musik</string>
     <string name="lyrics_romanize_chinese">Романизировать тексты на китайском</string>
     <string name="google_cast">Google Cast</string>
     <string name="google_cast_description">Трансляция звука на Chromecast и другие устройства с поддержкой Cast</string>
@@ -267,7 +267,7 @@
     <string name="wrapped_playlist_saved">Плейлист сохранён</string>
     <string name="casting_to">Трансляция на %s</string>
     <string name="progress_percent">Прогресс %s%%</string>
-    <string name="listening_to_metrolist">Слушает Metrolist</string>
+    <string name="listening_to_metrolist">Слушает Musik</string>
     <string name="open">Открыть</string>
     <string name="failed_to_create_image">Не удалось создать изображение: %s</string>
     <string name="copied_title">Название скопировано</string>
@@ -299,7 +299,7 @@
     <string name="pause_music_when_media_is_muted">Останавливать воспроизведение при отключении звука</string>
     <string name="no_song_playing">Сейчас ничего не играет</string>
     <string name="album_art">Обложка альбома</string>
-    <string name="tap_to_open">Нажмите, чтобы открыть Metrolist</string>
+    <string name="tap_to_open">Нажмите, чтобы открыть Musik</string>
     <string name="previous">Предыдущий</string>
     <string name="play_pause">Играть/Пауза</string>
     <string name="next">Следующий</string>
@@ -395,7 +395,7 @@
     <string name="crash_description">Произошла непредвиденная ошибка. Пожалуйста, отправьте отчет о сбое, чтобы помочь нам устранить проблему</string>
     <string name="crash_share_logs">Поделиться логами</string>
     <string name="crash_share_title">Поделиться отчетом о сбое</string>
-    <string name="crash_report_subject">Отчет о сбое Metrolist</string>
+    <string name="crash_report_subject">Отчет о сбое Musik</string>
     <string name="crash_close">Закрыть</string>
     <string name="crash_no_log">Лог сбоя недоступен</string>
     <string name="palette_dynamic">Динамическая</string>
@@ -444,7 +444,7 @@
     <string name="unblock">Разблокировать</string>
     <string name="user_blocked_by_host">Заблокирован ведущим</string>
     <string name="not_playing">Ничего не играет</string>
-    <string name="tap_to_play">Нажмите, чтобы открыть Metrolist</string>
+    <string name="tap_to_play">Нажмите, чтобы открыть Musik</string>
     <string name="widget_music_player">Музыкальный плеер</string>
     <string name="widget_turntable">Виниловый проигрыватель</string>
     <string name="together">Вместе</string>
@@ -492,7 +492,7 @@
     <string name="song_title_column">Столбец названия трека</string>
     <string name="recently_converted">Недавно конвертированные</string>
     <string name="importing_csv">Импорт CSV…</string>
-    <string name="play_on_app">Играть в Metrolist</string>
+    <string name="play_on_app">Играть в Musik</string>
     <string name="listening">Слушаем…</string>
     <string name="continue_action">Продолжить</string>
     <string name="enable">Включить</string>
@@ -538,7 +538,7 @@
     <string name="discord_buttons">Кнопки</string>
     <string name="discord_button_1">Кнопка 1</string>
     <string name="discord_button_2">Кнопка 2</string>
-    <string name="discord_information_warning">Metrolist отправляет информацию о воспроизводимом треке в Discord Gateway для обновления статуса Rich Presence. Все данные передаются напрямую с вашего устройства в Discord — без участия сторонних серверов. Ваш токен хранится на устройстве и никуда не передается. Однако использование пользовательского токена для подключения к Gateway официально не поддерживается и может нарушать Условия использования Discord. Используйте на своё усмотрение!</string>
+    <string name="discord_information_warning">Musik отправляет информацию о воспроизводимом треке в Discord Gateway для обновления статуса Rich Presence. Все данные передаются напрямую с вашего устройства в Discord — без участия сторонних серверов. Ваш токен хранится на устройстве и никуда не передается. Однако использование пользовательского токена для подключения к Gateway официально не поддерживается и может нарушать Условия использования Discord. Используйте на своё усмотрение!</string>
     <string name="discord_activity_type">Тип активности</string>
     <string name="discord_activity_name">Название активности</string>
     <string name="discord_advanced_mode">Расширенный режим</string>
@@ -562,7 +562,7 @@
     <string name="lyrics_provider_priority_desc">Перетащите, чтобы изменить порядок поставщиков. Чем выше позиция, тем выше приоритет</string>
     <string name="changelog">Список изменений</string>
     <string name="changelog_empty">Список изменений недоступен</string>
-    <string name="github_releases_url">https://github.com/MetrolistGroup/Metrolist/releases</string>
+    <string name="github_releases_url">https://github.com/AOSP-Silicon/Musik/releases</string>
     <string name="list_bullet">•</string>
     <string name="view_on_github">Открыть на GitHub</string>
     <string name="current_version">Текущая версия</string>
@@ -615,7 +615,7 @@
     <string name="like_what_i_do">Нравится то, что я делаю?</string>
     <string name="buy_mo_a_coffee">Угостить меня кофе!</string>
     <string name="community_and_info">Сообщество и информация</string>
-    <string name="metrolist">METROLIST</string>
+    <string name="metrolist">MUSIK</string>
     <string name="wanna_play_favorite_song">Хотите включить их любимую песню?</string>
     <string name="yeah">Да!</string>
     <string name="stands_with_palestine">Этот проект поддерживает Палестину 🇵🇸</string>
@@ -776,7 +776,7 @@
     <string name="recognition_notification_processing">Определяем…</string>
     <string name="recognition_notification_no_match">Совпадений не найдено</string>
     <string name="recognition_notification_failed">Не удалось распознать</string>
-    <string name="listen_on_metrolist">Слушать в Metrolist</string>
+    <string name="listen_on_metrolist">Слушать в Musik</string>
     <string name="android_auto">Android Auto</string>
     <string name="android_auto_visible_sections">Видимые разделы</string>
     <string name="android_auto_reorder_hint">Нажмите на раздел, чтобы включить или отключить его.\nУдерживайте значок перетаскивания, чтобы изменить порядок. Первый раздел будет отображаться по умолчанию</string>

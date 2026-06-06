@@ -217,7 +217,7 @@
     <string name="lyrics_offset">歌詞のタイミングを調整</string>
     <string name="google_cast_description">Chromecastなどのキャスト対応のデバイスに音声をキャストできます</string>
     <string name="last_fm_send_likes">高評価/低評価を反映</string>
-    <string name="last_fm_send_likes_description">Metrolistで曲に高評価/低評価をつけると、Last.fmでもラブ/アンラブされます</string>
+    <string name="last_fm_send_likes_description">Musikで曲に高評価/低評価をつけると、Last.fmでもラブ/アンラブされます</string>
     <string name="edit_desc">タイトルやアーティスト名を編集します</string>
     <string name="start_radio_desc">この項目をもとにラジオを開始します</string>
     <string name="play_next_desc">キューの先頭に追加します</string>
@@ -298,7 +298,7 @@
     <string name="crash_title">アプリがクラッシュしました</string>
     <string name="crash_share_logs">クラッシュログを共有</string>
     <string name="crash_share_title">クラッシュレポートを共有</string>
-    <string name="crash_report_subject">Metrolistのクラッシュレポート</string>
+    <string name="crash_report_subject">Musikのクラッシュレポート</string>
     <string name="crash_close">閉じる</string>
     <string name="crash_no_log">クラッシュログがありません</string>
     <string name="palette_dynamic">ダイナミック</string>
@@ -388,15 +388,15 @@
     <string name="error_eq_apply_failed">イコライザープロファイルを適用できません：%1$s</string>
     <string name="casting_to">%sにキャスト中</string>
     <string name="progress_percent">進行状況：%s%%</string>
-    <string name="listening_to_metrolist">Metrolistで再生中</string>
+    <string name="listening_to_metrolist">Musikで再生中</string>
     <string name="failed_to_create_image">画像の作成に失敗しました：%s</string>
     <string name="error_playing">再生中にエラーが発生しました</string>
     <string name="failed_to_parse_proxy">プロキシURLを解析できません</string>
     <string name="error_playback_failed">再生に失敗しました</string>
     <string name="no_song_playing">再生中の曲はありません</string>
-    <string name="tap_to_open">タップしてMetrolistを開く</string>
+    <string name="tap_to_open">タップしてMusikを開く</string>
     <string name="previous">前へ</string>
-    <string name="tap_to_play">タップしてMetrolistを開く</string>
+    <string name="tap_to_play">タップしてMusikを開く</string>
     <string name="listen_together_you_are_host">あなたはホストです</string>
     <string name="listen_together_you_are_guest">あなたはゲストです</string>
     <string name="listen_together_join_requests">参加リクエスト</string>
@@ -481,7 +481,7 @@
     <string name="clear_recognition_history_confirm">認識履歴をすべて削除しますか？</string>
     <string name="delete_from_history">履歴から削除</string>
     <string name="re_listen">もう一度聴く</string>
-    <string name="play_on_app">Metrolistで再生</string>
+    <string name="play_on_app">Musikで再生</string>
     <string name="map_csv_columns">CSV列の対応設定</string>
     <string name="first_row_is_header">1行目をヘッダーとして扱う</string>
     <string name="artist_name_column">アーティスト名の列</string>
@@ -518,7 +518,7 @@
     <string name="discord_buttons">ボタン</string>
     <string name="discord_button_1">ボタン 1</string>
     <string name="discord_button_2">ボタン 2</string>
-    <string name="discord_information_warning">Metrolistは、再生状況を更新するために、現在再生中の曲をDiscordのゲートウェイに送信します。すべてのデータはお使いのデバイスからDiscordに直接送信され、第三者のサーバーは使用されません。トークンはデバイス内に保持され、共有されることはありません。ただし、ゲートウェイ接続にユーザートークンを使用することはDiscordで正式にサポートされておらず、Discordの利用規約に違反する可能性があります。自己責任で使用してください。</string>
+    <string name="discord_information_warning">Musikは、再生状況を更新するために、現在再生中の曲をDiscordのゲートウェイに送信します。すべてのデータはお使いのデバイスからDiscordに直接送信され、第三者のサーバーは使用されません。トークンはデバイス内に保持され、共有されることはありません。ただし、ゲートウェイ接続にユーザートークンを使用することはDiscordで正式にサポートされておらず、Discordの利用規約に違反する可能性があります。自己責任で使用してください。</string>
     <string name="discord_activity_type">アクティビティの種類</string>
     <string name="discord_activity_playing">プレイ中</string>
     <string name="discord_activity_listening">再生中</string>
@@ -561,7 +561,7 @@
     <string name="lyrics_provider_priority_desc">ドラッグして提供元を並び替えます。上にあるほど優先順位が高くなります</string>
     <string name="changelog">変更履歴</string>
     <string name="changelog_empty">変更履歴はありません</string>
-    <string name="github_releases_url">https://github.com/MetrolistGroup/Metrolist/releases</string>
+    <string name="github_releases_url">https://github.com/AOSP-Silicon/Musik/releases</string>
     <string name="list_bullet">•</string>
     <string name="view_on_github">GitHubを開く</string>
     <string name="current_version">バージョン</string>
@@ -604,7 +604,7 @@
     <string name="like_what_i_do">私の活動を気に入ってもらえましたか？</string>
     <string name="buy_mo_a_coffee">コーヒーをおごる</string>
     <string name="community_and_info">コミュニティと情報</string>
-    <string name="metrolist">METROLIST</string>
+    <string name="metrolist">MUSIK</string>
     <string name="wanna_play_favorite_song">お気に入りの曲を再生しますか？</string>
     <string name="yeah">はい</string>
     <string name="stands_with_palestine">このプロジェクトはパレスチナを支持しています 🇵🇸</string>
@@ -748,7 +748,7 @@
     <string name="recognition_notification_processing">認識中…</string>
     <string name="recognition_notification_no_match">一致する曲が見つかりませんでした</string>
     <string name="recognition_notification_failed">認識に失敗しました</string>
-    <string name="listen_on_metrolist">Metrolistで聴く</string>
+    <string name="listen_on_metrolist">Musikで聴く</string>
     <string name="android_auto">Android Auto</string>
     <string name="android_auto_visible_sections">表示する項目</string>
     <string name="android_auto_reorder_hint">項目をタップするとオン/オフを切り替えられます。長押しで並び替えができます。先頭の項目がデフォルトで表示されます</string>

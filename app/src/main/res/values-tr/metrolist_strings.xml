@@ -176,7 +176,7 @@
     <string name="scrobble_delay_minutes">Scrobble gecikmesi (dakika)</string>
     <string name="swipe_song_to_remove">Şarkıyı oynatma listesinden kaldırmak için kaydırın</string>
     <string name="last_fm_send_likes">Beğenilenleri ve beğenilmeyenleri eşitle</string>
-    <string name="last_fm_send_likes_description">Metrolist\'te bir şarkıyı beğendiğinizde veya beğenmediğinizde bu Last.fm\'de güncellenir</string>
+    <string name="last_fm_send_likes_description">Musik\'te bir şarkıyı beğendiğinizde veya beğenmediğinizde bu Last.fm\'de güncellenir</string>
     <string name="primary_color_style">Ana renk</string>
     <string name="auto_scroll">Yeniden eşitle</string>
     <string name="lyrics_romanize_chinese">Çince sözleri Latinleştir</string>
@@ -261,7 +261,7 @@
     <string name="wrapped_playlist_saved">Oynatma listesi kaydedildi</string>
     <string name="casting_to">%s cihazına yansıtılıyor</string>
     <string name="progress_percent">İlerleme %s%%</string>
-    <string name="listening_to_metrolist">Metrolist dinleniyor</string>
+    <string name="listening_to_metrolist">Musik dinleniyor</string>
     <string name="open">Aç</string>
     <string name="failed_to_create_image">Görsel oluşturulamadı: %s</string>
     <string name="copied_title">Başlık kopyalandı</string>
@@ -294,7 +294,7 @@
     <string name="system_equalizer">Sistem ekolayzırı</string>
     <string name="album_art">Albüm görseli</string>
     <string name="no_song_playing">Oynatılan şarkı yok</string>
-    <string name="tap_to_open">Metrolist\'i açmak için dokun</string>
+    <string name="tap_to_open">Musik\'i açmak için dokun</string>
     <string name="previous">Önceki</string>
     <string name="play_pause">Oynat/Duraklat</string>
     <string name="next">Sonraki</string>
@@ -387,7 +387,7 @@
     <string name="crash_description">Beklenmedik bir hata oluştu. Sorunu düzeltmemize yardımcı olmak için lütfen hata raporunu paylaşın</string>
     <string name="crash_share_logs">Günlükleri paylaş</string>
     <string name="crash_share_title">Hata raporlarını paylaş</string>
-    <string name="crash_report_subject">Metrolist hata raporu</string>
+    <string name="crash_report_subject">Musik hata raporu</string>
     <string name="crash_close">Kapat</string>
     <string name="crash_no_log">Hata logları bulunmamakta</string>
     <string name="palette_dynamic">Dinamik</string>
@@ -436,7 +436,7 @@
     <string name="user_blocked_by_host">Oda sahibi tarafından engellendi</string>
     <string name="transfer_ownership">Sahipliği devret</string>
     <string name="not_playing">Şarkı oynatılmıyor</string>
-    <string name="tap_to_play">Metrolist\'i açmak için tıkla</string>
+    <string name="tap_to_play">Musik\'i açmak için tıkla</string>
     <string name="widget_music_player">Müzik Çalar</string>
     <string name="widget_turntable">Dönen plak</string>
     <string name="together">Birlikte</string>
@@ -484,7 +484,7 @@
     <string name="song_title_column">Şarkı adı sütunu</string>
     <string name="recently_converted">Son dönüştürülenler</string>
     <string name="importing_csv">CSV içe aktarılıyor…</string>
-    <string name="play_on_app">Metrolist\'te Oynat</string>
+    <string name="play_on_app">Musik\'te Oynat</string>
     <string name="listening">Dinleniliyor…</string>
     <string name="continue_action">Devam et</string>
     <string name="enable">Etkinleştir</string>
@@ -522,7 +522,7 @@
     <string name="discord_buttons">Butonlar</string>
     <string name="discord_button_1">1. tuş</string>
     <string name="discord_button_2">2. tuş</string>
-    <string name="discord_information_warning">Metrolist, aktif olarak oynatılan şarkınızı Discord Gateway’ine göndererek Rich Presence durumunu günceller. Tüm veriler cihazınızdan Discord’a gider — herhangi bir üçüncü taraf sunucu kullanılmaz. Token’iniz cihazında kalır ve asla paylaşılmaz. Ancak, Gateway bağlantıları için kullanıcı tokenı kullanmak Discord tarafından resmi olarak desteklenmez ve bu Discord Hizmet Şartları’nı ihlal edebilir. Sorumluluk tamamen size aittir!</string>
+    <string name="discord_information_warning">Musik, aktif olarak oynatılan şarkınızı Discord Gateway’ine göndererek Rich Presence durumunu günceller. Tüm veriler cihazınızdan Discord’a gider — herhangi bir üçüncü taraf sunucu kullanılmaz. Token’iniz cihazında kalır ve asla paylaşılmaz. Ancak, Gateway bağlantıları için kullanıcı tokenı kullanmak Discord tarafından resmi olarak desteklenmez ve bu Discord Hizmet Şartları’nı ihlal edebilir. Sorumluluk tamamen size aittir!</string>
     <string name="discord_activity_type">Etkinlik türü</string>
     <string name="discord_activity_playing">Oynuyor</string>
     <string name="discord_activity_listening">Dinliyor</string>
@@ -554,7 +554,7 @@
     <string name="lyrics_provider_priority_desc">Sağlayıcıları sürükleyerek sıralayın. Üst konum daha yüksek öncelik demektir</string>
     <string name="changelog">Değişiklik günlüğü</string>
     <string name="changelog_empty">Değişiklik günlüğü mevcut değil</string>
-    <string name="github_releases_url">https://github.com/MetrolistGroup/Metrolist/releases</string>
+    <string name="github_releases_url">https://github.com/AOSP-Silicon/Musik/releases</string>
     <string name="list_bullet">•</string>
     <string name="view_on_github">GitHub\'da görüntüle</string>
     <string name="current_version">Mevcut sürüm</string>
@@ -607,7 +607,7 @@
     <string name="like_what_i_do">Yaptıklarımdan hoşlanıyor musunuz?</string>
     <string name="buy_mo_a_coffee">Bana bir kahve ısmarla!</string>
     <string name="community_and_info">Topluluk ve Bilgi</string>
-    <string name="metrolist">METROLIST</string>
+    <string name="metrolist">MUSIK</string>
     <string name="wanna_play_favorite_song">Onların en sevdiği şarkıyı çalmak ister misin?</string>
     <string name="yeah">Evet!</string>
     <string name="stands_with_palestine">Bu proje Filistin\'in yanındadır 🇵🇸</string>
@@ -728,7 +728,7 @@
     <string name="android_auto_reorder_hint">Bir bölümü etkinleştirmek veya devre dışı bırakmak için o bölüme dokunun.\nSıralamayı değiştirmek için sürükleme tutamacına uzun süre basın. Varsayılan olarak ilk bölüm gösterilecektir</string>
     <string name="android_auto_visible_sections">Görünür bölümler</string>
     <string name="android_auto">Android Auto</string>
-    <string name="listen_on_metrolist">Metrolist\'te dinle</string>
+    <string name="listen_on_metrolist">Musik\'te dinle</string>
     <string name="recognition_notification_failed">Tanıma başarısız oldu</string>
     <string name="recognition_notification_no_match">Eşleşme bulunamadı</string>
     <string name="recognition_notification_processing">Tanımlanıyor…</string>

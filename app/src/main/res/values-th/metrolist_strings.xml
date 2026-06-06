@@ -218,7 +218,7 @@
     <string name="enable_scrobbling">เปิดใช้งาน Scrobbling</string>
     <string name="lastfm_now_playing">ส่งสถานะกำลังเล่น</string>
     <string name="last_fm_send_likes">ส่งสถานะถูกใจและยกเลิกถูกใจ</string>
-    <string name="last_fm_send_likes_description">กด Love หรือ Unlove เพลงใน Last.fm เมื่อมีการกดถูกใจหรือยกเลิกถูกใจใน Metrolist</string>
+    <string name="last_fm_send_likes_description">กด Love หรือ Unlove เพลงใน Last.fm เมื่อมีการกดถูกใจหรือยกเลิกถูกใจใน Musik</string>
     <string name="logging_in">กำลังเข้าสู่ระบบ…</string>
     <string name="scrobbling_configuration">การตั้งค่า Scrobbling</string>
     <string name="scrobble_min_track_duration">Scrobble เพลงที่ยาวกว่า (วินาที)</string>
@@ -309,7 +309,7 @@
     <string name="error_eq_apply_failed">ไม่สามารถใช้โปรไฟล์อีควอไลเซอร์: %1$s</string>
     <string name="casting_to">กำลังแคสต์ไปยัง %s</string>
     <string name="progress_percent">ความคืบหน้า %s%%</string>
-    <string name="listening_to_metrolist">กำลังฟังผ่าน Metrolist</string>
+    <string name="listening_to_metrolist">กำลังฟังผ่าน Musik</string>
     <string name="open">เปิด</string>
     <string name="failed_to_create_image">ไม่สามารถสร้างรูปภาพ: %s</string>
     <string name="copied_title">คัดลอกชื่อเพลงแล้ว</string>
@@ -319,13 +319,13 @@
     <string name="error_playback_failed">การเล่นล้มเหลว</string>
     <string name="album_art">ปกอัลบั้ม</string>
     <string name="no_song_playing">ไม่มีเพลงกำลังเล่น</string>
-    <string name="tap_to_open">แตะเพื่อเปิด Metrolist</string>
+    <string name="tap_to_open">แตะเพื่อเปิด Musik</string>
     <string name="previous">ก่อนหน้า</string>
     <string name="play_pause">เล่น/หยุด</string>
     <string name="next">ถัดไป</string>
     <string name="like">ถูกใจ</string>
     <string name="not_playing">ไม่มีเพลงกำลังเล่น</string>
-    <string name="tap_to_play">แตะเพื่อเปิด Metrolist</string>
+    <string name="tap_to_play">แตะเพื่อเปิด Musik</string>
     <string name="widget_description">วิดเจ็ตเครื่องเล่นเพลงพร้อมปุ่มควบคุมการเล่น</string>
     <string name="turntable_widget_description">วิดเจ็ตเพลงแบบวงกลม พร้อมปุ่มเล่นและถูกใจ</string>
     <string name="widget_music_player">เครื่องเล่นเพลง</string>
@@ -441,7 +441,7 @@
     <string name="crash_description">เกิดข้อผิดพลาดที่ไม่คาดคิด โปรดแชร์รายงานข้อขัดข้องเพื่อช่วยให้เราแก้ไขปัญหา</string>
     <string name="crash_share_logs">แชร์บันทึกข้อขัดข้อง</string>
     <string name="crash_share_title">แชร์รายงานข้อขัดข้อง</string>
-    <string name="crash_report_subject">รายงานข้อขัดข้องของ Metrolist</string>
+    <string name="crash_report_subject">รายงานข้อขัดข้องของ Musik</string>
     <string name="crash_close">ปิด</string>
     <string name="crash_no_log">ไม่มีบันทึกข้อขัดข้อง</string>
     <string name="palette_dynamic">ไดนามิก</string>
@@ -485,7 +485,7 @@
     <string name="clear_recognition_history_confirm">คุณแน่ใจหรือไม่ว่าต้องการล้างประวัติการค้นหาเพลงทั้งหมด?</string>
     <string name="delete_from_history">ออก</string>
     <string name="re_listen">ฟังอีกครั้ง</string>
-    <string name="play_on_app">เล่นบน Metrolist</string>
+    <string name="play_on_app">เล่นบน Musik</string>
     <string name="map_csv_columns">จับคู่คอลัมน์ CSV</string>
     <string name="first_row_is_header">แถวแรกเป็นหัวตาราง</string>
     <string name="artist_name_column">คอลัมน์ชื่อศิลปิน</string>
@@ -550,7 +550,7 @@
     <string name="lyrics_provider_priority_desc">ลากเพื่อจัดเรียงลำดับผู้ให้บริการตามความต้องการ ตำแหน่งที่อยู่สูงกว่าจะมีลำดับความสำคัญมากกว่า</string>
     <string name="changelog">บันทึกการเปลี่ยนแปลง</string>
     <string name="changelog_empty">ยังไม่มีบันทึกการเปลี่ยนแปลง</string>
-    <string name="github_releases_url">https://github.com/MetrolistGroup/Metrolist/releases</string>
+    <string name="github_releases_url">https://github.com/AOSP-Silicon/Musik/releases</string>
     <string name="list_bullet">•</string>
     <string name="view_on_github">ดูบน GitHub</string>
     <string name="current_version">เวอร์ชันปัจจุบัน</string>
@@ -604,7 +604,7 @@
     <string name="like_what_i_do">ชอบผลงานของฉันไหม?</string>
     <string name="buy_mo_a_coffee">เลี้ยงกาแฟฉันสักแก้ว!</string>
     <string name="community_and_info">ชุมชนและข้อมูล</string>
-    <string name="metrolist">METROLIST</string>
+    <string name="metrolist">MUSIK</string>
     <string name="wanna_play_favorite_song">อยากเล่นเพลงโปรดของพวกเขาไหม?</string>
     <string name="yeah">ใช่เลย!</string>
     <string name="stands_with_palestine">โปรเจกต์นี้ขอยืนหยัดเคียงข้างปาเลสไตน์ 🇵🇸</string>
@@ -827,7 +827,7 @@
     <string name="recognition_notification_processing">กำลังระบุเพลง…</string>
     <string name="recognition_notification_no_match">ไม่พบผลลัพธ์ที่ตรงกัน</string>
     <string name="recognition_notification_failed">ระบุเพลงไม่สำเร็จ</string>
-    <string name="listen_on_metrolist">ฟังบน Metrolist</string>
+    <string name="listen_on_metrolist">ฟังบน Musik</string>
     <string name="pin">ปักหมุด</string>
     <string name="unpin">เลิกปักหมุด</string>
     <string name="and">และ</string>

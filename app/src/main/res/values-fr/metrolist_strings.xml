@@ -178,7 +178,7 @@
     <string name="scrobble_delay_minutes">Délai de scrobble (en minutes)</string>
     <string name="swipe_song_to_remove">Faites glisser pour supprimer le titre de la playlist</string>
     <string name="last_fm_send_likes">Synchroniser les favoris et les éléments non favoris</string>
-    <string name="last_fm_send_likes_description">Ajoutez ou retirez des titres de vos favoris sur Last.fm lorsque vous les ajoutez ou les retirez de vos favoris dans Metrolist</string>
+    <string name="last_fm_send_likes_description">Ajoutez ou retirez des titres de vos favoris sur Last.fm lorsque vous les ajoutez ou les retirez de vos favoris dans Musik</string>
     <string name="lyrics_romanize_chinese">Paroles chinoises romanisées</string>
     <string name="google_cast">Google Cast</string>
     <string name="google_cast_description">Diffusez du contenu audio sur Chromecast et d\'autres appareils compatibles avec Cast</string>
@@ -263,7 +263,7 @@
     <string name="wrapped_playlist_saved">Playlist enregistrée</string>
     <string name="casting_to">Conversion en %s</string>
     <string name="progress_percent">Progression %s%%</string>
-    <string name="listening_to_metrolist">Écouter Metrolist</string>
+    <string name="listening_to_metrolist">Écouter Musik</string>
     <string name="open">Ouvrir</string>
     <string name="failed_to_create_image">Échec de la création de l\'image : %s</string>
     <string name="copied_title">Titre copié</string>
@@ -296,7 +296,7 @@
     <string name="system_equalizer">Égaliseur système</string>
     <string name="album_art">Pochette d\'album</string>
     <string name="no_song_playing">Aucun titre en cours de lecture</string>
-    <string name="tap_to_open">Appuyez pour ouvrir Metrolist</string>
+    <string name="tap_to_open">Appuyez pour ouvrir Musik</string>
     <string name="previous">Précédent</string>
     <string name="play_pause">Lecture/Pause</string>
     <string name="next">Suivant</string>
@@ -391,7 +391,7 @@
     <string name="crash_description">Une erreur inattendue s\'est produite. Veuillez partager le rapport d\'erreur afin de nous aider à résoudre le problème</string>
     <string name="crash_share_logs">Partager les journaux</string>
     <string name="crash_share_title">Partager le rapport d\'incident</string>
-    <string name="crash_report_subject">Rapport d\'incident Metrolist</string>
+    <string name="crash_report_subject">Rapport d\'incident Musik</string>
     <string name="crash_close">Fermer</string>
     <string name="crash_no_log">Aucun rapport d\'incident disponible</string>
     <string name="palette_dynamic">Dynamique</string>
@@ -440,7 +440,7 @@
     <string name="unblock">Débloquer</string>
     <string name="user_blocked_by_host">Bloqué par l\'hôte</string>
     <string name="not_playing">Aucun titre en cours de lecture</string>
-    <string name="tap_to_play">Appuyez pour ouvrir Metrolist</string>
+    <string name="tap_to_play">Appuyez pour ouvrir Musik</string>
     <string name="widget_music_player">Lecteur de Musique</string>
     <string name="widget_turntable">Platine vinyle</string>
     <string name="together">Ensemble</string>
@@ -488,7 +488,7 @@
     <string name="song_title_column">Colonne « Titre de la chanson »</string>
     <string name="recently_converted">Récemment converti</string>
     <string name="importing_csv">Importation du fichier CSV…</string>
-    <string name="play_on_app">Jouer sur Metrolist</string>
+    <string name="play_on_app">Jouer sur Musik</string>
     <string name="listening">Écoute…</string>
     <string name="continue_action">Continuer</string>
     <string name="enable">Activer</string>
@@ -526,7 +526,7 @@
     <string name="discord_buttons">Boutons</string>
     <string name="discord_button_1">Bouton 1</string>
     <string name="discord_button_2">Bouton 2</string>
-    <string name="discord_information_warning">Metrolist envoie le titre en cours de lecture à la passerelle Discord afin de mettre à jour votre profil enrichi. Toutes les données sont transmises directement de votre appareil à Discord — aucun serveur tiers n\'intervient. Votre jeton reste sur votre appareil et n\'est jamais partagé. Cependant, l\'utilisation d\'un jeton utilisateur pour les connexions via la passerelle n\'est pas officiellement prise en charge et peut constituer une violation des conditions d\'utilisation de Discord. Procédez à vos propres risques !</string>
+    <string name="discord_information_warning">Musik envoie le titre en cours de lecture à la passerelle Discord afin de mettre à jour votre profil enrichi. Toutes les données sont transmises directement de votre appareil à Discord — aucun serveur tiers n\'intervient. Votre jeton reste sur votre appareil et n\'est jamais partagé. Cependant, l\'utilisation d\'un jeton utilisateur pour les connexions via la passerelle n\'est pas officiellement prise en charge et peut constituer une violation des conditions d\'utilisation de Discord. Procédez à vos propres risques !</string>
     <string name="discord_activity_type">Type d\'activité</string>
     <string name="discord_activity_playing">Lire</string>
     <string name="discord_activity_listening">Écouter</string>
@@ -552,7 +552,7 @@
     <string name="credits_github">GitHub</string>
     <string name="credits_view_repo">Consulter le dépôt</string>
     <string name="app_version_info">%1$s • %2$s</string>
-    <string name="metrolist">METROLIST</string>
+    <string name="metrolist">MUSIK</string>
     <string name="no_account_found">Aucun compte trouvé</string>
     <string name="checking_previous_account">Vérification du compte précédent…</string>
     <string name="restore">Restaurer</string>
@@ -579,7 +579,7 @@
     <string name="lyrics_provider_priority_desc">Faites glisser pour réorganiser les fournisseurs selon vos préférences. Plus la position est élevée, plus la priorité est grande</string>
     <string name="changelog">Journal des modifications</string>
     <string name="changelog_empty">Aucun journal des modifications disponible</string>
-    <string name="github_releases_url">https://github.com/MetrolistGroup/Metrolist/releases</string>
+    <string name="github_releases_url">https://github.com/AOSP-Silicon/Musik/releases</string>
     <string name="list_bullet">•</string>
     <string name="view_on_github">Voir sur GitHub</string>
     <string name="current_version">Version actuelle</string>
@@ -769,7 +769,7 @@
     <string name="recognition_notification_processing">Identification en cours…</string>
     <string name="recognition_notification_no_match">Aucun résultat trouvé</string>
     <string name="recognition_notification_failed">Échec de la reconnaissance</string>
-    <string name="listen_on_metrolist">Écoutez sur Metrolist</string>
+    <string name="listen_on_metrolist">Écoutez sur Musik</string>
     <string name="android_auto">Android Auto</string>
     <string name="android_auto_visible_sections">Sections visibles</string>
     <string name="android_auto_reorder_hint">Appuyez sur une section pour l\'activer ou la désactiver.\nAppuyez longuement sur la poignée de déplacement pour modifier l\'ordre. La première section s\'affichera par défaut</string>

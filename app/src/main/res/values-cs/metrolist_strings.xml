@@ -180,7 +180,7 @@
     <string name="scrobble_delay_minutes">Zpoždění scrobblování (minuty)</string>
     <string name="swipe_song_to_remove">Posuňte pro odstranění skladby z playlistu</string>
     <string name="last_fm_send_likes">Synchronizovat oblíbené</string>
-    <string name="last_fm_send_likes_description">Přidat/odebrat srdíčko u skladby v Last.fm, když ji přidáte/odeberete z oblíbených v Metrolistu</string>
+    <string name="last_fm_send_likes_description">Přidat/odebrat srdíčko u skladby v Last.fm, když ji přidáte/odeberete z oblíbených v Musiku</string>
     <string name="lyrics_romanize_chinese">Přepsat čínské texty do latinky</string>
     <string name="google_cast">Google Cast</string>
     <string name="google_cast_description">Streamovat zvuk do Chromecastu a dalších zařízení kompatibilních s protokolem Cast</string>
@@ -267,7 +267,7 @@
     <string name="wrapped_playlist_saved">Playlist uložen</string>
     <string name="casting_to">Přehrávání přes %s</string>
     <string name="progress_percent">Postup %s%%</string>
-    <string name="listening_to_metrolist">Poslouchá Metrolist</string>
+    <string name="listening_to_metrolist">Poslouchá Musik</string>
     <string name="open">Otevřít</string>
     <string name="failed_to_create_image">Nepodařilo se vytvořit obrázek: %s</string>
     <string name="copied_title">Název zkopírován</string>
@@ -300,7 +300,7 @@
     <string name="system_equalizer">Systémový ekvalizér</string>
     <string name="album_art">Obal alba</string>
     <string name="no_song_playing">Nehraje žádná skladba</string>
-    <string name="tap_to_open">Klepnutím otevřete Metrolist</string>
+    <string name="tap_to_open">Klepnutím otevřete Musik</string>
     <string name="previous">Předchozí</string>
     <string name="play_pause">Přehrát/pozastavit</string>
     <string name="next">Další</string>
@@ -395,7 +395,7 @@
     <string name="crash_description">Došlo k neočekávané chybě. Pošlete nám hlášení o chybě, abyste nám pomohli problém opravit</string>
     <string name="crash_share_logs">Sdílet protokoly</string>
     <string name="crash_share_title">Sdílet hlášení o chybě</string>
-    <string name="crash_report_subject">Hlášení o chybě Metrolist</string>
+    <string name="crash_report_subject">Hlášení o chybě Musik</string>
     <string name="crash_close">Zavřít</string>
     <string name="crash_no_log">Není k dispozici žádný záznam o chybě</string>
     <string name="palette_dynamic">Dynamická</string>
@@ -444,7 +444,7 @@
     <string name="unblock">Odblokovat</string>
     <string name="user_blocked_by_host">Zablokován hostitelem</string>
     <string name="not_playing">Nehraje žádná skladba</string>
-    <string name="tap_to_play">Klepněte pro otevření Metrolistu</string>
+    <string name="tap_to_play">Klepněte pro otevření Musiku</string>
     <string name="widget_music_player">Hudební přehrávač</string>
     <string name="widget_turntable">Gramofon</string>
     <string name="enter_room_code">Zadejte kód místnosti</string>
@@ -488,7 +488,7 @@
     <string name="song_title_column">Sloupec názvu skladby</string>
     <string name="recently_converted">Nedávno převedeno</string>
     <string name="importing_csv">Importuji CSV…</string>
-    <string name="play_on_app">Přehrát v Metrolistu</string>
+    <string name="play_on_app">Přehrát v Musiku</string>
     <string name="listening">Poslouchám…</string>
     <string name="ai_api_key_required">Vyžadován klíč API</string>
     <string name="ai_error_unexpected">Neočekávaný výsledek překladu</string>
@@ -535,7 +535,7 @@
     <string name="discord_buttons">Tlačítka</string>
     <string name="discord_button_1">Tlačítko 1</string>
     <string name="discord_button_2">Tlačítko 2</string>
-    <string name="discord_information_warning">Metrolist odesílá vaši právě hrající skladbu na bránu společnosti Discord pro aktualizaci vašeho stavu. Všechna data jdou přímo z vašeho zařízení na Discord – nejsou použity žádné servery třetích stran. Váš token zůstane na vašem zařízení a nikdy nebude sdílen. Používání tokenu pro připojení k bráně nicméně není oficiálně podporováno a může porušovat podmínky služby Discord. Pokračujte na vlastní zodpovědnost!</string>
+    <string name="discord_information_warning">Musik odesílá vaši právě hrající skladbu na bránu společnosti Discord pro aktualizaci vašeho stavu. Všechna data jdou přímo z vašeho zařízení na Discord – nejsou použity žádné servery třetích stran. Váš token zůstane na vašem zařízení a nikdy nebude sdílen. Používání tokenu pro připojení k bráně nicméně není oficiálně podporováno a může porušovat podmínky služby Discord. Pokračujte na vlastní zodpovědnost!</string>
     <string name="discord_activity_type">Typ aktivity</string>
     <string name="discord_activity_playing">Hraje</string>
     <string name="discord_activity_listening">Poslouchá</string>
@@ -570,7 +570,7 @@
     <string name="listen_together_auto_approval_suggestions_desc">Automaticky schvalovat a zařazovat do fronty návrhy skladeb od hostů</string>
     <string name="changelog">Seznam změn</string>
     <string name="changelog_empty">Seznam změn není k dispozici</string>
-    <string name="github_releases_url">https://github.com/MetrolistGroup/Metrolist/releases</string>
+    <string name="github_releases_url">https://github.com/AOSP-Silicon/Musik/releases</string>
     <string name="list_bullet">•</string>
     <string name="view_on_github">Zobrazit na GitHubu</string>
     <string name="current_version">Aktuální verze</string>
@@ -604,7 +604,7 @@
     <string name="like_what_i_do">Líbí se vám, co dělám?</string>
     <string name="buy_mo_a_coffee">Kupte mi kávu!</string>
     <string name="community_and_info">Komunita a informace</string>
-    <string name="metrolist">METROLIST</string>
+    <string name="metrolist">MUSIK</string>
     <string name="wanna_play_favorite_song">Chcete přehrát autorovu oblíbenou skladbu?</string>
     <string name="yeah">Jasně!</string>
     <string name="stands_with_palestine">Tento projekt podporuje Palestinu 🇵🇸</string>
@@ -780,7 +780,7 @@
     <string name="recognition_notification_processing">Identifikuji…</string>
     <string name="recognition_notification_no_match">Nenalezena žádná shoda</string>
     <string name="recognition_notification_failed">Rozpoznávání selhalo</string>
-    <string name="listen_on_metrolist">Přehrát v Metrolistu</string>
+    <string name="listen_on_metrolist">Přehrát v Musiku</string>
     <string name="android_auto">Android Auto</string>
     <string name="android_auto_visible_sections">Viditelné sekce</string>
     <string name="android_auto_reorder_hint">Klepněte na sekci pro její povolení nebo zakázání.\nPodržte posuvník pro změnu pořadí. První sekce bude ve výchozím nastavení zobrazena</string>

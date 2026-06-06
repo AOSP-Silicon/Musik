@@ -230,6 +230,6 @@
     <string name="connected_users">Përdorues të lidhur</string>
     <string name="enter_username">Fut një emër përdoruesi</string>
     <string name="enter_room_code">Fut një kod dhome</string>
-    <string name="metrolist">METROLIST</string>
+    <string name="metrolist">MUSIK</string>
     <string name="android_auto">Android Auto</string>
 </resources>

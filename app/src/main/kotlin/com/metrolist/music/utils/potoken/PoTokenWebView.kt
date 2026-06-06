@@ -12,6 +12,7 @@ import android.webkit.WebViewClient
 import androidx.annotation.MainThread
 import androidx.collection.ArrayMap
 import com.metrolist.innertube.YouTube
+import com.metrolist.innertubex.models.YouTubeClient
 import com.metrolist.music.BuildConfig
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -470,7 +471,7 @@ class PoTokenWebView private constructor(
         private const val TAG = "PoTokenWebView"
         private const val GOOGLE_API_KEY = "AIzaSyDyT5W0Jh49F30Pqqtyfdf7pDLFKLJoAnw"
         private const val REQUEST_KEY = "O43z0dpjhgX20SCx4KAo"
-        private const val USER_AGENT = com.metrolist.innertube.models.YouTubeClient.USER_AGENT_WEB
+        private const val USER_AGENT = "YouTubeClient.USER_AGENT_WEB"
         private const val JS_INTERFACE = "__native_bridge"
 
         // Init does network round-trips (botguard Create/GenerateIT) + JS execution; a WebView

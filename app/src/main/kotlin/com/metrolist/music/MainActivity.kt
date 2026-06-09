@@ -145,6 +145,7 @@ import com.metrolist.music.constants.ListenTogetherUsernameKey
 import com.metrolist.music.constants.LyricsProviderOrderKey
 import com.metrolist.music.constants.MiniPlayerBottomSpacing
 import com.metrolist.music.constants.MiniPlayerHeight
+import com.metrolist.music.constants.MusikRedThemeKey
 import com.metrolist.music.constants.NavigationBarAnimationSpec
 import com.metrolist.music.constants.NavigationBarHeight
 import com.metrolist.music.constants.PauseListenHistoryKey
@@ -519,6 +520,8 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+        val musikRedTheme by rememberPreference(MusikRedThemeKey, defaultValue = false)
+
         val enableDynamicTheme by rememberPreference(DynamicThemeKey, defaultValue = true)
         val enableHighRefreshRate by rememberPreference(EnableHighRefreshRateKey, defaultValue = true)
 
@@ -579,15 +582,15 @@ class MainActivity : ComponentActivity() {
 
         val themeColorCache = remember { mutableMapOf<String, Color>() }
 
-        LaunchedEffect(selectedThemeColor) {
-            if (!enableDynamicTheme) {
+        LaunchedEffect(selectedThemeColor, musikRedTheme) {
+            if (!enableDynamicTheme || musikRedTheme) {
                 themeColor = selectedThemeColor
             }
         }
 
-        LaunchedEffect(playerConnection, enableDynamicTheme, selectedThemeColor) {
+        LaunchedEffect(playerConnection, enableDynamicTheme, musikRedTheme, selectedThemeColor) {
             val playerConnection = playerConnection
-            if (!enableDynamicTheme || playerConnection == null) {
+            if (musikRedTheme || !enableDynamicTheme || playerConnection == null) {
                 themeColor = selectedThemeColor
                 return@LaunchedEffect
             }
@@ -635,6 +638,7 @@ class MainActivity : ComponentActivity() {
             darkTheme = useDarkTheme,
             pureBlack = pureBlack,
             themeColor = themeColor,
+            musikRedTheme = musikRedTheme,
         ) {
             val currentDensity = LocalDensity.current
             val windowInfo = LocalWindowInfo.current
@@ -1147,6 +1151,7 @@ class MainActivity : ComponentActivity() {
                                         state = playerBottomSheetState,
                                         navController = navController,
                                         pureBlack = pureBlack,
+                                        musikRedTheme = musikRedTheme,
                                     )
 
                                     AppNavigationBar(
@@ -1156,6 +1161,7 @@ class MainActivity : ComponentActivity() {
                                         pureBlack = pureBlack,
                                         slimNav = slimNav,
                                         onSearchLongClick = onSearchLongClick,
+                                        musikRedTheme = musikRedTheme,
                                         modifier =
                                             Modifier
                                                 .align(Alignment.BottomCenter)
@@ -1206,6 +1212,7 @@ class MainActivity : ComponentActivity() {
                                         state = playerBottomSheetState,
                                         navController = navController,
                                         pureBlack = pureBlack,
+                                        musikRedTheme = musikRedTheme,
                                     )
                                 }
 

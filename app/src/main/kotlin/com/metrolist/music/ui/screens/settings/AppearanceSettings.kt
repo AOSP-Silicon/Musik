@@ -82,6 +82,7 @@ import com.metrolist.music.constants.LyricsTextPositionKey
 import com.metrolist.music.constants.LyricsTextSizeKey
 import com.metrolist.music.constants.MiniPlayerBackgroundStyle
 import com.metrolist.music.constants.MiniPlayerBackgroundStyleKey
+import com.metrolist.music.constants.MusikRedThemeKey
 import com.metrolist.music.constants.PlayerBackgroundStyle
 import com.metrolist.music.constants.PlayerBackgroundStyleKey
 import com.metrolist.music.constants.PlayerButtonsStyle
@@ -153,6 +154,11 @@ fun AppearanceSettings(
         rememberPreference(
             SelectedThemeColorKey,
             defaultValue = DefaultThemeColor.toArgb(),
+        )
+    val (musikRedTheme, onMusikRedThemeChange) =
+        rememberPreference(
+            MusikRedThemeKey,
+            defaultValue = false,
         )
     // Check if user has selected a custom color (not the default/dynamic color)
     val isUsingCustomColor = selectedThemeColorInt != DefaultThemeColor.toArgb()
@@ -1059,10 +1065,12 @@ fun AppearanceSettings(
                             Material3SettingsItem(
                                 icon = painterResource(R.drawable.palette),
                                 title = { Text(stringResource(R.string.enable_dynamic_theme)) },
+                                enabled = !musikRedTheme,
                                 trailingContent = {
                                     Switch(
                                         checked = dynamicTheme,
                                         onCheckedChange = onDynamicThemeChange,
+                                        enabled = !musikRedTheme,
                                         thumbContent = {
                                             Icon(
                                                 painter =
@@ -1075,10 +1083,34 @@ fun AppearanceSettings(
                                         },
                                     )
                                 },
-                                onClick = { onDynamicThemeChange(!dynamicTheme) },
+                                onClick = { if (!musikRedTheme) onDynamicThemeChange(!dynamicTheme) },
                             ),
                         )
                     }
+                    add(
+                        Material3SettingsItem(
+                            icon = painterResource(R.drawable.palette),
+                            title = { Text(stringResource(R.string.musik_red_theme)) },
+                            description = { Text(stringResource(R.string.musik_red_theme_desc)) },
+                            trailingContent = {
+                                Switch(
+                                    checked = musikRedTheme,
+                                    onCheckedChange = onMusikRedThemeChange,
+                                    thumbContent = {
+                                        Icon(
+                                            painter =
+                                                painterResource(
+                                                    id = if (musikRedTheme) R.drawable.check else R.drawable.close,
+                                                ),
+                                            contentDescription = null,
+                                            modifier = Modifier.size(SwitchDefaults.IconSize),
+                                        )
+                                    },
+                                )
+                            },
+                            onClick = { onMusikRedThemeChange(!musikRedTheme) },
+                        ),
+                    )
                     add(
                         Material3SettingsItem(
                             icon = painterResource(R.drawable.palette),

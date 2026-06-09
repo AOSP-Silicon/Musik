@@ -73,6 +73,7 @@ import androidx.navigation.NavController
 import com.materialkolor.PaletteStyle
 import com.materialkolor.rememberDynamicColorScheme
 import com.metrolist.music.R
+import com.metrolist.music.constants.MusikRedThemeKey
 import com.metrolist.music.constants.DarkModeKey
 import com.metrolist.music.constants.DynamicThemeKey
 import com.metrolist.music.constants.PureBlackKey
@@ -117,6 +118,7 @@ fun ThemeScreen(
     navController: NavController,
 ) {
     val (darkMode, onDarkModeChange) = rememberEnumPreference(DarkModeKey, DarkMode.AUTO)
+    val musikRedTheme by rememberPreference(MusikRedThemeKey, defaultValue = false)
     val (pureBlack, onPureBlackChangeRaw) = rememberPreference(PureBlackKey, defaultValue = false)
     val (_, onPureBlackMiniPlayerChange) = rememberPreference(
         PureBlackMiniPlayerKey,
@@ -154,7 +156,8 @@ fun ThemeScreen(
             pureBlack = pureBlack,
             onPureBlackChange = onPureBlackChange,
             selectedThemeColor = selectedThemeColor,
-            onSelectedThemeColorChange = handleColorSelection
+            onSelectedThemeColorChange = handleColorSelection,
+            musikRedTheme = musikRedTheme,
         )
     } else {
         PortraitThemeLayout(
@@ -164,7 +167,8 @@ fun ThemeScreen(
             pureBlack = pureBlack,
             onPureBlackChange = onPureBlackChange,
             selectedThemeColor = selectedThemeColor,
-            onSelectedThemeColorChange = handleColorSelection
+            onSelectedThemeColorChange = handleColorSelection,
+            musikRedTheme = musikRedTheme,
         )
     }
 
@@ -189,7 +193,8 @@ fun PortraitThemeLayout(
     pureBlack: Boolean,
     onPureBlackChange: (Boolean) -> Unit,
     selectedThemeColor: Color,
-    onSelectedThemeColorChange: (Color) -> Unit
+    onSelectedThemeColorChange: (Color) -> Unit,
+    musikRedTheme: Boolean = false,
 ) {
     Column(
         modifier = Modifier
@@ -208,7 +213,8 @@ fun PortraitThemeLayout(
             ThemeMockupPortrait(
                 darkMode = darkMode,
                 pureBlack = pureBlack,
-                themeColor = selectedThemeColor
+                themeColor = selectedThemeColor,
+                musikRedTheme = musikRedTheme,
             )
         }
 
@@ -220,7 +226,8 @@ fun PortraitThemeLayout(
             pureBlack = pureBlack,
             onPureBlackChange = onPureBlackChange,
             selectedThemeColor = selectedThemeColor,
-            onSelectedThemeColorChange = onSelectedThemeColorChange
+            onSelectedThemeColorChange = onSelectedThemeColorChange,
+            musikRedTheme = musikRedTheme,
         )
 
         Spacer(modifier = Modifier.height(120.dp))
@@ -235,7 +242,8 @@ fun LandscapeThemeLayout(
     pureBlack: Boolean,
     onPureBlackChange: (Boolean) -> Unit,
     selectedThemeColor: Color,
-    onSelectedThemeColorChange: (Color) -> Unit
+    onSelectedThemeColorChange: (Color) -> Unit,
+    musikRedTheme: Boolean = false,
 ) {
     Row(
         modifier = Modifier
@@ -259,7 +267,8 @@ fun LandscapeThemeLayout(
                 ThemeMockup(
                     darkMode = darkMode,
                     pureBlack = pureBlack,
-                    themeColor = selectedThemeColor
+                    themeColor = selectedThemeColor,
+                    musikRedTheme = musikRedTheme,
                 )
             }
         }
@@ -277,7 +286,8 @@ fun LandscapeThemeLayout(
                 pureBlack = pureBlack,
                 onPureBlackChange = onPureBlackChange,
                 selectedThemeColor = selectedThemeColor,
-                onSelectedThemeColorChange = onSelectedThemeColorChange
+                onSelectedThemeColorChange = onSelectedThemeColorChange,
+                musikRedTheme = musikRedTheme,
             )
 
             Spacer(modifier = Modifier.height(80.dp))
@@ -292,7 +302,8 @@ fun ThemeControls(
     pureBlack: Boolean,
     onPureBlackChange: (Boolean) -> Unit,
     selectedThemeColor: Color,
-    onSelectedThemeColorChange: (Color) -> Unit
+    onSelectedThemeColorChange: (Color) -> Unit,
+    musikRedTheme: Boolean = false,
 ) {
     Card(
         modifier = Modifier
@@ -385,27 +396,45 @@ fun ThemeControls(
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                
-                LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally),
-                    contentPadding = PaddingValues(horizontal = 4.dp)
-                ) {
-                    items(PaletteColors) { palette ->
-                        val isDynamicPalette = palette.seedColor == Color.Transparent
-                        val isSelected = if (isDynamicPalette) {
-                            selectedThemeColor == DefaultThemeColor
-                        } else {
-                            selectedThemeColor == palette.seedColor
-                        }
-                        
-                        PaletteItem(
-                            palette = palette,
-                            isSelected = isSelected,
-                            onClick = { 
-                                val colorToSave = if (isDynamicPalette) DefaultThemeColor else palette.seedColor
-                                onSelectedThemeColorChange(colorToSave) 
-                            }
+
+                if (musikRedTheme) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 12.dp)
+                            .clip(RoundedCornerShape(12.dp))
+                            .background(MaterialTheme.colorScheme.surfaceVariant)
+                            .padding(16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = stringResource(R.string.musik_red_color_picker_disabled),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
+                    }
+                } else {
+                    LazyRow(
+                        horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally),
+                        contentPadding = PaddingValues(horizontal = 4.dp)
+                    ) {
+                        items(PaletteColors) { palette ->
+                            val isDynamicPalette = palette.seedColor == Color.Transparent
+                            val isSelected = if (isDynamicPalette) {
+                                selectedThemeColor == DefaultThemeColor
+                            } else {
+                                selectedThemeColor == palette.seedColor
+                            }
+
+                            PaletteItem(
+                                palette = palette,
+                                isSelected = isSelected,
+                                onClick = {
+                                    val colorToSave = if (isDynamicPalette) DefaultThemeColor else palette.seedColor
+                                    onSelectedThemeColorChange(colorToSave)
+                                }
+                            )
+                        }
                     }
                 }
             }
@@ -665,7 +694,8 @@ fun PaletteItem(
 fun ThemeMockup(
     darkMode: DarkMode,
     pureBlack: Boolean,
-    themeColor: Color
+    themeColor: Color,
+    musikRedTheme: Boolean = false,
 ) {
     val isSystemDark = isSystemInDarkTheme()
     val useDark = when (darkMode) {
@@ -677,7 +707,8 @@ fun ThemeMockup(
     MetrolistTheme(
         darkTheme = useDark,
         pureBlack = pureBlack,
-        themeColor = themeColor
+        themeColor = themeColor,
+        musikRedTheme = musikRedTheme,
     ) {
         Card(
             modifier = Modifier
@@ -773,7 +804,8 @@ fun ThemeMockup(
 fun ThemeMockupPortrait(
     darkMode: DarkMode,
     pureBlack: Boolean,
-    themeColor: Color
+    themeColor: Color,
+    musikRedTheme: Boolean = false,
 ) {
     val isSystemDark = isSystemInDarkTheme()
     val useDark = when (darkMode) {
@@ -785,7 +817,8 @@ fun ThemeMockupPortrait(
     MetrolistTheme(
         darkTheme = useDark,
         pureBlack = pureBlack,
-        themeColor = themeColor
+        themeColor = themeColor,
+        musikRedTheme = musikRedTheme,
     ) {
         Card(
             modifier = Modifier

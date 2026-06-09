@@ -226,6 +226,7 @@ fun BottomSheetPlayer(
     navController: NavController,
     modifier: Modifier = Modifier,
     pureBlack: Boolean,
+    musikRedTheme: Boolean,
 ) {
     val context = LocalContext.current
     val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager

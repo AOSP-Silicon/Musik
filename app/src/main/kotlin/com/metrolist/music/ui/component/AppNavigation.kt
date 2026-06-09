@@ -12,8 +12,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
+import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -61,9 +63,28 @@ fun AppNavigationRail(
     onItemClick: (Screens, Boolean) -> Unit,
     modifier: Modifier = Modifier,
     pureBlack: Boolean = false,
+    musikRedTheme: Boolean = false,
     onSearchLongClick: (() -> Unit)? = null
 ) {
     val containerColor = if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer
+    val contentColor = if (pureBlack) {
+        Color.White
+    } else if (musikRedTheme) {
+        MaterialTheme.colorScheme.onSurface
+    } else {
+        MaterialTheme.colorScheme.onSurfaceVariant
+    }
+
+    val railColors = if (musikRedTheme) {
+        NavigationRailItemDefaults.colors(
+            selectedIconColor = MaterialTheme.colorScheme.primary,
+            unselectedIconColor = contentColor,
+            indicatorColor = Color.Transparent,
+        )
+    } else {
+        NavigationRailItemDefaults.colors()
+    }
+
     val haptics = LocalHapticFeedback.current
     val viewConfiguration = LocalViewConfiguration.current
 
@@ -120,6 +141,7 @@ fun AppNavigationRail(
                     // For search item, click is handled via InteractionSource
                 },
                 interactionSource = interactionSource,
+                colors = railColors,
                 icon = {
                     Icon(
                         painter = painterResource(id = iconRes),
@@ -141,10 +163,30 @@ fun AppNavigationBar(
     modifier: Modifier = Modifier,
     pureBlack: Boolean = false,
     slimNav: Boolean = false,
+    musikRedTheme: Boolean = false,
     onSearchLongClick: (() -> Unit)? = null
 ) {
     val containerColor = if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer
-    val contentColor = if (pureBlack) Color.White else MaterialTheme.colorScheme.onSurfaceVariant
+    val contentColor = if (pureBlack) {
+        Color.White
+    } else if (musikRedTheme) {
+        MaterialTheme.colorScheme.onSurface
+    } else {
+        MaterialTheme.colorScheme.onSurfaceVariant
+    }
+
+    val barColors = if (musikRedTheme) {
+        NavigationBarItemDefaults.colors(
+            selectedIconColor = MaterialTheme.colorScheme.primary,
+            selectedTextColor = MaterialTheme.colorScheme.primary,
+            unselectedIconColor = contentColor,
+            unselectedTextColor = contentColor,
+            indicatorColor = Color.Transparent,
+        )
+    } else {
+         NavigationBarItemDefaults.colors()
+    }
+
     val haptics = LocalHapticFeedback.current
     val viewConfiguration = LocalViewConfiguration.current
 
@@ -200,6 +242,7 @@ fun AppNavigationBar(
                     // For search item, click is handled via InteractionSource
                 },
                 interactionSource = interactionSource,
+                colors = barColors,
                 icon = {
                     Icon(
                         painter = painterResource(id = iconRes),

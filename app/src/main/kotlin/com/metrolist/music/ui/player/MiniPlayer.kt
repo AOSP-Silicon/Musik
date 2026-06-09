@@ -178,6 +178,7 @@ fun MiniPlayer(
 private fun NewMiniPlayer(
     progressState: ProgressState,
     modifier: Modifier = Modifier,
+    musikRedTheme: Boolean = false,
     onClick: () -> Unit = {},
 ) {
     val playerConnection = LocalPlayerConnection.current ?: return
@@ -290,7 +291,13 @@ private fun NewMiniPlayer(
 
     // Memoize colors
     val backgroundColor = when (miniPlayerBackground) {
-        MiniPlayerBackgroundStyle.DEFAULT    -> MaterialTheme.colorScheme.surfaceContainer
+        MiniPlayerBackgroundStyle.DEFAULT -> {
+            if (musikRedTheme) {
+                MaterialTheme.colorScheme.surfaceContainerHigh
+            } else {
+                MaterialTheme.colorScheme.surfaceContainer
+            }
+        }
         MiniPlayerBackgroundStyle.TRANSPARENT -> Color.Black.copy(alpha = 0.25f)
         MiniPlayerBackgroundStyle.BLUR       -> MaterialTheme.colorScheme.surfaceContainer
         MiniPlayerBackgroundStyle.GRADIENT   -> MaterialTheme.colorScheme.surfaceContainer

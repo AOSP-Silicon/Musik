@@ -69,6 +69,7 @@ import androidx.media3.common.Player
 import coil3.compose.AsyncImage
 import coil3.request.CachePolicy
 import coil3.request.ImageRequest
+import coil3.request.crossfade
 import com.metrolist.music.LocalListenTogetherManager
 import com.metrolist.music.LocalPlayerConnection
 import com.metrolist.music.R
@@ -634,6 +635,7 @@ private fun ThumbnailImage(
                 .memoryCachePolicy(CachePolicy.ENABLED)
                 .diskCachePolicy(CachePolicy.ENABLED)
                 .networkCachePolicy(CachePolicy.ENABLED)
+                .crossfade(true)
                 .build(),
             contentDescription = null,
             contentScale = if (cropArtwork) ContentScale.Crop else ContentScale.Fit,

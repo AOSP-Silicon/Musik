@@ -18,12 +18,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
@@ -50,9 +53,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.CompositingStrategy
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
@@ -110,29 +115,44 @@ data class MediaItemsData(
 )
 
 /**
- * Calculate thumbnail dimensions once based on container size.
- * This function is marked as @Stable to indicate it produces stable results.
- * In landscape mode, uses the smaller dimension (height) to ensure square thumbnail fits.
+ * Calculate thumbnail dimensions based on screen size, not just container.
+ * This ensures proper sizing on all devices including low-end phones and tablets.
  */
-@Stable
 private fun calculateThumbnailDimensions(
     containerWidth: Dp,
-    containerHeight: Dp = containerWidth,
-    horizontalPadding: Dp = PlayerHorizontalPadding,
-    cornerRadius: Dp = PlayerCornerRadius,
+    screenWidthDp: Int,
+    screenHeightDp: Int,
     isLandscape: Boolean = false
 ): ThumbnailDimensions {
-    // In landscape, use height as the constraining dimension for a square thumbnail
-    val effectiveSize = if (isLandscape) {
-        minOf(containerWidth, containerHeight) - (horizontalPadding * 2)
+    val isSmallScreen = screenWidthDp < 360
+    val isVerySmallScreen = screenWidthDp < 320
+    val isTablet = screenWidthDp >= 600
+
+    val screenWidth = screenWidthDp.dp
+    val screenHeight = screenHeightDp.dp
+
+    // Calculate effective thumbnail size based on device type and orientation
+    val screenPercentage = if (isLandscape) {
+        if (isTablet) 0.7f else 0.8f
     } else {
-        containerWidth - (horizontalPadding * 2)
+        when {
+            isTablet -> 0.7f
+            isVerySmallScreen -> 0.8f
+            isSmallScreen -> 0.9f
+            else -> 1.0f
+        }
     }
+
+    val screenBasedSize = (if (isLandscape) screenHeight else screenWidth) * screenPercentage
+
+    val effectiveSize = screenBasedSize
+        .coerceAtMost(containerWidth - (PlayerHorizontalPadding * 2))
+
     return ThumbnailDimensions(
         itemWidth = containerWidth,
         containerSize = containerWidth,
         thumbnailSize = effectiveSize,
-        cornerRadius = cornerRadius
+        cornerRadius = PlayerCornerRadius
     )
 }
 
@@ -148,11 +168,11 @@ private fun getMediaItems(
     val timeline = player.currentTimeline
     val currentIndex = player.currentMediaItemIndex
     val shuffleModeEnabled = player.shuffleModeEnabled
-    
+
     val currentMediaItem = try {
         player.currentMediaItem
     } catch (e: Exception) { null }
-    
+
     val previousMediaItem = if (swipeThumbnail && !timeline.isEmpty) {
         val previousIndex = timeline.getPreviousWindowIndex(
             currentIndex,
@@ -177,7 +197,7 @@ private fun getMediaItems(
 
     val items = listOfNotNull(previousMediaItem, currentMediaItem, nextMediaItem)
     val currentMediaIndex = items.indexOf(currentMediaItem)
-    
+
     return MediaItemsData(items, currentMediaIndex)
 }
 
@@ -353,10 +373,12 @@ fun Thumbnail(
                     }
                 ) {
                     // Calculate dimensions once per size change, considering landscape mode
-                    val dimensions = remember(maxWidth, maxHeight, isLandscape) {
+                    val configuration = LocalConfiguration.current
+                    val dimensions = remember(maxWidth, isLandscape, configuration) {
                         calculateThumbnailDimensions(
                             containerWidth = maxWidth,
-                            containerHeight = maxHeight,
+                            screenWidthDp = configuration.screenWidthDp,
+                            screenHeightDp = configuration.screenHeightDp,
                             isLandscape = isLandscape
                         )
                     }
@@ -382,7 +404,9 @@ fun Thumbnail(
                         modifier = if (isLandscape) {
                             Modifier.size(dimensions.thumbnailSize + (PlayerHorizontalPadding * 2))
                         } else {
-                            Modifier.fillMaxSize()
+                            Modifier
+                                .fillMaxSize()
+                                .size(dimensions.thumbnailSize)
                         }
                     ) {
                         items(
@@ -507,6 +531,7 @@ private fun ThumbnailItem(
     val incrementalSeekSkipEnabled by rememberPreference(SeekExtraSeconds, defaultValue = false)
     var skipMultiplier by remember { mutableIntStateOf(1) }
     var lastTapTime by remember { mutableLongStateOf(0L) }
+    var imageAspectRatio by remember { mutableStateOf(1f) }
 
     Box(
         modifier = modifier
@@ -559,11 +584,22 @@ private fun ThumbnailItem(
     ) {
         Box(
             modifier = Modifier
-                .size(dimensions.thumbnailSize)
-                .clip(RoundedCornerShape(dimensions.cornerRadius))
+                .then(
+                    if (!cropAlbumArt) {
+                        Modifier
+                            .widthIn(max = dimensions.thumbnailSize)
+                            .heightIn(max = dimensions.thumbnailSize)
+                            .aspectRatio(imageAspectRatio)
+                    } else {
+                        Modifier.size(dimensions.thumbnailSize)
+                    }
+                )
         ) {
             if (hidePlayerThumbnail) {
-                HiddenThumbnailPlaceholder(textBackgroundColor = textBackgroundColor)
+                HiddenThumbnailPlaceholder(
+                    textBackgroundColor = textBackgroundColor,
+                    modifier = Modifier.clip(RoundedCornerShape(dimensions.cornerRadius))
+                )
             } else {
                 val artworkUriToUse = if (item.mediaId == currentMediaId && !currentMediaThumbnail.isNullOrBlank()) {
                     currentMediaThumbnail
@@ -573,7 +609,11 @@ private fun ThumbnailItem(
 
                 ThumbnailImage(
                     artworkUri = artworkUriToUse,
-                    cropArtwork = cropAlbumArt
+                    cropArtwork = cropAlbumArt,
+                    shape = RoundedCornerShape(dimensions.cornerRadius),
+                    onAspectRatioChanged = { aspectRatio ->
+                        imageAspectRatio = aspectRatio
+                    }
                 )
             }
             
@@ -618,30 +658,29 @@ private fun HiddenThumbnailPlaceholder(
 private fun ThumbnailImage(
     artworkUri: String?,
     cropArtwork: Boolean,
-    modifier: Modifier = Modifier
+    shape: Shape,
+    modifier: Modifier = Modifier,
+    onAspectRatioChanged: (Float) -> Unit = {}
 ) {
-    Box(
+    AsyncImage(
+        model = ImageRequest.Builder(LocalContext.current)
+            .data(artworkUri)
+            .memoryCachePolicy(CachePolicy.ENABLED)
+            .diskCachePolicy(CachePolicy.ENABLED)
+            .networkCachePolicy(CachePolicy.ENABLED)
+            .crossfade(true)
+            .build(),
+        contentDescription = null,
+        contentScale = if (cropArtwork) ContentScale.Crop else ContentScale.Fit,
+        onSuccess = { result ->
+            val aspectRatio = result.painter.intrinsicSize.width / result.painter.intrinsicSize.height
+            onAspectRatioChanged(aspectRatio)
+        },
         modifier = modifier
             .fillMaxSize()
-            .graphicsLayer {
-                // Use offscreen compositing for hardware acceleration during animations
-                compositingStrategy = CompositingStrategy.Offscreen
-            }
+            .clip(shape)
             .background(MaterialTheme.colorScheme.surfaceVariant)
-    ) {
-        AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(artworkUri)
-                .memoryCachePolicy(CachePolicy.ENABLED)
-                .diskCachePolicy(CachePolicy.ENABLED)
-                .networkCachePolicy(CachePolicy.ENABLED)
-                .crossfade(true)
-                .build(),
-            contentDescription = null,
-            contentScale = if (cropArtwork) ContentScale.Crop else ContentScale.Fit,
-            modifier = Modifier.fillMaxSize()
-        )
-    }
+    )
 }
 
 /**

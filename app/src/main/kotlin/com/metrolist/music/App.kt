@@ -78,12 +78,14 @@ class App :
             Timber.e(e, "Failed to ensure DataStore directory")
         }
 
-        // Initialize cipher deobfuscator for WEB_REMIX streaming
-        CipherDeobfuscator.initialize(this)
-
+        // Plant logging BEFORE cipher init so the synchronous config-store load
+        // (bundled asset + cached overlay) is captured, not just the async remote refresh.
         Timber.plant(Timber.DebugTree())
         com.metrolist.music.utils.LoggingTree.initialize(cacheDir)
         Timber.plant(com.metrolist.music.utils.LoggingTree)
+
+        // Initialize cipher deobfuscator for WEB_REMIX streaming
+        CipherDeobfuscator.initialize(this)
         
         // Observe logging preference
         applicationScope.launch {

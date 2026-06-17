@@ -130,6 +130,7 @@ import com.metrolist.innertube.models.SongItem
 import com.metrolist.innertube.models.WatchEndpoint
 import com.metrolist.music.constants.AppBarHeight
 import com.metrolist.music.constants.AppLanguageKey
+import com.metrolist.music.constants.CheckForPrereleasesKey
 import com.metrolist.music.constants.CheckForUpdatesKey
 import com.metrolist.music.constants.DarkModeKey
 import com.metrolist.music.constants.DefaultOpenTabKey
@@ -485,16 +486,17 @@ class MainActivity : ComponentActivity() {
         syncUtils: SyncUtils,
     ) {
         val checkForUpdates by rememberPreference(CheckForUpdatesKey, defaultValue = true)
+        val checkForPrereleases by rememberPreference(CheckForPrereleasesKey, defaultValue = false)
 
         if (BuildConfig.UPDATER_AVAILABLE) {
-            LaunchedEffect(checkForUpdates) {
+            LaunchedEffect(checkForUpdates, checkForPrereleases) {
                 if (checkForUpdates) {
                     withContext(Dispatchers.IO) {
                         val updatesEnabled = dataStore.get(CheckForUpdatesKey, true)
                         val notifEnabled = dataStore.get(UpdateNotificationsEnabledKey, true)
                         if (!updatesEnabled) return@withContext
 
-                        Updater.checkForUpdate().onSuccess { (releaseInfo, hasUpdate) ->
+                        Updater.checkForUpdate(includePreRelease = checkForPrereleases).onSuccess { (releaseInfo, hasUpdate) ->
                             if (releaseInfo != null) {
                                 onLatestVersionNameChange(releaseInfo.versionName)
                                 if (hasUpdate && notifEnabled) {
@@ -1040,7 +1042,7 @@ class MainActivity : ComponentActivity() {
                                             }
                                             IconButton(onClick = { showAccountDialog = true }) {
                                                 BadgedBox(badge = {
-                                                    if (latestVersionName != BuildConfig.VERSION_NAME) {
+                                                    if (Updater.compareVersions(latestVersionName, BuildConfig.VERSION_NAME) > 0) {
                                                         Badge()
                                                     }
                                                 }) {

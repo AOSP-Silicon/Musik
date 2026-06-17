@@ -30,10 +30,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import com.metrolist.music.R
 import com.metrolist.music.BuildConfig
+import com.metrolist.music.constants.CheckForPrereleasesKey
+import com.metrolist.music.R
 import com.metrolist.music.utils.ReleaseInfo
 import com.metrolist.music.utils.Updater
+import com.metrolist.music.utils.rememberPreference
 
 private val markdownLinkRegex = Regex("(@[a-zA-Z0-9_-]+)|(https?://[\\w-]+(\\.[\\w-]+)+[\\w.,@?^=%&:/~+#-]*[\\w@?^=%&/~+#-])")
 
@@ -45,11 +47,18 @@ fun ChangelogScreen(
     var releases by remember { mutableStateOf<List<ReleaseInfo>>(emptyList()) }
     var isLoading by remember { mutableStateOf(true) }
     val uriHandler = LocalUriHandler.current
+    val (checkForPrereleases) = rememberPreference(CheckForPrereleasesKey, false)
 
-    LaunchedEffect(Unit) {
-        Updater.getAllReleases().onSuccess { allReleases ->
-            releases = allReleases.filter { release ->
-                Updater.compareVersions(BuildConfig.VERSION_NAME, release.tagName) >= 0
+    LaunchedEffect(checkForPrereleases) {
+        isLoading = true
+        Updater.getAllReleases(forceRefresh = true).onSuccess { allReleases ->
+            releases = if (checkForPrereleases) {
+                allReleases
+            } else {
+                allReleases.filter { release ->
+                    // Keep releases that are older than or equal to current version
+                    Updater.compareVersions(release.tagName, BuildConfig.VERSION_NAME) <= 0
+                }
             }
             isLoading = false
         }.onFailure {

@@ -5,6 +5,11 @@
 
 package com.metrolist.music.ui.screens.settings
 
+import android.app.DownloadManager
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.Environment
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -35,11 +40,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.navigation.NavController
 import com.metrolist.music.BuildConfig
 import com.metrolist.music.utils.DeviceInfo
 import com.metrolist.music.LocalPlayerAwareWindowInsets
 import com.metrolist.music.R
+import com.metrolist.music.constants.CheckForPrereleasesKey
 import com.metrolist.music.constants.CheckForUpdatesKey
 import com.metrolist.music.constants.UpdateNotificationsEnabledKey
 import com.metrolist.music.ui.component.IconButton
@@ -58,10 +66,12 @@ fun UpdaterScreen(
     navController: NavController
 ) {
     val (checkForUpdates, onCheckForUpdatesChange) = rememberPreference(CheckForUpdatesKey, true)
+    val (checkForPrereleases, onCheckForPrereleasesChange) = rememberPreference(CheckForPrereleasesKey, false)
     val (updateNotifications, onUpdateNotificationsChange) = rememberPreference(UpdateNotificationsEnabledKey, true)
 
     val context = LocalContext.current
     var isChecking by remember { mutableStateOf(false) }
+    var isDownloading by remember { mutableStateOf(false) }
     var updateAvailable by remember { mutableStateOf(false) }
     var latestVersion by remember { mutableStateOf<String?>(null) }
     var showChangelog by remember { mutableStateOf(false) }
@@ -77,7 +87,7 @@ fun UpdaterScreen(
             checkError = null
             withContext(Dispatchers.IO) {
                 Updater
-                    .checkForUpdate(forceRefresh = true)
+                    .checkForUpdate(forceRefresh = true, includePreRelease = checkForPrereleases)
                     .onSuccess { (releaseInfo, hasUpdate) ->
                         if (releaseInfo != null) {
                             latestVersion = releaseInfo.versionName
@@ -89,6 +99,46 @@ fun UpdaterScreen(
                     }
             }
             isChecking = false
+        }
+    }
+
+    fun performDownload() {
+        coroutineScope.launch {
+            isDownloading = true
+            withContext(Dispatchers.IO) {
+                val releaseInfo = Updater.getCachedLatestRelease()
+                releaseInfo?.let {
+                    val downloadUrl = Updater.getDownloadUrlForCurrentVariant(it)
+                    if (downloadUrl != null) {
+                        withContext(Dispatchers.Main) {
+                            try {
+                                val downloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+                                val request = DownloadManager.Request(Uri.parse(downloadUrl))
+                                    .setTitle("Musik Update")
+                                    .setDescription("Downloading ${it.versionName}")
+                                    .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                                    .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "musik-${it.versionName}.apk")
+                                    .setMimeType("application/vnd.android.package-archive")
+                                downloadManager.enqueue(request)
+                                checkError = "Download started. Check notification bar."
+                            } catch (e: Exception) {
+                                try {
+                                    val intent = Intent(Intent.ACTION_VIEW, downloadUrl.toUri())
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    context.startActivity(intent)
+                                } catch (e2: Exception) {
+                                    checkError = "Failed to start download: ${e2.message}"
+                                }
+                            }
+                        }
+                    } else {
+                        withContext(Dispatchers.Main) {
+                            checkError = "No download available for your device"
+                        }
+                    }
+                }
+            }
+            isDownloading = false
         }
     }
 
@@ -154,6 +204,19 @@ fun UpdaterScreen(
                     if (checkForUpdates) {
                         add(
                             Material3SettingsItem(
+                                title = { Text("Check for pre-releases") },
+                                icon = painterResource(R.drawable.update),
+                                trailingContent = {
+                                    Switch(
+                                        checked = checkForPrereleases,
+                                        onCheckedChange = onCheckForPrereleasesChange,
+                                    )
+                                },
+                                onClick = { onCheckForPrereleasesChange(!checkForPrereleases) },
+                            ),
+                        )
+                        add(
+                            Material3SettingsItem(
                                 title = { Text(stringResource(R.string.update_notifications)) },
                                 icon = painterResource(R.drawable.notification),
                                 trailingContent = {
@@ -187,20 +250,34 @@ fun UpdaterScreen(
                             }
                         },
                         trailingContent = {
-                            if (isChecking) {
-                                CircularProgressIndicator(
-                                    modifier = Modifier.padding(end = 16.dp),
-                                    strokeWidth = 2.dp,
-                                )
-                            } else if (updateAvailable) {
-                                Icon(
-                                    painter = painterResource(R.drawable.download),
-                                    contentDescription = stringResource(R.string.update_available_title),
-                                    tint = MaterialTheme.colorScheme.primary,
-                                )
+                            when {
+                                isChecking -> {
+                                    CircularProgressIndicator(
+                                        modifier = Modifier.padding(end = 16.dp),
+                                        strokeWidth = 2.dp,
+                                    )
+                                }
+                                updateAvailable && !isDownloading -> {
+                                    IconButton(
+                                        onClick = { performDownload() },
+                                        onLongClick = {},
+                                    ) {
+                                        Icon(
+                                            painter = painterResource(R.drawable.download),
+                                            contentDescription = stringResource(R.string.update_available_title),
+                                            tint = MaterialTheme.colorScheme.primary,
+                                        )
+                                    }
+                                }
+                                isDownloading -> {
+                                    CircularProgressIndicator(
+                                        modifier = Modifier.padding(end = 16.dp),
+                                        strokeWidth = 2.dp,
+                                    )
+                                }
                             }
                         },
-                        onClick = { if (!isChecking) performManualCheck() },
+                        onClick = { if (!isChecking && !isDownloading) performManualCheck() },
                     ),
                 ),
         )
@@ -215,7 +292,7 @@ fun UpdaterScreen(
             )
         }
 
-        if (updateAvailable && latestVersion != null) {
+        if (updateAvailable && latestVersion != null && changelogContent != null) {
             Spacer(Modifier.height(16.dp))
             Button(
                 onClick = { showChangelog = !showChangelog },
@@ -227,7 +304,7 @@ fun UpdaterScreen(
                 Text(if (showChangelog) stringResource(R.string.hide_changelog) else stringResource(R.string.view_changelog))
             }
 
-            if (showChangelog && changelogContent != null) {
+            if (showChangelog) {
                 Spacer(Modifier.height(12.dp))
                 Text(
                     text = changelogContent!!,

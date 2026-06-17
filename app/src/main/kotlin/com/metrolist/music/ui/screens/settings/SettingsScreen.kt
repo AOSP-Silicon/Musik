@@ -238,7 +238,7 @@ fun SettingsScreen(
                         onClick = { navController.navigate("settings/about") }
                     )
                 )
-                if (BuildConfig.UPDATER_AVAILABLE && latestVersionName != BuildConfig.VERSION_NAME) {
+                if (BuildConfig.UPDATER_AVAILABLE && Updater.compareVersions(latestVersionName, BuildConfig.VERSION_NAME) > 0) {
                     val releaseInfo = Updater.getCachedLatestRelease()
                     val downloadUrl = releaseInfo?.let { Updater.getDownloadUrlForCurrentVariant(it) }
 
@@ -266,7 +266,7 @@ fun SettingsScreen(
                 }
             }
         )
-    if (BuildConfig.UPDATER_AVAILABLE && latestVersionName != BuildConfig.VERSION_NAME) {
+    if (BuildConfig.UPDATER_AVAILABLE && Updater.compareVersions(latestVersionName, BuildConfig.VERSION_NAME) > 0) {
             Spacer(modifier = Modifier.height(16.dp))
             ReleaseNotesCard()
         }

@@ -593,18 +593,25 @@ object YTPlayerUtils {
 
         val format = when (audioQuality) {
             AudioQuality.HIGH -> {
-                audioCapableFormats.maxWithOrNull(
-                    compareBy<PlayerResponse.StreamingData.Format> { format ->
-                        when (format.audioQuality) {
-                            "AUDIO_QUALITY_HIGH" -> 3
-                            "AUDIO_QUALITY_MEDIUM" -> 2
-                            "AUDIO_QUALITY_LOW" -> 1
-                            else -> 0
-                        }
-                    }.thenBy { it.audioChannels ?: 2 }
-                        .thenBy { scoreCodec(it.mimeType) }
-                        .thenBy { it.bitrate }
-                )
+                audioCapableFormats.maxWithOrNull(Comparator { f1, f2 ->
+                    // Audio Quality (Standard quality label)
+                    val q1 = when (f1.audioQuality) { "AUDIO_QUALITY_HIGH" -> 3; "AUDIO_QUALITY_MEDIUM" -> 2; "AUDIO_QUALITY_LOW" -> 1; else -> 0 }
+                    val q2 = when (f2.audioQuality) { "AUDIO_QUALITY_HIGH" -> 3; "AUDIO_QUALITY_MEDIUM" -> 2; "AUDIO_QUALITY_LOW" -> 1; else -> 0 }
+                    if (q1 != q2) return@Comparator q1.compareTo(q2)
+
+                    // Channels
+                    val c1 = f1.audioChannels ?: 2
+                    val c2 = f2.audioChannels ?: 2
+                    if (c1 != c2) return@Comparator c1.compareTo(c2)
+
+                    // Codec (Opus > AAC)
+                    val codec1 = scoreCodec(f1.mimeType)
+                    val codec2 = scoreCodec(f2.mimeType)
+                    if (codec1 != codec2) return@Comparator codec1.compareTo(codec2)
+
+                    // Bitrate (Primary indicator of quality if not a preferred itag)
+                    return@Comparator f1.bitrate.compareTo(f2.bitrate)
+                })
             }
 
             AudioQuality.LOW -> {

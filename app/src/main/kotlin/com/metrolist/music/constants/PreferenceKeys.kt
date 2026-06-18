@@ -109,11 +109,17 @@ val UpdateNotificationsEnabledKey = booleanPreferencesKey("updateNotifications")
 val LastUpdateCheckTimeKey = longPreferencesKey("lastUpdateCheckTime")
 
 val AudioQualityKey = stringPreferencesKey("audioQuality")
+val PreferredItagOrderKey = stringPreferencesKey("preferredItagOrder")
 
 enum class AudioQuality {
     AUTO,
     LOW,
     HIGH,
+}
+
+enum class ItagPriority {
+    PRIO_VERY_HIGH_AAC,
+    PRIO_VERY_HIGH_OPUS,
 }
 
 val AudioOffload = booleanPreferencesKey("enableOffload")

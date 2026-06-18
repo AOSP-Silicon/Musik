@@ -20,13 +20,17 @@ import androidx.media3.exoplayer.offline.DownloadNotificationHelper
 import com.metrolist.innertube.YouTube
 import com.metrolist.music.constants.AudioQuality
 import com.metrolist.music.constants.AudioQualityKey
+import com.metrolist.music.constants.PreferredItagOrderKey
+import com.metrolist.music.constants.ItagPriority
 import com.metrolist.music.db.MusicDatabase
 import com.metrolist.music.db.entities.FormatEntity
 import com.metrolist.music.db.entities.SongEntity
 import com.metrolist.music.di.DownloadCache
 import com.metrolist.music.di.PlayerCache
 import com.metrolist.music.utils.YTPlayerUtils
+import com.metrolist.music.utils.dataStore
 import com.metrolist.music.utils.enumPreference
+import kotlinx.coroutines.flow.first
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -98,9 +102,18 @@ constructor(
             }
 
             val playbackData = runBlocking(Dispatchers.IO) {
+                val prefs = context.dataStore.data.first()
+                val itagPriority = try {
+                    ItagPriority.valueOf(
+                        prefs[PreferredItagOrderKey] ?: ItagPriority.values()[0].name
+                    )
+                } catch (e: IllegalArgumentException) {
+                    ItagPriority.values()[0]
+                }
                 YTPlayerUtils.playerResponseForPlayback(
                     mediaId,
                     audioQuality = audioQuality,
+                    itagPriority = itagPriority,
                     connectivityManager = connectivityManager,
                 )
             }.getOrThrow()

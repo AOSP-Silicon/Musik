@@ -26,6 +26,7 @@ import com.metrolist.innertube.models.YouTubeClient.Companion.WEB_CREATOR
 import com.metrolist.innertube.models.YouTubeClient.Companion.WEB_REMIX
 import com.metrolist.innertube.models.response.PlayerResponse
 import com.metrolist.music.constants.AudioQuality
+import com.metrolist.music.constants.ItagPriority
 import com.metrolist.music.utils.YTPlayerUtils.MAIN_CLIENT
 import com.metrolist.music.utils.YTPlayerUtils.STREAM_FALLBACK_CLIENTS
 import com.metrolist.music.utils.YTPlayerUtils.validateStatus
@@ -143,6 +144,7 @@ object YTPlayerUtils {
         videoId: String,
         playlistId: String? = null,
         audioQuality: AudioQuality,
+        itagPriority: ItagPriority,
         connectivityManager: ConnectivityManager,
     ): Result<PlaybackData> = runCatching {
         Timber.tag(TAG).d("=== PLAYER RESPONSE FOR PLAYBACK ===")
@@ -317,6 +319,7 @@ object YTPlayerUtils {
                     findFormat(
                         responseToUse,
                         audioQuality,
+                        itagPriority,
                         connectivityManager,
                     )
 
@@ -574,9 +577,10 @@ object YTPlayerUtils {
     private fun findFormat(
         playerResponse: PlayerResponse,
         audioQuality: AudioQuality,
+        itagPriority: ItagPriority,
         connectivityManager: ConnectivityManager,
     ): PlayerResponse.StreamingData.Format? {
-        Timber.tag(logTag).d("Finding format with audioQuality: $audioQuality, network metered: ${connectivityManager.isActiveNetworkMetered}")
+        Timber.tag(logTag).d("Finding format with audioQuality: $audioQuality, itagPriority: $itagPriority, network metered: ${connectivityManager.isActiveNetworkMetered}")
 
         val adaptiveFormats = playerResponse.streamingData?.adaptiveFormats ?: return null
 
@@ -598,6 +602,16 @@ object YTPlayerUtils {
                     val q1 = when (f1.audioQuality) { "AUDIO_QUALITY_HIGH" -> 3; "AUDIO_QUALITY_MEDIUM" -> 2; "AUDIO_QUALITY_LOW" -> 1; else -> 0 }
                     val q2 = when (f2.audioQuality) { "AUDIO_QUALITY_HIGH" -> 3; "AUDIO_QUALITY_MEDIUM" -> 2; "AUDIO_QUALITY_LOW" -> 1; else -> 0 }
                     if (q1 != q2) return@Comparator q1.compareTo(q2)
+
+
+                    // High Priority Itags (Dynamic based on preference)
+                    val priorityOrder = when (itagPriority) {
+                        ItagPriority.PRIO_VERY_HIGH_AAC -> mapOf(141 to 2, 774 to 1)
+                        ItagPriority.PRIO_VERY_HIGH_OPUS -> mapOf(774 to 2, 141 to 1)
+                    }
+                    val p1 = priorityOrder[f1.itag] ?: 0
+                    val p2 = priorityOrder[f2.itag] ?: 0
+                    if (p1 != p2) return@Comparator p1.compareTo(p2)
 
                     // Channels
                     val c1 = f1.audioChannels ?: 2

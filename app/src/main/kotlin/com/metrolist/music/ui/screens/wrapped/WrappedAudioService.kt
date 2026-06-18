@@ -14,6 +14,7 @@ import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import com.metrolist.music.R
 import com.metrolist.music.constants.AudioQuality
+import com.metrolist.music.constants.ItagPriority
 import com.metrolist.music.utils.YTPlayerUtils
 import com.metrolist.music.utils.dataStore
 import com.metrolist.music.utils.get
@@ -107,10 +108,18 @@ class WrappedAudioService(
                 if (value == "VERY_HIGH") AudioQuality.HIGH
                 else AudioQuality.entries.find { it.name == value } ?: AudioQuality.AUTO
             }
+            val itagPriority = context.dataStore.get(com.metrolist.music.constants.PreferredItagOrderKey)?.let {
+                try {
+                    ItagPriority.valueOf(it)
+                } catch (e: IllegalArgumentException) {
+                    ItagPriority.values()[0]
+                }
+            } ?: ItagPriority.values()[0]
             val playbackData = withContext(Dispatchers.IO) {
                 YTPlayerUtils.playerResponseForPlayback(
                     videoId = songId,
                     audioQuality = audioQuality,
+                    itagPriority = itagPriority,
                     connectivityManager = connectivityManager,
                 ).getOrNull()
             }

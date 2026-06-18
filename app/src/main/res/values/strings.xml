@@ -283,6 +283,10 @@
     <string name="audio_quality_auto">Auto</string>
     <string name="audio_quality_high">High</string>
     <string name="audio_quality_low">Low</string>
+    <string name="itag_priority_title">Premium Audio Codec</string>
+    <string name="itag_priority_description">Set the priority between audio codec AAC and Opus</string>
+    <string name="itag_priority_very_high_aac">AAC (141) over Opus (774)</string>
+    <string name="itag_priority_very_high_opus">Opus (774) over AAC (141)</string>
     <string name="queue">Queue</string>
     <string name="persistent_queue">Persistent queue</string>
     <string name="persistent_queue_desc">Restore your last queue when the app starts</string>

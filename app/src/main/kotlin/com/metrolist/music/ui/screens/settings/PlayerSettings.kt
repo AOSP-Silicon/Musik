@@ -41,6 +41,8 @@ import com.metrolist.music.constants.AudioOffload
 import com.metrolist.music.constants.AudioTrackPlaybackParamsKey
 import com.metrolist.music.constants.AudioQuality
 import com.metrolist.music.constants.AudioQualityKey
+import com.metrolist.music.constants.ItagPriority
+import com.metrolist.music.constants.PreferredItagOrderKey
 import com.metrolist.music.constants.AutoDownloadOnLikeKey
 import com.metrolist.music.constants.CrossfadeDurationKey
 import com.metrolist.music.constants.CrossfadeEnabledKey
@@ -98,6 +100,10 @@ fun PlayerSettings(
     val (audioQuality, onAudioQualityChange) = rememberEnumPreference(
         AudioQualityKey,
         defaultValue = AudioQuality.AUTO
+    )
+    val (itagPriority, onItagPriorityChange) = rememberEnumPreference(
+        PreferredItagOrderKey,
+        defaultValue = ItagPriority.PRIO_VERY_HIGH_OPUS
     )
     val (crossfadeEnabled, onCrossfadeEnabledChange) = rememberPreference(
         CrossfadeEnabledKey,
@@ -227,6 +233,10 @@ fun PlayerSettings(
         mutableStateOf(false)
     }
 
+    var showItagPriorityDialog by remember {
+        mutableStateOf(false)
+    }
+
     var showLoudnessLevelDialog by remember {
         mutableStateOf(false)
     }
@@ -246,6 +256,25 @@ fun PlayerSettings(
                     AudioQuality.AUTO -> stringResource(R.string.audio_quality_auto)
                     AudioQuality.HIGH -> stringResource(R.string.audio_quality_high)
                     AudioQuality.LOW -> stringResource(R.string.audio_quality_low)
+                }
+            }
+        )
+    }
+
+    if (showItagPriorityDialog) {
+        EnumDialog(
+            onDismiss = { showItagPriorityDialog = false },
+            onSelect = {
+                onItagPriorityChange(it)
+                showItagPriorityDialog = false
+            },
+            title = "Preferred Itag Priority",
+            current = itagPriority,
+            values = ItagPriority.values().toList(),
+            valueText = {
+                when (it) {
+                    ItagPriority.PRIO_VERY_HIGH_AAC -> stringResource(R.string.itag_priority_very_high_aac)
+                    ItagPriority.PRIO_VERY_HIGH_OPUS -> stringResource(R.string.itag_priority_very_high_opus)
                 }
             }
         )
@@ -300,6 +329,14 @@ fun PlayerSettings(
                     },
                     onClick = { showAudioQualityDialog = true }
                 ))
+                if (audioQuality == AudioQuality.HIGH) {
+                    add(Material3SettingsItem(
+                        icon = painterResource(R.drawable.tune),
+                        title = { Text(stringResource(R.string.itag_priority_title)) },
+                        description = { Text(stringResource(R.string.itag_priority_description)) },
+                        onClick = { showItagPriorityDialog = true }
+                    ))
+                }
                 add(Material3SettingsItem(
                     icon = painterResource(R.drawable.linear_scale),
                     title = { Text(stringResource(R.string.crossfade)) },

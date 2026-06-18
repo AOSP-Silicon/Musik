@@ -95,6 +95,8 @@ import com.metrolist.music.constants.AndroidAutoTargetPlaylistKey
 import com.metrolist.music.constants.AudioNormalizationKey
 import com.metrolist.music.constants.AudioOffload
 import com.metrolist.music.constants.AudioQualityKey
+import com.metrolist.music.constants.PreferredItagOrderKey
+import com.metrolist.music.constants.ItagPriority
 import com.metrolist.music.constants.AudioTrackPlaybackParamsKey
 import com.metrolist.music.constants.AutoDownloadOnLikeKey
 import com.metrolist.music.constants.AutoLoadMoreKey
@@ -783,41 +785,75 @@ class MusicService :
                     Timber.tag(TAG).i("QUALITY CHANGED: $oldQuality -> $newQuality")
 
                     // Reload current song with new quality
-                    val mediaId = player.currentMediaItem?.mediaId ?: return@collect
-                    val currentPosition = player.currentPosition
-                    val wasPlaying = player.isPlaying
-                    val currentIndex = player.currentMediaItemIndex
-
-                    Timber.tag(TAG).i("RELOADING STREAM: $mediaId at position ${currentPosition}ms")
-
-                    // Clear cached URL to force fresh fetch
-                    songUrlCache.remove(mediaId)
-
-                    // CRITICAL: Clear caches synchronously to prevent format parsing errors
-                    runBlocking(Dispatchers.IO) {
-                        try {
-                            playerCache.removeResource(mediaId)
-                            downloadCache.removeResource(mediaId)
-                            Timber.tag(TAG).d("Cleared player and download cache for $mediaId")
-                        } catch (e: Exception) {
-                            Timber.tag(TAG).e(e, "Failed to clear cache for $mediaId")
-                        }
-                    }
-
-                    // Set bypass flag so resolver skips cache checks
-                    bypassCacheForQualityChange.add(mediaId)
-                    Timber.tag(TAG).d("Set bypass cache flag for $mediaId")
-
-                    // Reload player at same position
-                    player.stop()
-                    player.seekTo(currentIndex, currentPosition)
-                    player.prepare()
-                    if (wasPlaying) {
-                        player.play()
-                    }
+                    reloadCurrentSongWithBypass()
                 }
         }
 
+        // Watch for Itag priority setting changes
+        var isFirstItagEmit = true
+        scope.launch {
+            dataStore.data
+                .map { prefs ->
+                    try {
+                        ItagPriority.valueOf(
+                            prefs[PreferredItagOrderKey] ?: ItagPriority.values()[0].name
+                        )
+                    } catch (e: IllegalArgumentException) {
+                        ItagPriority.values()[0]
+                    }
+                }.distinctUntilChanged()
+                .collect { newPriority ->
+                    // Skip reload on first emit (app startup)
+                    if (isFirstItagEmit) {
+                        isFirstItagEmit = false
+                        Timber.tag(TAG).i("ITAG PRIORITY INIT: $newPriority")
+                        return@collect
+                    }
+
+                    Timber.tag(TAG).i("ITAG PRIORITY CHANGED: $newPriority")
+
+                    // Reload current song with new priority
+                    reloadCurrentSongWithBypass()
+                }
+        }
+    }
+
+    private fun reloadCurrentSongWithBypass() {
+        val mediaId = player.currentMediaItem?.mediaId ?: return
+        val currentPosition = player.currentPosition
+        val wasPlaying = player.isPlaying
+        val currentIndex = player.currentMediaItemIndex
+
+        Timber.tag(TAG).i("RELOADING STREAM: $mediaId at position ${currentPosition}ms")
+
+        // Clear cached URL to force fresh fetch
+        songUrlCache.remove(mediaId)
+
+        // CRITICAL: Clear caches synchronously to prevent format parsing errors
+        runBlocking(Dispatchers.IO) {
+            try {
+                playerCache.removeResource(mediaId)
+                downloadCache.removeResource(mediaId)
+                Timber.tag(TAG).d("Cleared player and download cache for $mediaId")
+            } catch (e: Exception) {
+                Timber.tag(TAG).e(e, "Failed to clear cache for $mediaId")
+            }
+        }
+
+        // Set bypass flag so resolver skips cache checks
+        bypassCacheForQualityChange.add(mediaId)
+        Timber.tag(TAG).d("Set bypass cache flag for $mediaId")
+
+        // Reload player at same position
+        player.stop()
+        player.seekTo(currentIndex, currentPosition)
+        player.prepare()
+        if (wasPlaying) {
+            player.play()
+        }
+    }
+
+    private fun observeVolumeSettings() {
         combine(
             playerVolume,
             isMuted,
@@ -3660,9 +3696,18 @@ class MusicService :
             Timber.tag(TAG).i("FETCHING STREAM: $mediaId | quality=$audioQuality")
             val playbackData =
                 runBlocking(Dispatchers.IO) {
+                    val prefs = dataStore.data.first()
+                    val itagPriority = try {
+                        ItagPriority.valueOf(
+                            prefs[PreferredItagOrderKey] ?: ItagPriority.values()[0].name
+                        )
+                    } catch (e: IllegalArgumentException) {
+                        ItagPriority.values()[0]
+                    }
                     YTPlayerUtils.playerResponseForPlayback(
                         mediaId,
                         audioQuality = audioQuality,
+                        itagPriority = itagPriority,
                         connectivityManager = connectivityManager,
                     )
                 }.getOrElse { throwable ->
@@ -4483,11 +4528,20 @@ class MusicService :
     suspend fun getStreamUrl(mediaId: String): String? =
         withContext(Dispatchers.IO) {
             try {
+                val prefs = dataStore.data.first()
+                val itagPriority = try {
+                    ItagPriority.valueOf(
+                        prefs[PreferredItagOrderKey] ?: ItagPriority.values()[0].name
+                    )
+                } catch (e: IllegalArgumentException) {
+                    ItagPriority.values()[0]
+                }
                 val playbackData =
                     YTPlayerUtils
                         .playerResponseForPlayback(
                             videoId = mediaId,
                             audioQuality = audioQuality,
+                            itagPriority = itagPriority,
                             connectivityManager = connectivityManager,
                         ).getOrNull()
                 playbackData?.streamUrl

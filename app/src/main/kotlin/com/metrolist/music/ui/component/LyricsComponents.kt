@@ -307,10 +307,17 @@ internal fun LyricsColorPickerDialog(
     
     val pal = remember { mutableStateListOf<Color>() }
     var bgStyle by remember { mutableStateOf(LyricsBackgroundStyle.SOLID) }
-    var previewBackgroundColor by remember { mutableStateOf(Color(0xFF242424)) }
+    var previewBackgroundColor by remember { mutableStateOf(Color.Unspecified) }
     var previewTextColor by remember { mutableStateOf(Color.White) }
     var previewSecondaryTextColor by remember { mutableStateOf(Color.White.copy(alpha = 0.7f)) }
     
+    val surfaceVariant = MaterialTheme.colorScheme.surfaceVariant
+    LaunchedEffect(Unit) {
+        if (previewBackgroundColor == Color.Unspecified) {
+            previewBackgroundColor = surfaceVariant
+        }
+    }
+
     val align = when (lyricsTextPosition) {
         LyricsPosition.LEFT -> TextAlign.Left
         LyricsPosition.CENTER -> TextAlign.Center

@@ -11,41 +11,113 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
-
-private fun getProcessedColors(colors: List<Color>): List<Color> {
-    return when {
-        colors.size >= 5 -> colors.take(5) // Use up to 5 provided colors
-        colors.size == 2 -> colors
-        colors.size == 1 -> {
-            val base = colors[0]
-            val lighter = base.copy( // Generate a lighter shade
-                red = (base.red * 1.2f).coerceIn(0f, 1f),
-                green = (base.green * 1.2f).coerceIn(0f, 1f),
-                blue = (base.blue * 1.2f).coerceIn(0f, 1f)
-            )
-            listOf(base, lighter)
-        }
-        else -> defaultGradientColors.take(2) // Fallback to first two defaults if 0 or invalid
-    }
-}
+import androidx.compose.ui.platform.LocalContext
+import androidx.palette.graphics.Palette
+import coil3.imageLoader
+import coil3.request.ImageRequest
+import coil3.request.allowHardware
+import coil3.toBitmap
+import com.metrolist.music.LocalPlayerConnection
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 private val SmoothEasing = CubicBezierEasing(0.2f, 0.9f, 0.4f, 1.0f)
 
 private val defaultGradientColors = listOf(
-    Color(0xFF5E5CE0),
-    Color(0xFFD4145A),
     Color(0xFFAF52DE),
-    Color(0xFFFF2D55),
-    Color(0xFF11998E),
-    Color(0xFF5E5CE0),
+    Color(0xFF5AC8FA),
+    Color(0xFFFFFFFF),
+    Color(0xFFA29BFE),
 )
+
+private fun getProcessedColors(colors: List<Color>): List<Color> {
+    val targetSize = 4
+    val result = mutableListOf<Color>()
+
+    val available = colors.take(targetSize)
+    result.addAll(available)
+
+    while (result.size < targetSize) {
+        val last = if (result.isNotEmpty()) result.last() else defaultGradientColors[0]
+        val next = when (result.size) {
+            0 -> defaultGradientColors[0]
+            1 -> last.copy(
+                red = (last.red * 1.3f).coerceIn(0f, 1f),
+                green = (last.green * 1.3f).coerceIn(0f, 1f),
+                blue = (last.blue * 1.3f).coerceIn(0f, 1f)
+            )
+            2 -> {
+                val first = result[0]
+                Color(
+                    red = (first.red * 0.5f + last.red * 0.5f).coerceIn(0f, 1f),
+                    green = (first.green * 0.5f + last.green * 0.5f).coerceIn(0f, 1f),
+                    blue = (first.blue * 0.5f + last.blue * 0.5f).coerceIn(0f, 1f)
+                )
+            }
+            3 -> Color.White
+            else -> last.copy(alpha = 0.6f)
+        }
+        result.add(next)
+    }
+
+    if (result.size >= 3) {
+        result[2] = Color.White
+    }
+
+    return result
+}
+
+private suspend fun extractColorsFromAlbumArt(
+    context: android.content.Context,
+    imageUrl: String
+): List<Color> {
+    return withContext(Dispatchers.IO) {
+        try {
+            val request = ImageRequest.Builder(context)
+                .data(imageUrl)
+                .size(100, 100)
+                .allowHardware(false)
+                .build()
+
+            val result = context.imageLoader.execute(request)
+            val bitmap = result.image?.toBitmap()
+
+            if (bitmap != null) {
+                val palette = Palette.from(bitmap)
+                    .maximumColorCount(8)
+                    .resizeBitmapArea(100 * 100)
+                    .generate()
+
+                val colors = mutableListOf<Color>()
+
+                palette.vibrantSwatch?.let { colors.add(Color(it.rgb)) }
+                palette.mutedSwatch?.let { colors.add(Color(it.rgb)) }
+                palette.darkVibrantSwatch?.let { colors.add(Color(it.rgb)) }
+                palette.lightVibrantSwatch?.let { colors.add(Color(it.rgb)) }
+
+                if (colors.isNotEmpty()) {
+                    return@withContext colors
+                }
+            }
+
+            defaultGradientColors
+
+        } catch (e: Exception) {
+            defaultGradientColors
+        }
+    }
+}
 
 @Composable
 fun AnimatedGradientBackground(
@@ -56,7 +128,25 @@ fun AnimatedGradientBackground(
     enableBreathing: Boolean = true,
     modifier: Modifier = Modifier
 ) {
-    val processedColors = remember(colors) { getProcessedColors(colors) }
+    val context = LocalContext.current
+    val playerConnection = LocalPlayerConnection.current
+    val mediaMetadata by playerConnection?.mediaMetadata?.collectAsState() ?: remember { mutableStateOf(null) }
+    val albumArtUrl = mediaMetadata?.thumbnailUrl
+    var extractedColors by remember { mutableStateOf<List<Color>>(emptyList()) }
+
+    LaunchedEffect(albumArtUrl) {
+        if (albumArtUrl != null && albumArtUrl.isNotBlank()) {
+            val extracted = extractColorsFromAlbumArt(context, albumArtUrl)
+            extractedColors = extracted
+        } else {
+            extractedColors = emptyList()
+        }
+    }
+
+    val colorsToUse = if (extractedColors.isNotEmpty()) extractedColors else colors
+
+    val finalColors = colorsToUse
+    val processedColors = remember(finalColors) { getProcessedColors(finalColors) }
 
     val (primaryColor, secondaryColor) = remember(processedColors) {
         // Use the first two processed colors for animation

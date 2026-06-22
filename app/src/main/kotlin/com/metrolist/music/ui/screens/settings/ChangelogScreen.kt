@@ -177,11 +177,17 @@ fun ReleaseItem(release: ReleaseInfo) {
                 )
             }
 
-            Text(
-                text = release.releaseDate.split("T").firstOrNull() ?: "",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+            Surface(
+                color = MaterialTheme.colorScheme.tertiaryContainer,
+                shape = CircleShape
+            ) {
+                Text(
+                    text = release.releaseDate.split("T").firstOrNull() ?: "",
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.onTertiaryContainer
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(12.dp))

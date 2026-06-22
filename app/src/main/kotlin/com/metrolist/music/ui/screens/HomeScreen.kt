@@ -479,12 +479,12 @@ fun CommunityPlaylistCard(
                     modifier =
                         Modifier
                             .size(48.dp)
-                            .background(MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f), CircleShape),
+                            .background(MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.5f), CircleShape),
                 ) {
                     Icon(
                         painter = painterResource(if (isBookmarked) R.drawable.library_add_check else R.drawable.library_add),
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                        tint = MaterialTheme.colorScheme.onTertiaryContainer,
                         modifier = Modifier.size(24.dp),
                     )
                 }

@@ -257,7 +257,7 @@ fun AccountScreen(
                         Text(
                             text = stringResource(R.string.filter_podcasts),
                             style = MaterialTheme.typography.titleSmall,
-                            color = MaterialTheme.colorScheme.secondary,
+                            color = MaterialTheme.colorScheme.onSurface,
                             modifier =
                                 Modifier
                                     .fillMaxWidth()
@@ -287,7 +287,7 @@ fun AccountScreen(
                         Text(
                             text = stringResource(R.string.filter_channels),
                             style = MaterialTheme.typography.titleSmall,
-                            color = MaterialTheme.colorScheme.secondary,
+                            color = MaterialTheme.colorScheme.onSurface,
                             modifier =
                                 Modifier
                                     .fillMaxWidth()

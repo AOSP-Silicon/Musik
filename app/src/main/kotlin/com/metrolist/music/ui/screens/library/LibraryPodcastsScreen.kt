@@ -299,7 +299,7 @@ fun LibraryPodcastsScreen(
                                         podcastChannels.size,
                                     ),
                                 style = MaterialTheme.typography.titleSmall,
-                                color = MaterialTheme.colorScheme.secondary,
+                                color = MaterialTheme.colorScheme.onSurface,
                             )
                         }
                     }
@@ -379,7 +379,7 @@ fun LibraryPodcastsScreen(
                                         downloadedEpisodes.size,
                                     ),
                                 style = MaterialTheme.typography.titleSmall,
-                                color = MaterialTheme.colorScheme.secondary,
+                                color = MaterialTheme.colorScheme.onSurface,
                             )
                         }
                     }

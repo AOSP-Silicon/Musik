@@ -433,7 +433,7 @@ fun LibrarySongsScreen(
                                 filteredSongs.size,
                             ),
                         style = MaterialTheme.typography.titleSmall,
-                        color = MaterialTheme.colorScheme.secondary,
+                        color = MaterialTheme.colorScheme.onSurface,
                     )
 
                     IconButton(

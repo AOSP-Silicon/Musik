@@ -1043,7 +1043,7 @@ private fun LegacyMiniMediaInfo(
              if (mediaMetadata.artists.any { it.name.isNotBlank() }) {
                  Text(
                      text = mediaMetadata.artists.joinToArtistString(" ${stringResource(R.string.and)} ") { it.name },
-                     color = MaterialTheme.colorScheme.secondary,
+                     color = MaterialTheme.colorScheme.onSurface,
                     fontSize = 12.sp,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,

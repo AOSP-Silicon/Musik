@@ -886,7 +886,7 @@ private fun UserAvatar(
             Text(
                 text = stringResource(R.string.you_label),
                 style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.8f),
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
             )
         }
     }
@@ -928,7 +928,7 @@ private fun PendingJoinRequestsSection(
                     Surface(
                         modifier = Modifier.size(40.dp),
                         shape = CircleShape,
-                        color = MaterialTheme.colorScheme.secondary,
+                        color = MaterialTheme.colorScheme.onSurface,
                     ) {
                         Box(
                             contentAlignment = Alignment.Center,

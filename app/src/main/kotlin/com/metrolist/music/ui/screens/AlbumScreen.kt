@@ -240,7 +240,7 @@ fun AlbumScreen(
                             fontWeight = FontWeight.Normal,
                             textAlign = TextAlign.Center,
                         ),
-                        color = MaterialTheme.colorScheme.secondary,
+                        color = MaterialTheme.colorScheme.onSurface,
                         maxLines = Int.MAX_VALUE,
                         modifier = Modifier.fillMaxWidth(),
                     )

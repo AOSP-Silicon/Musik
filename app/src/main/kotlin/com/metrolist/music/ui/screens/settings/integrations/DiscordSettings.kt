@@ -1086,7 +1086,7 @@ fun RichPresence(
 
                     Text(
                         text = renderedState,
-                        color = MaterialTheme.colorScheme.secondary,
+                        color = MaterialTheme.colorScheme.onSurface,
                         fontSize = 16.sp,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,

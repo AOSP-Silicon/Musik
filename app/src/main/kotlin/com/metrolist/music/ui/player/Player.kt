@@ -502,26 +502,26 @@ fun BottomSheetPlayer(
                 playerBackground == PlayerBackgroundStyle.GRADIENT -> {
                 when (playerButtonsStyle) {
                     PlayerButtonsStyle.DEFAULT -> {
-                        Pair(Color.White, Color.Black)
+                        Pair(Color.White.copy(alpha = 0.7f), Color.Black)
                     }
 
                     PlayerButtonsStyle.PRIMARY -> {
                         Pair(
-                            MaterialTheme.colorScheme.primary,
+                            MaterialTheme.colorScheme.primary.copy(alpha = 0.7f),
                             MaterialTheme.colorScheme.onPrimary,
                         )
                     }
 
                     PlayerButtonsStyle.SECONDARY -> {
                         Pair(
-                            MaterialTheme.colorScheme.secondary,
+                            MaterialTheme.colorScheme.secondary.copy(alpha = 0.7f),
                             MaterialTheme.colorScheme.onSecondary
                         )
                     }
 
                     PlayerButtonsStyle.TERTIARY -> {
                         Pair(
-                            MaterialTheme.colorScheme.tertiary,
+                            MaterialTheme.colorScheme.tertiary.copy(alpha = 0.7f),
                             MaterialTheme.colorScheme.onTertiary,
                         )
                     }
@@ -534,27 +534,27 @@ fun BottomSheetPlayer(
                         if (useDarkTheme) {
                             Pair(Color.White.copy(alpha = 0.7f), Color.Black)
                         } else {
-                            Pair(Color.Black.copy(alpha = 0.8f), Color.White)
+                            Pair(Color.Black.copy(alpha = 0.7f), Color.White)
                         }
                     }
 
                     PlayerButtonsStyle.PRIMARY -> {
                         Pair(
-                            MaterialTheme.colorScheme.primary,
+                            MaterialTheme.colorScheme.primary.copy(alpha = 0.7f),
                             MaterialTheme.colorScheme.onPrimary,
                         )
                     }
 
                     PlayerButtonsStyle.SECONDARY -> {
                         Pair(
-                            MaterialTheme.colorScheme.secondary,
+                            MaterialTheme.colorScheme.secondary.copy(alpha = 0.7f),
                             MaterialTheme.colorScheme.onSecondary
                         )
                     }
 
                     PlayerButtonsStyle.TERTIARY -> {
                         Pair(
-                            MaterialTheme.colorScheme.tertiary,
+                            MaterialTheme.colorScheme.tertiary.copy(alpha = 0.7f),
                             MaterialTheme.colorScheme.onTertiary,
                         )
                     }
@@ -577,21 +577,21 @@ fun BottomSheetPlayer(
 
                     PlayerButtonsStyle.PRIMARY -> {
                         Pair(
-                            MaterialTheme.colorScheme.primaryContainer,
+                            MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f),
                             MaterialTheme.colorScheme.onPrimaryContainer,
                         )
                     }
 
                     PlayerButtonsStyle.SECONDARY -> {
                         Pair(
-                            MaterialTheme.colorScheme.secondary,
+                            MaterialTheme.colorScheme.secondary.copy(alpha = 0.7f),
                             MaterialTheme.colorScheme.onSecondary
                         )
                     }
 
                     PlayerButtonsStyle.TERTIARY -> {
                         Pair(
-                            MaterialTheme.colorScheme.tertiaryContainer,
+                            MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.7f),
                             MaterialTheme.colorScheme.onTertiaryContainer,
                         )
                     }
@@ -602,28 +602,28 @@ fun BottomSheetPlayer(
                 when (playerButtonsStyle) {
                     PlayerButtonsStyle.DEFAULT -> {
                         Pair(
-                            if (useDarkTheme) Color.White.copy(alpha = 0.7f) else Color.Black.copy(alpha = 0.8f),
+                            if (useDarkTheme) Color.White.copy(alpha = 0.7f) else Color.Black.copy(alpha = 0.7f),
                             if (useDarkTheme) Color.Black else Color.White,
                         )
                     }
 
                     PlayerButtonsStyle.PRIMARY -> {
                         Pair(
-                            MaterialTheme.colorScheme.primaryContainer,
+                            MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f),
                             MaterialTheme.colorScheme.onPrimaryContainer,
                         )
                     }
 
                     PlayerButtonsStyle.SECONDARY -> {
                         Pair(
-                            MaterialTheme.colorScheme.secondary,
+                            MaterialTheme.colorScheme.secondary.copy(alpha = 0.7f),
                             MaterialTheme.colorScheme.onSecondary
                         )
                     }
 
                     PlayerButtonsStyle.TERTIARY -> {
                         Pair(
-                            MaterialTheme.colorScheme.tertiaryContainer,
+                            MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.7f),
                             MaterialTheme.colorScheme.onTertiaryContainer,
                         )
                     }

@@ -512,6 +512,13 @@ fun BottomSheetPlayer(
                         )
                     }
 
+                    PlayerButtonsStyle.SECONDARY -> {
+                        Pair(
+                            MaterialTheme.colorScheme.secondary,
+                            MaterialTheme.colorScheme.onSecondary
+                        )
+                    }
+
                     PlayerButtonsStyle.TERTIARY -> {
                         Pair(
                             MaterialTheme.colorScheme.tertiary,
@@ -535,6 +542,13 @@ fun BottomSheetPlayer(
                         Pair(
                             MaterialTheme.colorScheme.primary,
                             MaterialTheme.colorScheme.onPrimary,
+                        )
+                    }
+
+                    PlayerButtonsStyle.SECONDARY -> {
+                        Pair(
+                            MaterialTheme.colorScheme.secondary,
+                            MaterialTheme.colorScheme.onSecondary
                         )
                     }
 
@@ -568,6 +582,13 @@ fun BottomSheetPlayer(
                         )
                     }
 
+                    PlayerButtonsStyle.SECONDARY -> {
+                        Pair(
+                            MaterialTheme.colorScheme.secondary,
+                            MaterialTheme.colorScheme.onSecondary
+                        )
+                    }
+
                     PlayerButtonsStyle.TERTIARY -> {
                         Pair(
                             MaterialTheme.colorScheme.tertiaryContainer,
@@ -590,6 +611,13 @@ fun BottomSheetPlayer(
                         Pair(
                             MaterialTheme.colorScheme.primaryContainer,
                             MaterialTheme.colorScheme.onPrimaryContainer,
+                        )
+                    }
+
+                    PlayerButtonsStyle.SECONDARY -> {
+                        Pair(
+                            MaterialTheme.colorScheme.secondary,
+                            MaterialTheme.colorScheme.onSecondary
                         )
                     }
 

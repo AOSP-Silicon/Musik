@@ -443,6 +443,7 @@ enum class PreferredLyricsProvider {
 enum class PlayerButtonsStyle {
     DEFAULT,
     PRIMARY,
+    SECONDARY,
     TERTIARY,
 }
 

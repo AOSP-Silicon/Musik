@@ -306,7 +306,7 @@ inline fun ListItem(
                 .background(
                     color = // selected active
                         if (isSelected == true) MaterialTheme.colorScheme.primary.copy(alpha = 0.4f)
-                        else MaterialTheme.colorScheme.secondary
+                        else MaterialTheme.colorScheme.secondary.copy(alpha = 0.2f)
                 )
         } else if (isSelected == true) {
             modifier // inactive selected

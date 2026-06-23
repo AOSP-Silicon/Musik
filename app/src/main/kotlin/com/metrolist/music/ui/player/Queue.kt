@@ -1361,9 +1361,9 @@ private fun PlayerQueueButton(
 
                         PlayerBackgroundStyle.DEFAULT -> {
                             if (useDarkTheme) {
-                                Color.White.copy(alpha = 0.7f)
+                                Color.White
                             } else {
-                                Color.Black.copy(alpha = 0.8f)
+                                Color.Black
                             }
                         }
                     }

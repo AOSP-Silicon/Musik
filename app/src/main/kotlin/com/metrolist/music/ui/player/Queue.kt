@@ -1065,7 +1065,7 @@ fun Queue(
                             Color.Black
                         } else {
                             MaterialTheme.colorScheme
-                                .secondaryContainer
+                                .surfaceContainer
                                 .copy(alpha = 0.90f)
                         },
                     ).windowInsetsPadding(
@@ -1211,7 +1211,7 @@ fun Queue(
                             Color.Black
                         } else {
                             MaterialTheme.colorScheme
-                                .secondaryContainer
+                                .surfaceContainer
                                 .copy(alpha = 0.90f)
                         },
                     ).fillMaxWidth()

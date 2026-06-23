@@ -19,11 +19,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import androidx.palette.graphics.Palette
+import android.os.Build
 import coil3.imageLoader
 import coil3.request.ImageRequest
 import coil3.request.allowHardware
@@ -126,6 +130,7 @@ fun AnimatedGradientBackground(
     intensity: Float = 0.6f,
     animationDuration: Int = 500,
     enableBreathing: Boolean = true,
+    blurRadius: Dp = 0.dp,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -237,6 +242,13 @@ fun AnimatedGradientBackground(
             .fillMaxSize()
             // Apply the overall intensity and breathing effect here
             .alpha(if (isActive) currentFinalIntensity else 0.0f)
+            .then(
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    Modifier.blur(blurRadius)
+                } else {
+                    Modifier
+                }
+            )
             .background(
                 Brush.verticalGradient(
                     colorStops = colorStops,

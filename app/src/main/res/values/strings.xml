@@ -14,6 +14,10 @@
     <string name="albums">Albums</string>
     <string name="playlists">Playlists</string>
 
+    <!-- Blur -->
+    <string name="enable_glassmorphic_blur_title">Glassmorphism</string>
+    <string name="enable_glassmorphic_blur_description">Apply frosted glass blur to player</string>
+
     <!-- Top bar -->
     <plurals name="n_selected">
         <item quantity="other">%d selected</item>

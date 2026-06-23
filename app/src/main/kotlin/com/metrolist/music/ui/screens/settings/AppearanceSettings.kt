@@ -63,6 +63,7 @@ import com.metrolist.music.constants.DensityScale
 import com.metrolist.music.constants.DensityScaleKey
 import com.metrolist.music.constants.DynamicThemeKey
 import com.metrolist.music.constants.EnableDynamicIconKey
+import com.metrolist.music.constants.EnableGlassmorphismKey
 import com.metrolist.music.constants.EnableHighRefreshRateKey
 import com.metrolist.music.constants.EnableLandscapeScalingKey
 import com.metrolist.music.constants.ExperimentalLyricsKey
@@ -139,6 +140,11 @@ fun AppearanceSettings(
         rememberPreference(
             EnableDynamicIconKey,
             defaultValue = true,
+        )
+    val (enableGlassmorphism, onEnableGlassmorphismChange) =
+        rememberPreference(
+            EnableGlassmorphismKey,
+            defaultValue = false,
         )
     val (enableHighRefreshRate, onEnableHighRefreshRateChange) =
         rememberPreference(
@@ -1059,6 +1065,32 @@ fun AppearanceSettings(
                             onClick = { onEnableLandscapeScalingChange(!enableLandscapeScaling) },
                         ),
                     )
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        add(
+                            Material3SettingsItem(
+                                icon = painterResource(R.drawable.palette),
+                                title = { Text(stringResource(R.string.enable_glassmorphic_blur_title)) },
+                                description = { Text(stringResource(R.string.enable_glassmorphic_blur_description)) },
+                                trailingContent = {
+                                    Switch(
+                                        checked = enableGlassmorphism,
+                                        onCheckedChange = onEnableGlassmorphismChange,
+                                        thumbContent = {
+                                            Icon(
+                                                painter =
+                                                    painterResource(
+                                                        id = if (enableGlassmorphism) R.drawable.check else R.drawable.close,
+                                                    ),
+                                                contentDescription = null,
+                                                modifier = Modifier.size(SwitchDefaults.IconSize),
+                                            )
+                                        },
+                                    )
+                                },
+                                onClick = { onEnableGlassmorphismChange(!enableGlassmorphism) },
+                            ),
+                        )
+                    }
                     // Only show dynamic theme option when using the default/dynamic color
                     // When a custom color is selected, dynamic theme is automatically disabled
                     if (!isUsingCustomColor) {

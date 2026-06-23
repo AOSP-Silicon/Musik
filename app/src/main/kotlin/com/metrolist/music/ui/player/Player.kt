@@ -31,6 +31,7 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -127,6 +128,7 @@ import androidx.media3.common.Player
 import androidx.media3.common.Player.STATE_ENDED
 import androidx.navigation.NavController
 import androidx.palette.graphics.Palette
+import android.os.Build
 import com.metrolist.music.LocalNavController
 import coil3.compose.AsyncImage
 import coil3.imageLoader
@@ -140,6 +142,7 @@ import com.metrolist.music.LocalPlayerConnection
 import com.metrolist.music.R
 import com.metrolist.music.constants.CropAlbumArtKey
 import com.metrolist.music.constants.DarkModeKey
+import com.metrolist.music.constants.EnableGlassmorphismKey
 import com.metrolist.music.constants.HidePlayerThumbnailKey
 import com.metrolist.music.constants.HideStatusBarOnFullscreenKey
 import com.metrolist.music.constants.KeepScreenOn
@@ -205,17 +208,52 @@ import com.metrolist.music.constants.SleepTimerStopAfterCurrentSongKey
 private fun NowPlayingPanel(
     panelColor: Color,
     modifier: Modifier = Modifier,
+    enableGlassmorphism: Boolean,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    Column(
+    Box(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = PlayerHorizontalPadding)
             .clip(RoundedCornerShape(PlayerCornerRadius))
-            .background(panelColor)
-            .padding(vertical = PlayerVerticalPadding),
-        content = content,
-    )
+    ) {
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .clip(RoundedCornerShape(PlayerCornerRadius))
+                .background(
+                    if (enableGlassmorphism && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        panelColor.copy(alpha = 0.05f)
+                    } else {
+                        panelColor.copy(alpha = 0.2f)
+                    },
+                    RoundedCornerShape(PlayerCornerRadius)
+                )
+                .then(
+                    if (enableGlassmorphism && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        Modifier.blur(20.dp)
+                    } else {
+                        Modifier.blur(0.dp)
+                    }
+                )
+                .border(
+                    1.dp,
+                    if (enableGlassmorphism && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        panelColor.copy(alpha = 0.2f)
+                    } else {
+                        panelColor.copy(alpha = 0.4f)
+                    },
+                    RoundedCornerShape(PlayerCornerRadius)
+                )
+        )
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = PlayerVerticalPadding),
+            content = content
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -242,6 +280,8 @@ fun BottomSheetPlayer(
             defaultValue = true,
         )
     val (hidePlayerThumbnail, onHidePlayerThumbnailChange) = rememberPreference(HidePlayerThumbnailKey, false)
+    val (enableGlassmorphism, _) = rememberPreference(EnableGlassmorphismKey, defaultValue = false)
+
     val (hideStatusBarOnFullscreen) = rememberPreference(HideStatusBarOnFullscreenKey, false)
     val cropAlbumArt by rememberPreference(CropAlbumArtKey, false)
 
@@ -881,7 +921,7 @@ fun BottomSheetPlayer(
     val nowPlayingPanelColor =
         when (playerBackground) {
             PlayerBackgroundStyle.DEFAULT, PlayerBackgroundStyle.BLUR, PlayerBackgroundStyle.GRADIENT -> {
-                gradientColors.firstOrNull()?.copy(alpha = 0.4f) ?: MaterialTheme.colorScheme.surface
+                gradientColors.firstOrNull()?: MaterialTheme.colorScheme.surface
             }
         }
 
@@ -971,6 +1011,7 @@ fun BottomSheetPlayer(
                     else -> {
                         AnimatedGradientBackground(
                             isActive = effectiveIsPlaying,
+                            blurRadius = if (enableGlassmorphism) 10.dp else 0.dp,
                             modifier = Modifier.fillMaxSize()
                         )
                     }
@@ -1959,7 +2000,10 @@ fun BottomSheetPlayer(
                         Spacer(Modifier.weight(1f))
 
                         mediaMetadata?.let {
-                            NowPlayingPanel(panelColor = nowPlayingPanelColor) {
+                            NowPlayingPanel(
+                                panelColor = nowPlayingPanelColor,
+                                enableGlassmorphism = enableGlassmorphism,
+                            ) {
                                 controlsContent(it)
                             }
                         }
@@ -2015,7 +2059,10 @@ fun BottomSheetPlayer(
                     Spacer(Modifier.height(12.dp))
 
                     mediaMetadata?.let {
-                        NowPlayingPanel(panelColor = nowPlayingPanelColor) {
+                        NowPlayingPanel(
+                            panelColor = nowPlayingPanelColor,
+                            enableGlassmorphism = enableGlassmorphism,
+                        ) {
                             controlsContent(it)
                         }
                     }
@@ -2051,6 +2098,7 @@ fun BottomSheetPlayer(
                     showInlineLyrics = !showInlineLyrics
                 },
                 nowPlayingPanelColor = nowPlayingPanelColor,
+                enableGlassmorphism = enableGlassmorphism,
             )
         }
     }

@@ -548,6 +548,7 @@
 
     <!-- Playback errors -->
     <string name="error_playback_failed">Playback failed</string>
+    <string name="error_job_cancelled">The video is not available for playback. Try again or skip to the next song.</string>
     <string name="error_episode_save">Failed to save episode</string>
     <string name="error_episode_remove">Failed to remove episode</string>
     <string name="error_podcast_subscribe">Failed to subscribe to podcast</string>
@@ -765,6 +766,9 @@
     <string name="play_all">Play all</string>
     <string name="enable_high_refresh_rate">Enable high refresh rate</string>
     <string name="enable_high_refresh_rate_desc">Forces the display to run at its highest supported refresh rate (e.g. 120Hz)</string>
+    <string name="enable_landscape_scaling">Landscape Scaling</string>
+    <string name="enable_landscape_scaling_desc">Scale UI in landscape mode for larger screens</string>
+    <string name="dynamic_theme">Dynamic Theme</string>
 
     <!-- Music Recognition -->
     <string name="recognize_music">Recognize music</string>
@@ -919,7 +923,7 @@
     <!-- Restore confirmation dialog -->
     <string name="restore_confirm_title">Restore backup?</string>
     <string name="restore_confirm_message">This will restore your app data from the selected backup</string>
-    <string name="restore_account_warning">You will need to log in again after restoring. The following account will be signed out:</string>
+    <string name="restore_account_warning">The following account information will be restored and preserved:</string>
     <string name="restore">Restore</string>
     <string name="restore_database_incompatible">Cannot restore backup: database version incompatible. Your current data has been preserved.</string>
     <string name="checking_previous_account">Checking for previous account…</string>

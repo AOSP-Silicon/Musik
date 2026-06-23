@@ -238,9 +238,10 @@ fun AlbumScreen(
                         artists = albumWithSongs.artists,
                         style = MaterialTheme.typography.titleMedium.copy(
                             fontWeight = FontWeight.Normal,
-                            color = MaterialTheme.colorScheme.secondary,
                             textAlign = TextAlign.Center,
                         ),
+                        color = MaterialTheme.colorScheme.secondary,
+                        maxLines = Int.MAX_VALUE,
                         modifier = Modifier.fillMaxWidth(),
                     )
 

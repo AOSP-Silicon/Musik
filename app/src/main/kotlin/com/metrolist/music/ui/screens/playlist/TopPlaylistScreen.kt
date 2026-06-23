@@ -82,6 +82,7 @@ import com.metrolist.music.LocalPlayerAwareWindowInsets
 import com.metrolist.music.LocalPlayerConnection
 import com.metrolist.music.R
 import com.metrolist.music.constants.MyTopFilter
+import com.metrolist.music.constants.ThumbnailCornerRadius
 import com.metrolist.music.db.entities.Song
 import com.metrolist.music.extensions.toMediaItem
 import com.metrolist.music.playback.ExoDownloadService
@@ -550,10 +551,10 @@ private fun TopPlaylistHeader(
                     .size(240.dp)
                     .shadow(
                         elevation = 24.dp,
-                        shape = RoundedCornerShape(3.dp),
+                        shape = RoundedCornerShape(ThumbnailCornerRadius),
                         spotColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)
                     ),
-                shape = RoundedCornerShape(3.dp)
+                shape = RoundedCornerShape(ThumbnailCornerRadius)
             ) {
                 AsyncImage(
                     model = songs[0].thumbnailUrl,
@@ -605,13 +606,13 @@ private fun TopPlaylistHeader(
                 onClick = {
                     playerConnection.playQueue(
                         ListQueue(
-                            title = name,
+                            title = "Top Songs",
                             items = songs.shuffled().map { it.toMediaItem() },
                         ),
                     )
                 },
                 shape = androidx.compose.foundation.shape.CircleShape,
-                color = MaterialTheme.colorScheme.surfaceVariant,
+                color = MaterialTheme.colorScheme.secondary,
                 modifier = Modifier.size(48.dp)
             ) {
                 Box(
@@ -699,7 +700,7 @@ private fun TopPlaylistHeader(
                     }
                 },
                 shape = androidx.compose.foundation.shape.CircleShape,
-                color = MaterialTheme.colorScheme.surfaceVariant,
+                color = MaterialTheme.colorScheme.tertiary,
                 modifier = Modifier.size(48.dp)
             ) {
                 Box(

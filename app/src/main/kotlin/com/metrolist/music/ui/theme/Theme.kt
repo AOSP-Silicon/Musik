@@ -84,65 +84,75 @@ fun MetrolistTheme(
                 // Surface colors: Pure white background, subtle gray containers
                 surface = when {
                     pureBlack && darkTheme -> Color.Black
-                    darkTheme -> Color(0xFF121212)
+                    darkTheme -> Color(0xFF1C1C1E)
                     else -> Color.White
                 },
-                onSurface = if (darkTheme) Color.White else Color.Black,
-
+                onSurface = when {
+                    pureBlack && darkTheme -> Color.White
+                    darkTheme -> Color.White
+                    else -> Color.Black
+                },
                 surfaceTint = Color.Transparent,
 
                 surfaceVariant = when {
-                    pureBlack && darkTheme -> Color.Black
-                    darkTheme -> Color(0xFF2C2C2E)
-                    else -> Color(0xFFE8E8ED)
+                    pureBlack && darkTheme -> Color(0xFF161618)
+                    darkTheme -> Color(0xFF222224)
+                    else -> Color(0xFFEDEDED)
                 },
-                onSurfaceVariant = if (darkTheme) Color(0xFFC7C7CC) else Color(0xFF6C6C70),
-
+                onSurfaceVariant = when {
+                    pureBlack && darkTheme -> Color(0xFFAEAEB2)
+                    darkTheme -> Color(0xFFC6C6C8)
+                    else -> Color(0xFF6C6C70)
+                },
                 surfaceContainer = when {
-                    pureBlack && darkTheme -> Color.Black
-                    darkTheme -> Color(0xFF1D1D1D)
+                    pureBlack && darkTheme -> Color(0xFF121212)
+                    darkTheme -> Color(0xFF2C2C2E)
                     else -> Color(0xFFF2F2F7)
                 },
                 surfaceContainerHigh = when {
-                    pureBlack && darkTheme -> Color.Black
-                    darkTheme -> Color(0xFF252525)
-                    else -> Color(0xFFEFEFF4)
+                    pureBlack && darkTheme -> Color(0xFF0A0A0A)
+                    darkTheme -> Color(0xFF28282A)
+                    else -> Color(0xFFF8F8F8)
                 },
                 surfaceContainerHighest = when {
                     pureBlack && darkTheme -> Color.Black
-                    darkTheme -> Color(0xFF303030)
-                    else -> Color(0xFFE5E5EA)
+                    darkTheme -> Color(0xFF242426)
+                    else -> Color.White
                 },
                 surfaceContainerLow = when {
-                    pureBlack && darkTheme -> Color.Black
-                    darkTheme -> Color(0xFF191919)
-                    else -> Color(0xFFF8F8FA)
+                    pureBlack && darkTheme -> Color(0xFF1C1C1E)
+                    darkTheme -> Color(0xFF363638)
+                    else -> Color(0xFFE5E5EA)
                 },
                 surfaceContainerLowest = when {
-                    pureBlack && darkTheme -> Color.Black
-                    darkTheme -> Color(0xFF111112)
-                    else -> Color(0xFFFFFFFF)
+                    pureBlack && darkTheme -> Color(0xFF242426)
+                    darkTheme -> Color(0xFF3A3A3C)
+                    else -> Color(0xFFD1D1D6)
                 },
                 surfaceBright = when {
-                    pureBlack && darkTheme -> Color.Black
+                    pureBlack && darkTheme -> Color(0xFF1C1C1E)
                     darkTheme -> Color(0xFF3A3A3C)
-                    else -> Color(0xFFF9F9FB)
+                    else -> Color.White
                 },
                 surfaceDim = when {
                     pureBlack && darkTheme -> Color.Black
-                    darkTheme -> Color(0xFF0A0A0A)
-                    else -> Color(0xFFE8E8ED)
+                    darkTheme -> Color(0xFF1C1C1E)
+                    else -> Color(0xFFE5E5EA)
                 },
 
                 background = when {
                     pureBlack && darkTheme -> Color.Black
-                    darkTheme -> Color(0xFF121212)
+                    darkTheme -> Color(0xFF1C1C1E)
                     else -> Color.White
                 },
-                onBackground = if (darkTheme) Color.White else Color.Black,
+                onBackground = when {
+                    pureBlack && darkTheme -> Color.White
+                    darkTheme -> Color.White
+                    else -> Color.Black
+                },
 
                 // System Grays
-                outline = if (darkTheme) Color(0xFF38383A).copy(alpha = 0.6f) else Color(0xFF3C3C43).copy(alpha = 0.36f),
+                outline = if (darkTheme) Color(0xFF545458).copy(alpha = 0.6f) else Color(0xFF3C3C43).copy(alpha = 0.36f),
                 outlineVariant = if (darkTheme) Color(0xFF38383A).copy(alpha = 0.36f) else Color(0xFF3C3C43).copy(alpha = 0.18f),
 
                 inverseSurface = if (darkTheme) Color(0xFFE5E5EA) else Color(0xFF3A3A3C),

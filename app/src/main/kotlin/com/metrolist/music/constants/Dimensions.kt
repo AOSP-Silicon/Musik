@@ -36,9 +36,11 @@ val AlbumThumbnailSize = 144.dp
 val ThumbnailCornerRadius = 16.dp
 
 val PlayerCornerRadius = 22.dp
-
 val PlayerHorizontalPadding = 12.dp
 val PlayerVerticalPadding = 10.dp
+val QueueCornerRadius = 50.dp
+val QueueHorizontalPadding = 12.dp
+val QueueVerticalPadding = 8.dp
 
 val NavigationBarAnimationSpec = spring<Dp>(
     dampingRatio = Spring.DampingRatioNoBouncy,

@@ -106,10 +106,10 @@ import com.metrolist.music.LocalPlayerConnection
 import com.metrolist.music.R
 import com.metrolist.music.constants.ListItemHeight
 import com.metrolist.music.constants.PlayerBackgroundStyle
-import com.metrolist.music.constants.PlayerCornerRadius
-import com.metrolist.music.constants.PlayerHorizontalPadding
-import com.metrolist.music.constants.PlayerVerticalPadding
+import com.metrolist.music.constants.QueueCornerRadius
 import com.metrolist.music.constants.QueueEditLockKey
+import com.metrolist.music.constants.QueueHorizontalPadding
+import com.metrolist.music.constants.QueueVerticalPadding
 import com.metrolist.music.constants.UseNewPlayerDesignKey
 import com.metrolist.music.extensions.metadata
 import com.metrolist.music.extensions.move
@@ -276,15 +276,15 @@ fun Queue(
                     modifier =
                         Modifier
                             .fillMaxWidth()
-                            .fillMaxHeight()
-                            .padding(horizontal = PlayerHorizontalPadding, vertical = 8.dp)
+                            .padding(horizontal = QueueHorizontalPadding)
                             .windowInsetsPadding(
                                 WindowInsets.systemBars.only(
                                     WindowInsetsSides.Bottom + WindowInsetsSides.Horizontal,
                                 ),
                             )
-                            .clip(RoundedCornerShape(PlayerCornerRadius))
-                            .background(nowPlayingPanelColor),
+                            .clip(RoundedCornerShape(QueueCornerRadius))
+                            .background(nowPlayingPanelColor)
+                            .padding(vertical = QueueVerticalPadding),
                 ) {
                     val buttonSize = 42.dp
                     val iconSize = 24.dp
@@ -447,13 +447,14 @@ fun Queue(
                     modifier =
                         Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = PlayerHorizontalPadding, vertical = PlayerVerticalPadding)
+                            .padding(horizontal = QueueHorizontalPadding)
                             .windowInsetsPadding(
                                 WindowInsets.systemBars
                                     .only(WindowInsetsSides.Bottom + WindowInsetsSides.Horizontal)
                             )
-                            .clip(RoundedCornerShape(PlayerCornerRadius))
-                            .background(nowPlayingPanelColor),
+                            .clip(RoundedCornerShape(QueueCornerRadius))
+                            .background(nowPlayingPanelColor)
+                            .padding(vertical = QueueVerticalPadding),
                 ) {
                     TextButton(
                         onClick = { state.expandSoft() },

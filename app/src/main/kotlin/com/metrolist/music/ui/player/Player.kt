@@ -2012,7 +2012,7 @@ fun BottomSheetPlayer(
                         }
                     }
 
-                    Spacer(Modifier.height(4.dp))
+                    Spacer(Modifier.height(12.dp))
 
                     mediaMetadata?.let {
                         NowPlayingPanel(panelColor = nowPlayingPanelColor) {
@@ -2020,7 +2020,7 @@ fun BottomSheetPlayer(
                         }
                     }
 
-                    Spacer(Modifier.height(4.dp))
+                    Spacer(Modifier.height(12.dp))
                 }
             }
         }

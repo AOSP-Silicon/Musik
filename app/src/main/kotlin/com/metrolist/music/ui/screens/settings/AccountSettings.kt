@@ -300,7 +300,6 @@ fun AccountSettings(
                     }
                 )
             ),
-            useLowContrast = true
         )
 
         Spacer(Modifier.height(8.dp))
@@ -370,7 +369,6 @@ fun AccountSettings(
                     enabled = isLoggedIn
                 )
             ),
-            useLowContrast = true
         )
 
         Spacer(Modifier.height(12.dp))

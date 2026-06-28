@@ -501,17 +501,32 @@ object YouTube {
                                 ?.url!!,
                         explicit = false, // TODO: Extract explicit badge for albums from YouTube response
                     )
+                val albumSongsList =
+                    if (withSongs) {
+                        albumSongs(
+                            playlistId,
+                            albumItem,
+                        ).getOrThrow()
+                    } else {
+                        emptyList()
+                    }
+                // When YouTube credits the album to a label/distributor channel (the header
+                // strapline) but every track names the same performing artist, surface the
+                // performer as the album artist instead of the label.
+                val performer =
+                    albumSongsList.firstOrNull()?.artists?.firstOrNull()?.takeIf { first ->
+                        first.name.isNotBlank() &&
+                            albumSongsList.all { it.artists.firstOrNull()?.name == first.name }
+                    }
+                val resolvedAlbum =
+                    if (performer != null && albumItem.artists?.any { it.name == performer.name } != true) {
+                        albumItem.copy(artists = listOf(performer))
+                    } else {
+                        albumItem
+                    }
                 return@runCatching AlbumPage(
-                    album = albumItem,
-                    songs =
-                        if (withSongs) {
-                            albumSongs(
-                                playlistId,
-                                albumItem,
-                            ).getOrThrow()
-                        } else {
-                            emptyList()
-                        },
+                    album = resolvedAlbum,
+                    songs = albumSongsList,
                     otherVersions =
                         response.contents.twoColumnBrowseResultsRenderer.secondaryContents
                             ?.sectionListRenderer
@@ -2070,15 +2085,11 @@ object YouTube {
                     val titleRun = firstColumn.runs?.firstOrNull() ?: return null
                     val title = titleRun.text.takeIf { it.isNotBlank() } ?: return null
 
-                    val artists =
-                        secondColumn.runs?.mapNotNull { run ->
-                            run.text.takeIf { it.isNotBlank() }?.let { name ->
-                                Artist(
-                                    name = name,
-                                    id = run.navigationEndpoint?.browseEndpoint?.browseId,
-                                )
-                            }
-                        } ?: emptyList()
+                    val artists = PageHelper.extractArtists(secondColumn.runs)
+                    
+                    if (artists.isEmpty()) {
+                        Timber.w("convertMusicResponsiveListItemRenderer: Song '$title' (id=${renderer.videoId}) has EMPTY artists list")
+                    }
 
                     val thirdColumn =
                         renderer.flexColumns
@@ -2121,18 +2132,18 @@ object YouTube {
             when {
                 renderer.isSong -> {
                     val subtitle = renderer.subtitle?.runs ?: return null
+                    val title = renderer.title.runs?.firstOrNull()?.text ?: return null
+                    val artists = PageHelper.extractArtists(subtitle)
+                    val videoId = renderer.navigationEndpoint.watchEndpoint?.videoId ?: return null
+                    
+                    if (artists.isEmpty()) {
+                        Timber.w("convertMusicTwoRowItem: Song '$title' (id=$videoId) has EMPTY artists list from ${subtitle.size} subtitle runs")
+                    }
+                    
                     SongItem(
-                        id = renderer.navigationEndpoint.watchEndpoint?.videoId ?: return null,
-                        title =
-                            renderer.title.runs
-                                ?.firstOrNull()
-                                ?.text ?: return null,
-                        artists =
-                            subtitle.mapNotNull {
-                                it.navigationEndpoint?.browseEndpoint?.browseId?.let { id ->
-                                    Artist(name = it.text, id = id)
-                                }
-                            },
+                        id = videoId,
+                        title = title,
+                        artists = artists,
                         thumbnail = renderer.thumbnailRenderer.musicThumbnailRenderer?.getThumbnailUrl() ?: return null,
                         musicVideoType = renderer.musicVideoType,
                         explicit =

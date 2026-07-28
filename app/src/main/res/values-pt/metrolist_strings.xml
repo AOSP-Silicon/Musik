@@ -189,12 +189,12 @@
     <string name="wrapped_intro_title">METROLIST</string>
     <string name="wrapped_intro_subtitle">está na hora de ver o que andaste a ouvir</string>
     <string name="wrapped_intro_button">vamos lá!</string>
-    <string name="wrapped_logo_content_description">Logo do Metrolist</string>
+    <string name="wrapped_logo_content_description">Logo do Musik</string>
     <string name="wrapped_year">2025</string>
     <string name="wrapped_ready_title">O TEU WRAPPED ESTÁ PRONTO!</string>
     <string name="wrapped_ready_subtitle">Está na hora de ver o que amaste este ano.</string>
     <string name="wrapped_thank_you">Obrigado por ouvires</string>
-    <string name="wrapped_special_thanks">Um agradecimento a MO Agamy por criar o Metrolist</string>
+    <string name="wrapped_special_thanks">Um agradecimento a MO Agamy por criar o Musik</string>
     <string name="wrapped_close">Fechar wrapped</string>
     <string name="wrapped_playlist_title">O teu %s Wrapped</string>
     <string name="wrapped_create_playlist">Criar lista de reprodução</string>
@@ -248,7 +248,6 @@
     <string name="delete_desc">Remover este item permanentemente</string>
     <string name="advanced_desc">Alterar o tempo e o tom da música</string>
     <string name="equalizer_desc">Ajustar o equalizador de áudio</string>
-    <string name="enable_dynamic_icon">Habilitar o ícone dinâmico</string>
     <string name="mini_player">Mini-reprodutor</string>
     <string name="pure_black_mini_player">Mini-reprodutor preto puro</string>
     <string name="cache_size_warning_title">Aguarde!</string>
@@ -456,4 +455,11 @@
     <string name="lyrics_romanize_punjabi">Romanizar letras em Panjabi</string>
     <string name="audio_offload_disabled_by_crossfade">Desativado porque o crossfade está ativo</string>
     <string name="speed">Velocidade de Reprodução</string>
+    <string name="and">e</string>
+    <string name="lyrics_romanize_as_main">Mostrar letras romanizadas como padrão</string>
+    <string name="hide_youtube_shorts">Esconder YouTube Shorts</string>
+    <string name="transparent">Transparente</string>
+    <string name="lyrics_animation_style_title">Estilo de animação palavra-por-palavra</string>
+    <string name="system_equalizer_desc">Abrir equalizador embutido do Android</string>
+    <string name="eq_wizard">Mago do AutoEQ</string>
 </resources>

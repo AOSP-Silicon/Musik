@@ -49,7 +49,7 @@
     <string name="plays">Po luan</string>
     <string name="casting_to">Duke ndarë në %s</string>
     <string name="progress_percent">Progres %s%%</string>
-    <string name="listening_to_metrolist">Duke dëgjuar në Metrolist</string>
+    <string name="listening_to_metrolist">Duke dëgjuar në Musik</string>
     <string name="open">Hap</string>
     <string name="failed_to_create_image">Dështoi në krijimin e imazhit %s</string>
     <string name="close_chip">Mbyll</string>

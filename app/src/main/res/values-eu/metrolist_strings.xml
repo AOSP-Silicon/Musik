@@ -395,7 +395,6 @@
     <string name="delete_desc">Betirako kendu elementu hau</string>
     <string name="advanced_desc">Abestiaren tenpoa eta tonua aldatu</string>
     <string name="equalizer_desc">Audio-ekualizadorea ireki</string>
-    <string name="enable_dynamic_icon">Ikur dinamikoa gaitu</string>
     <string name="mini_player">Minierreproduzitzailea</string>
     <string name="pure_black_mini_player">Minierreproduzitzaile beltza purua</string>
     <string name="mini_player_background_style">Minierreproduzitzailearen hondoaren estiloa</string>
@@ -433,12 +432,12 @@
     <string name="wrapped_intro_title">METROLIST</string>
     <string name="wrapped_intro_subtitle">aurten entzuten egon zarena ikusteko unea iritsi da…</string>
     <string name="wrapped_intro_button">goazen!</string>
-    <string name="wrapped_logo_content_description">Metrolist Logoa</string>
+    <string name="wrapped_logo_content_description">Musik Logoa</string>
     <string name="wrapped_year">2025</string>
     <string name="wrapped_ready_title">ZURE WRAPPED-A PREST DAGO!</string>
     <string name="wrapped_ready_subtitle">Aurten maite izan duzuna ikusteko unea da…</string>
     <string name="wrapped_thank_you">Eskerrik asko entzuteagatik!</string>
-    <string name="wrapped_special_thanks">Esker bereziak MO Agamy-ri Metrolist sortzeagatik</string>
+    <string name="wrapped_special_thanks">Esker bereziak MO Agamy-ri Musik sortzeagatik</string>
     <string name="wrapped_close">Wrapped-a itxi</string>
     <string name="wrapped_playlist_title">Zure %s Wrapped</string>
     <string name="wrapped_create_playlist">Erreprodukzio-zerrenda sortu</string>

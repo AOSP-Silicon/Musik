@@ -198,7 +198,6 @@
     <string name="delete_desc">Supprimer définitivement cet élément</string>
     <string name="advanced_desc">Régler le tempo et la hauteur tonale du morceau</string>
     <string name="equalizer_desc">Ouvrez l\'égaliseur audio</string>
-    <string name="enable_dynamic_icon">Activer l\'icône dynamique</string>
     <string name="mini_player">Mini-lecteur</string>
     <string name="pure_black_mini_player">Mini-lecteur noir pur</string>
     <string name="cache_size_warning_title">Attendez !</string>
@@ -251,12 +250,12 @@
     <string name="wrapped_intro_title">METROLIST</string>
     <string name="wrapped_intro_subtitle">Il est temps de découvrir ce que vous avez écouté tout au long de cette année…</string>
     <string name="wrapped_intro_button">allons-y !</string>
-    <string name="wrapped_logo_content_description">Logo Metrolist</string>
+    <string name="wrapped_logo_content_description">Logo Musik</string>
     <string name="wrapped_year">2025</string>
     <string name="wrapped_ready_title">VOTRE CADEAU EST PRÊT À ÊTRE DÉVOILÉ !</string>
     <string name="wrapped_ready_subtitle">C\'est le moment de découvrir ce que vous avez aimé tout au long de cette année…</string>
     <string name="wrapped_thank_you">Merci de votre écoute !</string>
-    <string name="wrapped_special_thanks">Remerciements particuliers à MO Agamy pour la création de Metrolist</string>
+    <string name="wrapped_special_thanks">Remerciements particuliers à MO Agamy pour la création de Musik</string>
     <string name="wrapped_close">Fermer le résumé</string>
     <string name="wrapped_playlist_title">Votre %s en résumé</string>
     <string name="wrapped_create_playlist">Créer une playlist</string>
@@ -556,7 +555,7 @@
     <string name="no_account_found">Aucun compte trouvé</string>
     <string name="checking_previous_account">Vérification du compte précédent…</string>
     <string name="restore">Restaurer</string>
-    <string name="restore_account_warning">Vous devrez vous reconnecter après la restauration. La session du compte suivant sera déconnectée :</string>
+    <string name="restore_account_warning">Les informations de compte suivantes seront restaurées et conservées :</string>
     <string name="restore_confirm_message">Cela permettra de restaurer les données de votre application à partir de la sauvegarde sélectionnée</string>
     <string name="restore_confirm_title">Restaurer la sauvegarde ?</string>
     <plurals name="n_episode">
@@ -897,4 +896,10 @@
     <string name="stream_source_web_creator_desc">Client web Creator.</string>
     <string name="stream_source_android_creator">ANDROID_CREATOR</string>
     <string name="stream_source_android_creator_desc">Client créateur Android. Désactivé par défaut ; nécessite DroidGuard.</string>
+    <string name="error_job_cancelled">La vidéo ne peut pas être lue. Réessayez ou passez au titre suivant.</string>
+    <string name="enable_landscape_scaling">Mise à l\'échelle en paysage</string>
+    <string name="enable_landscape_scaling_desc">Adapter l\'interface utilisateur au mode paysage pour les écrans plus grands</string>
+    <string name="dynamic_theme">Thème dynamique</string>
+    <string name="enable_dynamic_icon">Couleurs dynamiques des icônes</string>
+    <string name="enable_dynamic_icon_desc">Utilisez les couleurs dynamiques du thème pour l\'icône de l\'application. Lorsque cette option est désactivée, l\'icône affiche des couleurs unies.</string>
 </resources>

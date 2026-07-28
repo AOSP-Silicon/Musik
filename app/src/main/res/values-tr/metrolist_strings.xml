@@ -196,7 +196,6 @@
     <string name="delete_desc">Bu öğeyi kalıcı olarak kaldır</string>
     <string name="advanced_desc">Şarkının temposunu ve perdesini ayarla</string>
     <string name="equalizer_desc">Ses ekolayzırını aç</string>
-    <string name="enable_dynamic_icon">Dinamik simgeyi etkinleştir</string>
     <string name="mini_player">Mini oynatıcı</string>
     <string name="pure_black_mini_player">Saf siyah mini oynatıcı</string>
     <string name="cache_size_warning_title">Bekle!</string>
@@ -249,12 +248,12 @@
     <string name="wrapped_intro_title">METROLIST</string>
     <string name="wrapped_intro_subtitle">bu yıl neler dinlediğine bakma zamanı…</string>
     <string name="wrapped_intro_button">hadi başlayalım!</string>
-    <string name="wrapped_logo_content_description">Metrolist Logosu</string>
+    <string name="wrapped_logo_content_description">Musik Logosu</string>
     <string name="wrapped_year">2025</string>
     <string name="wrapped_ready_title">ÖZETİN HAZIR!</string>
     <string name="wrapped_ready_subtitle">Bu yıl neleri sevdiğini görme zamanı…</string>
     <string name="wrapped_thank_you">Dinlediğin için teşekkürler!</string>
-    <string name="wrapped_special_thanks">Metrolist\'i oluşturduğu için MO Agamy\'ye özel teşekkürler</string>
+    <string name="wrapped_special_thanks">Musik\'i oluşturduğu için MO Agamy\'ye özel teşekkürler</string>
     <string name="wrapped_close">Özeti kapat</string>
     <string name="wrapped_playlist_title">%s Özetin</string>
     <string name="wrapped_create_playlist">Oynatma listesi oluştur</string>
@@ -522,7 +521,7 @@
     <string name="discord_buttons">Butonlar</string>
     <string name="discord_button_1">1. buton</string>
     <string name="discord_button_2">2. buton</string>
-    <string name="discord_information_warning">Musik, ne dinlediğinizi paylaşmak için Discord\'un herkese açık OAuth2 ve Gateway API\'lerini kullanır. Yetkilendirme, kodu aldıktan sonra kendini kapatan yerel bir tarayıcı oturumu üzerinden yapılır; üçüncü taraf sunuculara hiçbir şey gönderilmez. Token\'ınız bu cihazda şifrelenmiş tercihlerde saklanır ve asla paylaşılmaz. Metrolist, etkinliğinizi yayımlamak için doğrudan wss://gateway.discord.gg adresine bağlanır ve yalnızca gereken minimum kapsamı ister (sdk.social_layer_presence).</string>
+    <string name="discord_information_warning">Musik, ne dinlediğinizi paylaşmak için Discord\'un herkese açık OAuth2 ve Gateway API\'lerini kullanır. Yetkilendirme, kodu aldıktan sonra kendini kapatan yerel bir tarayıcı oturumu üzerinden yapılır; üçüncü taraf sunuculara hiçbir şey gönderilmez. Token\'ınız bu cihazda şifrelenmiş tercihlerde saklanır ve asla paylaşılmaz. Musik, etkinliğinizi yayımlamak için doğrudan wss://gateway.discord.gg adresine bağlanır ve yalnızca gereken minimum kapsamı ister (sdk.social_layer_presence).</string>
     <string name="discord_activity_type">Etkinlik türü</string>
     <string name="discord_activity_playing">Oynuyor</string>
     <string name="discord_activity_listening">Dinliyor</string>
@@ -628,7 +627,7 @@
     </plurals>
     <string name="restore_confirm_title">Yedek geri yüklensin mi?</string>
     <string name="restore_confirm_message">Bu, uygulama verilerinizi seçilen yedekten geri yükleyecektir</string>
-    <string name="restore_account_warning">Geri yüklemeden sonra tekrar giriş yapmanız gerekecek. Şu hesaptan çıkış yapılacak:</string>
+    <string name="restore_account_warning">Aşağıdaki hesap bilgileri geri yüklenecek ve korunacaktır:</string>
     <string name="restore">Geri yükle</string>
     <string name="checking_previous_account">Önceki hesap kontrol ediliyor…</string>
     <string name="no_account_found">Hesap bulunamadı</string>
@@ -890,4 +889,10 @@
     <string name="stream_source_web_creator_desc">Creator web istemcisi.</string>
     <string name="stream_source_android_creator">ANDROID_CREATOR</string>
     <string name="stream_source_android_creator_desc">Android Creator istemcisi. Varsayılan olarak kapalıdır; DroidGuard gerekir.</string>
+    <string name="error_job_cancelled">Video oynatılamıyor. Tekrar deneyin veya sonraki şarkıya geçin.</string>
+    <string name="enable_landscape_scaling">Yatay Ölçekleme</string>
+    <string name="enable_landscape_scaling_desc">Büyük ekranlarda yatay mod için arayüzü ölçeklendir</string>
+    <string name="dynamic_theme">Dinamik Tema</string>
+    <string name="enable_dynamic_icon">Dinamik ikon renkleri</string>
+    <string name="enable_dynamic_icon_desc">Uygulama ikonu için dinamik tema renklerini kullan. Eğer kapatılırsa, ikon sabit renkleri kullanır.</string>
 </resources>

@@ -209,7 +209,6 @@
     <string name="delete_desc">完全移除此歌曲</string>
     <string name="advanced_desc">调整歌曲的节奏和音高</string>
     <string name="equalizer_desc">打开音频均衡器</string>
-    <string name="enable_dynamic_icon">开启动态图标</string>
     <string name="mini_player">迷你播放器</string>
     <string name="pure_black_mini_player">纯黑迷你播放器</string>
     <string name="cache_size_warning_title">且慢！</string>
@@ -249,12 +248,12 @@
     <string name="wrapped_intro_title">METROLIST</string>
     <string name="wrapped_intro_subtitle">是时候回顾这一年都在听什么了…</string>
     <string name="wrapped_intro_button">让我们开始吧！</string>
-    <string name="wrapped_logo_content_description">Metrolist 徽标</string>
+    <string name="wrapped_logo_content_description">Musik 徽标</string>
     <string name="wrapped_year">2025</string>
     <string name="wrapped_ready_title">您的年度总结已准备好！</string>
     <string name="wrapped_ready_subtitle">是时候回顾这一年最喜欢什么了…</string>
     <string name="wrapped_thank_you">感谢您的收听！</string>
-    <string name="wrapped_special_thanks">特别感谢 MO Agamy 创建了 Metrolist</string>
+    <string name="wrapped_special_thanks">特别感谢 MO Agamy 创建了 Musik</string>
     <string name="wrapped_close">关闭年度总结</string>
     <string name="wrapped_playlist_title">您的 %s 年度总结</string>
     <string name="wrapped_create_playlist">创建播放列表</string>
@@ -518,7 +517,7 @@
     <string name="discord_buttons">按钮</string>
     <string name="discord_button_1">按钮 1</string>
     <string name="discord_button_2">按钮 2</string>
-    <string name="discord_information_warning">Musik 使用 Discord 的公共 OAuth2 和 Gateway API 来分享您当前正在收听的内容。授权通过本地浏览器会话进行，该会话在获取代码后会自动关闭——不会向第三方服务器发送任何信息。您的令牌存储在此设备的加密偏好设置中，绝不会被共享。Metrolist 直接连接到 wss://gateway.discord.gg 来发布您的活动，并且仅请求所需的最小权限范围（sdk.social_layer_presence）。</string>
+    <string name="discord_information_warning">Musik 使用 Discord 的公共 OAuth2 和 Gateway API 来分享您当前正在收听的内容。授权通过本地浏览器会话进行，该会话在获取代码后会自动关闭——不会向第三方服务器发送任何信息。您的令牌存储在此设备的加密偏好设置中，绝不会被共享。Musik 直接连接到 wss://gateway.discord.gg 来发布您的活动，并且仅请求所需的最小权限范围（sdk.social_layer_presence）。</string>
     <string name="discord_activity_type">活动类型</string>
     <string name="discord_activity_playing">正在播放</string>
     <string name="discord_activity_listening">正在听</string>
@@ -624,7 +623,7 @@
     </plurals>
     <string name="restore_confirm_title">恢复备份？</string>
     <string name="restore_confirm_message">这将从所选备份中恢复您的应用数据</string>
-    <string name="restore_account_warning">恢复后，您需要重新登录。以下账号将退出登录：</string>
+    <string name="restore_account_warning">以下账号信息将被恢复并保留：</string>
     <string name="restore">恢复</string>
     <string name="checking_previous_account">正在检查先前账号…</string>
     <string name="no_account_found">未找到账号</string>
@@ -883,4 +882,10 @@
     <string name="discord_error_token_refresh_failed">Discord 会话已过期。请重新连接。</string>
     <string name="discord_error_invalid_scope">Discord 已拒绝连接。请重新连接并授予所需权限。</string>
     <string name="discord_error_banner_title">Discord 错误</string>
+    <string name="error_job_cancelled">视频无法播放。请重试或跳到下一首歌曲。</string>
+    <string name="enable_landscape_scaling_desc">在横屏模式下缩放界面以适应更大的屏幕</string>
+    <string name="enable_landscape_scaling">横屏缩放</string>
+    <string name="dynamic_theme">动态主题</string>
+    <string name="enable_dynamic_icon">动态图标颜色</string>
+    <string name="enable_dynamic_icon_desc">为应用图标使用动态主题颜色。禁用后，图标将使用纯色。</string>
 </resources>

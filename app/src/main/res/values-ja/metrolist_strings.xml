@@ -230,7 +230,6 @@
     <string name="delete_desc">このコンテンツを完全に削除します</string>
     <string name="advanced_desc">曲の再生速度と音程を調整します</string>
     <string name="equalizer_desc">オーディオイコライザーを調整します</string>
-    <string name="enable_dynamic_icon">動的アイコン</string>
     <string name="pure_black_mini_player">ピュアブラックのミニプレーヤー</string>
     <string name="listen_together">Listen Together</string>
     <string name="play_pause">再生/停止</string>
@@ -369,11 +368,11 @@
     <string name="wrapped_total_songs_subtitle">ユニークな曲たち！</string>
     <string name="wrapped_intro_subtitle">今年聴いてきた曲を振り返る時が来ました…</string>
     <string name="wrapped_intro_button">さあ、始めよう！</string>
-    <string name="wrapped_logo_content_description">Metrolistロゴ</string>
+    <string name="wrapped_logo_content_description">Musikロゴ</string>
     <string name="wrapped_ready_title">あなたのWrappedが完成しました！</string>
     <string name="wrapped_ready_subtitle">今年あなたが夢中になった音楽を見てみましょう…</string>
     <string name="wrapped_thank_you">聴いてくれてありがとう！</string>
-    <string name="wrapped_special_thanks">Metrolistを制作したMO Agamyに特別な感謝を</string>
+    <string name="wrapped_special_thanks">Musikを制作したMO Agamyに特別な感謝を</string>
     <string name="wrapped_close">Wrappedを閉じる</string>
     <string name="wrapped_playlist_title">あなたの%sWrapped</string>
     <plurals name="profiles_count">

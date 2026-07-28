@@ -311,7 +311,6 @@
     <string name="lyrics_romanize_as_main">Átírt dalszövegek mutatása alapértelmezetten</string>
     <string name="hide_youtube_shorts">YouTube Short-ok elrejtése</string>
     <string name="equalizer_desc">Hangszínszabályzó megnyitása</string>
-    <string name="enable_dynamic_icon">Dinamikus ikon bekapcsolása</string>
     <string name="mini_player">Mini-lejátszó</string>
     <string name="pure_black_mini_player">OLED fekete mini-lejátszó</string>
     <string name="cache_size_warning_title">Várjon!</string>
@@ -351,12 +350,12 @@
     <string name="wrapped_intro_title">METROLIST</string>
     <string name="wrapped_intro_subtitle">itt az ideje áttekinteni, mit hallgatott az év során…</string>
     <string name="wrapped_intro_button">gyerünk!</string>
-    <string name="wrapped_logo_content_description">Metrolist Logó</string>
+    <string name="wrapped_logo_content_description">Musik Logó</string>
     <string name="wrapped_year">2025</string>
     <string name="wrapped_ready_title">AZ ÖSSZEFOGLALÓD KÉSZ!</string>
     <string name="wrapped_ready_subtitle">Ideje megnézni, melyik számot imádta a legjobban…</string>
     <string name="wrapped_thank_you">Köszönjük, hogy meghallgatta!</string>
-    <string name="wrapped_special_thanks">Külön köszönet MO Agamy-nak a Metrolist létrehozásáért</string>
+    <string name="wrapped_special_thanks">Külön köszönet MO Agamy-nak a Musik létrehozásáért</string>
     <string name="wrapped_close">Összefoglaló bezárása</string>
     <string name="wrapped_playlist_title">Az Ön %s Összefoglalója</string>
     <string name="wrapped_create_playlist">Lejátszási lista létrehozása</string>

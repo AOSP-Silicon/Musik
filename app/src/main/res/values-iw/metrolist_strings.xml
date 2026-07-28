@@ -331,7 +331,6 @@
     <string name="delete_desc">הסר פריט זה לצמיתות</string>
     <string name="advanced_desc">שינוי הקצב והגובה של השיר</string>
     <string name="equalizer_desc">כוונון אקולייזר השמע</string>
-    <string name="enable_dynamic_icon">הפעל סמל דינמי</string>
     <string name="mini_player">מיני נגן</string>
     <string name="pure_black_mini_player">מיני-נגן שחור טהור</string>
     <string name="cache_size_warning_title">אחיזה!</string>
@@ -371,12 +370,12 @@
     <string name="wrapped_intro_title">METROLIST</string>
     <string name="wrapped_intro_subtitle">הגיע הזמן לראות למה האזנתם</string>
     <string name="wrapped_intro_button">בואו נתחיל!</string>
-    <string name="wrapped_logo_content_description">Metrolist לוגו</string>
+    <string name="wrapped_logo_content_description">Musik לוגו</string>
     <string name="wrapped_year">2025</string>
     <string name="wrapped_ready_title">העטיפה שלך מוכנה!</string>
     <string name="wrapped_ready_subtitle">הגיע הזמן לראות מה אהבתם השנה.</string>
     <string name="wrapped_thank_you">תודה שהקשבת</string>
-    <string name="wrapped_special_thanks">תודה מיוחדת ל-MO Agamy על יצירת Metrolist</string>
+    <string name="wrapped_special_thanks">תודה מיוחדת ל-MO Agamy על יצירת Musik</string>
     <string name="wrapped_create_playlist">צור רשימת השמעה</string>
     <string name="wrapped_playlist_saved">רשימת ההשמעה נשמרה</string>
     <plurals name="profiles_count">

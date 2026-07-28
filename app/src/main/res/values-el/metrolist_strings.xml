@@ -227,7 +227,6 @@
     <string name="delete_desc">Μόνιμη διαγραφή αυτού του στοιχείου</string>
     <string name="advanced_desc">Αλλαγή του τέμπο και του τόνου του τραγουδιού</string>
     <string name="equalizer_desc">Ρύθμιση του ισοσταθμιστή ήχου</string>
-    <string name="enable_dynamic_icon">Ενεργοποίηση δυναμικού εικονιδίου</string>
     <string name="cache_size_warning_title">Περιμένετε!</string>
     <string name="cache_size_warning_message">Έχετε επιλέξει ένα όριο μεγέθους προσωρινής μνήμης μικρότερο από αυτό που χρησιμοποιεί επί του παρόντος η εφαρμογή (%1$s). Εάν συνεχίσετε, η εφαρμογή ενδέχεται να καταργήσει ορισμένα %2$s για να ταιριάξει με το νέο όριο. Θέλετε να συνεχίσετε;</string>
     <string name="cache_size_warning_confirm">Συνέχεια</string>
@@ -251,10 +250,10 @@
     <string name="wrapped_intro_title">METROLIST</string>
     <string name="wrapped_intro_subtitle">ήρθε η ώρα να δείτε τι έχετε ακούσει</string>
     <string name="wrapped_intro_button">Πάμε!</string>
-    <string name="wrapped_logo_content_description">Λογότυπο Metrolist</string>
+    <string name="wrapped_logo_content_description">Λογότυπο Musik</string>
     <string name="wrapped_year">2025</string>
     <string name="wrapped_ready_subtitle">Ήρθε η ώρα να δείτε τι λατρέψατε φέτος.</string>
-    <string name="wrapped_special_thanks">Ιδιαίτερες ευχαριστίες στον MO Agamy για τη δημιουργία του Metrolist</string>
+    <string name="wrapped_special_thanks">Ιδιαίτερες ευχαριστίες στον MO Agamy για τη δημιουργία του Musik</string>
     <string name="wrapped_create_playlist">Δημιουργία λίστας αναπαραγωγής</string>
     <string name="wrapped_playlist_saved">Η λίστα αναπαραγωγής αποθηκεύτηκε</string>
     <plurals name="profiles_count">

@@ -200,7 +200,6 @@
     <string name="delete_desc">Вилучити цей елемент назавжди</string>
     <string name="advanced_desc">Змінити темп і висоту тону пісні</string>
     <string name="equalizer_desc">Налаштування аудіоеквалайзера</string>
-    <string name="enable_dynamic_icon">Увімкнути динамічний значок</string>
     <string name="mini_player">Міні-плеєр</string>
     <string name="pure_black_mini_player">Чисто чорний міні-плеєр</string>
     <string name="cache_size_warning_title">Тримайся!</string>
@@ -255,12 +254,12 @@
     <string name="wrapped_intro_title">METROLIST</string>
     <string name="wrapped_intro_subtitle">настав час подивитися, що ви слухали протягом усього цього року…</string>
     <string name="wrapped_intro_button">Ходімо!</string>
-    <string name="wrapped_logo_content_description">Логотип Metrolist</string>
+    <string name="wrapped_logo_content_description">Логотип Musik</string>
     <string name="wrapped_year">2025</string>
     <string name="wrapped_ready_title">ВАШ АУДІОПІДСУМОК ЗА РІК ГОТОВИЙ!</string>
     <string name="wrapped_ready_subtitle">Час подивитися, що вам сподобалося цього року…</string>
     <string name="wrapped_thank_you">Дякую, що вислухали!</string>
-    <string name="wrapped_special_thanks">Особлива подяка MO Agamy за створення Metrolist</string>
+    <string name="wrapped_special_thanks">Особлива подяка MO Agamy за створення Musik</string>
     <string name="wrapped_close">Закрити обгорнуте</string>
     <string name="wrapped_playlist_title">Ваш Wrapped %s</string>
     <string name="wrapped_create_playlist">Створити список відтворення</string>

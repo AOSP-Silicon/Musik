@@ -18,6 +18,7 @@ import androidx.media3.exoplayer.offline.Download
 import androidx.media3.exoplayer.offline.DownloadManager
 import androidx.media3.exoplayer.offline.DownloadNotificationHelper
 import com.metrolist.innertube.YouTube
+import com.metrolist.innertube.strategy.ContentHints
 import com.metrolist.music.constants.AudioQuality
 import com.metrolist.music.constants.AudioQualityKey
 import com.metrolist.music.constants.PreferredItagOrderKey
@@ -110,11 +111,16 @@ constructor(
                 } catch (e: IllegalArgumentException) {
                     ItagPriority.values()[0]
                 }
+                val song = database.songEntity(mediaId)
                 YTPlayerUtils.playerResponseForPlayback(
                     mediaId,
                     audioQuality = audioQuality,
                     itagPriority = itagPriority,
                     connectivityManager = connectivityManager,
+                    contentHints = ContentHints(
+                        isExplicit = song?.explicit,
+                        isUploaded = song?.isUploaded,
+                    ),
                 )
             }.getOrThrow()
             val format = playbackData.format

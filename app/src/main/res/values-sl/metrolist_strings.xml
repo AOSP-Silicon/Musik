@@ -176,7 +176,7 @@
     <string name="scrobble_delay_percent">Odstotek zakasnitve beleženja</string>
     <string name="scrobble_delay_minutes">Zakasnitev beleženja v minutah</string>
     <string name="last_fm_send_likes">Pošlji všečke/nevšečke</string>
-    <string name="last_fm_send_likes_description">Dodaj/odstrani pesmi med priljubljenimi na Last.fm, ko jih všečkaš/odvšečkaš v Metrolistu</string>
+    <string name="last_fm_send_likes_description">Dodaj/odstrani pesmi med priljubljenimi na Last.fm, ko jih všečkaš/odvšečkaš v Musiku</string>
     <string name="lyrics_romanize_chinese">Romaniziraj kitajska besedila</string>
     <string name="edit_playlist_cover_note">Opomba: Vaš račun mora biti povezan s telefonsko številko in preverjen na YouTube Music, da lahko spremenite naslovnico seznama predvajanja.</string>
     <string name="settings_section_player_content">Predvajalnik in vsebina</string>
@@ -227,7 +227,6 @@
     <string name="delete_desc">Trajno odstrani ta element</string>
     <string name="advanced_desc">Spremeni tempo in višino tona skladbe</string>
     <string name="equalizer_desc">Prilagodi izenačevalnik zvoka</string>
-    <string name="enable_dynamic_icon">Omogoči dinamično ikono</string>
     <string name="mini_player">Mini predvajalnik</string>
     <string name="pure_black_mini_player">Popolnoma črn mini predvajalnik</string>
     <string name="cache_size_warning_title">Pozor!</string>
@@ -265,5 +264,5 @@
     <string name="wrapped_total_artists_subtitle">različnih izvajalcev</string>
     <string name="casting_to">Predvajanje na %s</string>
     <string name="progress_percent">Napredek: %s%%</string>
-    <string name="listening_to_metrolist">Poslušaš Metrolist</string>
+    <string name="listening_to_metrolist">Poslušaš Musik</string>
 </resources>

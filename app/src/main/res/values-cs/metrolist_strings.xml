@@ -202,7 +202,6 @@
     <string name="equalizer_desc">Otevřít ekvalizér</string>
     <string name="cache_size_warning_title">Pozor!</string>
     <string name="pure_black_mini_player">Čistě černý mini přehrávač</string>
-    <string name="enable_dynamic_icon">Povolit dynamickou ikonu</string>
     <string name="mini_player">Mini přehrávač</string>
     <string name="advanced_desc">Upravit tempo a výšku skladby</string>
     <string name="add_to_library_desc">Uložit do vaší knihovny</string>
@@ -255,12 +254,12 @@
     <string name="wrapped_intro_title">METROLIST</string>
     <string name="wrapped_intro_subtitle">je čas podívat se, co jsi tento rok poslouchal/a…</string>
     <string name="wrapped_intro_button">jdeme na to!</string>
-    <string name="wrapped_logo_content_description">Logo Metrolist</string>
+    <string name="wrapped_logo_content_description">Logo Musik</string>
     <string name="wrapped_year">2025</string>
     <string name="wrapped_ready_title">TVŮJ WRAPPED JE READY!</string>
     <string name="wrapped_ready_subtitle">Je čas podívat se, co se ti tento rok líbilo…</string>
     <string name="wrapped_thank_you">Děkujeme za poslech!</string>
-    <string name="wrapped_special_thanks">Zvláštní poděkování patří MO Agamy za vytvoření Metrolistu</string>
+    <string name="wrapped_special_thanks">Zvláštní poděkování patří MO Agamy za vytvoření Musiku</string>
     <string name="wrapped_close">Zavřít Wrapped</string>
     <string name="wrapped_playlist_title">Váš %s Wrapped</string>
     <string name="wrapped_create_playlist">Vytvořit playlist</string>
@@ -535,7 +534,7 @@
     <string name="discord_buttons">Tlačítka</string>
     <string name="discord_button_1">Tlačítko 1</string>
     <string name="discord_button_2">Tlačítko 2</string>
-    <string name="discord_information_warning">Musik využívá veřejné služby OAuth2 SDK a Gateway API Discordu ke sdílení toho, co posloucháte. Autorizace se provádí skrze lokální relaci prohlížeče, která se automaticky zavře po zaznamenání kódu – nic se neodesílá na servery třetích stran. Váš token je uložen na tomto zařízení v šifrovaných předvolbách a nikdy není sdílen. Metrolist se připojuje přímo k wss://gateway.discord.gg pro zveřejnění vaší aktivity, a žádá pouze o minimální vyžadovaný rozsah (sdk.social_layer_presence).</string>
+    <string name="discord_information_warning">Musik využívá veřejné služby OAuth2 SDK a Gateway API Discordu ke sdílení toho, co posloucháte. Autorizace se provádí skrze lokální relaci prohlížeče, která se automaticky zavře po zaznamenání kódu – nic se neodesílá na servery třetích stran. Váš token je uložen na tomto zařízení v šifrovaných předvolbách a nikdy není sdílen. Musik se připojuje přímo k wss://gateway.discord.gg pro zveřejnění vaší aktivity, a žádá pouze o minimální vyžadovaný rozsah (sdk.social_layer_presence).</string>
     <string name="discord_activity_type">Typ aktivity</string>
     <string name="discord_activity_playing">Hraje</string>
     <string name="discord_activity_listening">Poslouchá</string>
@@ -639,7 +638,7 @@
     </plurals>
     <string name="restore_confirm_title">Obnovit zálohu?</string>
     <string name="restore_confirm_message">Tímto se obnoví data aplikace ze zvolené zálohy</string>
-    <string name="restore_account_warning">Po obnovení se budete muset znovu přihlásit. Následující účet bude odhlášen:</string>
+    <string name="restore_account_warning">Budou obnoveny a zachovány následující informace o účtu:</string>
     <string name="restore">Obnovit</string>
     <string name="checking_previous_account">Kontroluji předchozí účet…</string>
     <string name="no_account_found">Žádný účet nenalezen</string>
@@ -904,4 +903,10 @@
     <string name="stream_source_web_creator_desc">Webový klient tvůrce.</string>
     <string name="stream_source_android_creator">ANDROID_CREATOR</string>
     <string name="stream_source_android_creator_desc">Klient tvůrce pro Android. Ve výchozím nastavení vypnuté; vyžaduje DroidGuard.</string>
+    <string name="error_job_cancelled">Video není k dispozici k přehrání. Zkuste to znovu nebo přeskočte na další skladbu.</string>
+    <string name="enable_landscape_scaling">Škálování na šířku</string>
+    <string name="enable_landscape_scaling_desc">Nastavit rozhraní do režimu na šířku pro větší obrazovky</string>
+    <string name="dynamic_theme">Dynamický motiv</string>
+    <string name="enable_dynamic_icon">Dynamické barvy ikon</string>
+    <string name="enable_dynamic_icon_desc">Použít barvy dynamického motivu pro ikonu aplikace. Pokud je vypnuto, budou použity jednobarevné odstíny.</string>
 </resources>

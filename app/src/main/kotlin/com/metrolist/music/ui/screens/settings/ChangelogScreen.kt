@@ -32,6 +32,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.metrolist.music.BuildConfig
 import com.metrolist.music.constants.CheckForPrereleasesKey
+import com.metrolist.music.constants.MusikRedThemeKey
 import com.metrolist.music.R
 import com.metrolist.music.utils.ReleaseInfo
 import com.metrolist.music.utils.Updater
@@ -159,6 +160,8 @@ fun ChangelogScreen(
 
 @Composable
 fun ReleaseItem(release: ReleaseInfo) {
+    val musikRedTheme by rememberPreference(MusikRedThemeKey, defaultValue = false)
+
     Column(modifier = Modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -178,14 +181,14 @@ fun ReleaseItem(release: ReleaseInfo) {
             }
 
             Surface(
-                color = MaterialTheme.colorScheme.tertiaryContainer,
+                color = if (musikRedTheme) MaterialTheme.colorScheme.tertiaryContainer else MaterialTheme.colorScheme.secondaryContainer,
                 shape = CircleShape
             ) {
                 Text(
                     text = release.releaseDate.split("T").firstOrNull() ?: "",
                     modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
                     style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.onTertiaryContainer
+                    color = if (musikRedTheme) MaterialTheme.colorScheme.onTertiaryContainer else MaterialTheme.colorScheme.onSecondaryContainer
                 )
             }
         }

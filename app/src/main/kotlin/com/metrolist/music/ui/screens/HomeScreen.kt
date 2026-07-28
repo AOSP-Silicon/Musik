@@ -117,6 +117,7 @@ import com.metrolist.music.constants.GridThumbnailHeight
 import com.metrolist.music.constants.InnerTubeCookieKey
 import com.metrolist.music.constants.ListItemHeight
 import com.metrolist.music.constants.ListThumbnailSize
+import com.metrolist.music.constants.MusikRedThemeKey
 import com.metrolist.music.constants.RandomizeHomeOrderKey
 import com.metrolist.music.constants.SmallGridThumbnailHeight
 import com.metrolist.music.constants.ThumbnailCornerRadius
@@ -214,6 +215,7 @@ fun CommunityPlaylistCard(
     val isListenTogetherGuest = listenTogetherManager?.let { it.isInRoom && !it.isHost } ?: false
     val scope = rememberCoroutineScope()
     val isDark = isSystemInDarkTheme()
+    val musikRedTheme by rememberPreference(MusikRedThemeKey, defaultValue = false)
 
     val containerColor =
         if (isDark) {
@@ -419,7 +421,10 @@ fun CommunityPlaylistCard(
                     modifier =
                         Modifier
                             .size(48.dp)
-                            .background(MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f), CircleShape),
+                            .background(
+                                if (musikRedTheme) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f),
+                                CircleShape
+                            ),
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.radio),
@@ -479,12 +484,15 @@ fun CommunityPlaylistCard(
                     modifier =
                         Modifier
                             .size(48.dp)
-                            .background(MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.5f), CircleShape),
+                            .background(
+                                if (musikRedTheme) MaterialTheme.colorScheme.tertiaryContainer else MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f),
+                                CircleShape
+                            ),
                 ) {
                     Icon(
                         painter = painterResource(if (isBookmarked) R.drawable.library_add_check else R.drawable.library_add),
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onTertiaryContainer,
+                        tint = if (musikRedTheme) MaterialTheme.colorScheme.onTertiaryContainer else MaterialTheme.colorScheme.onSecondaryContainer,
                         modifier = Modifier.size(24.dp),
                     )
                 }

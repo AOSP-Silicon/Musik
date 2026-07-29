@@ -114,6 +114,7 @@ import com.metrolist.music.LocalPlayerConnection
 import com.metrolist.music.LocalSyncUtils
 import com.metrolist.music.R
 import com.metrolist.music.constants.DarkModeKey
+import com.metrolist.music.constants.MusikRedThemeKey
 import com.metrolist.music.constants.PlaylistEditLockKey
 import com.metrolist.music.constants.PlaylistSongSortDescendingKey
 import com.metrolist.music.constants.PlaylistSongSortType
@@ -876,6 +877,7 @@ fun LocalPlaylistHeader(
 ) {
     val navController = LocalNavController.current
     val playerConnection = LocalPlayerConnection.current ?: return
+    val musikRedTheme by rememberPreference(MusikRedThemeKey, false)
     val context = LocalContext.current
     val database = LocalDatabase.current
     val menuState = LocalMenuState.current
@@ -1337,7 +1339,7 @@ fun LocalPlaylistHeader(
                     )
                 },
                 shape = CircleShape,
-                color = MaterialTheme.colorScheme.secondary,
+                color = if (musikRedTheme) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.surfaceVariant,
                 modifier = Modifier.size(48.dp),
             ) {
                 Box(
@@ -1457,7 +1459,7 @@ fun LocalPlaylistHeader(
                     }
                 },
                 shape = CircleShape,
-                color = MaterialTheme.colorScheme.tertiary,
+                color = if (musikRedTheme) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.surfaceVariant,
                 modifier = Modifier.size(48.dp),
             ) {
                 Box(

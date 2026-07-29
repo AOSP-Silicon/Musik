@@ -78,6 +78,7 @@ import com.metrolist.music.LocalPlayerAwareWindowInsets
 import com.metrolist.music.LocalPlayerConnection
 import com.metrolist.music.R
 import com.metrolist.music.constants.HideExplicitKey
+import com.metrolist.music.constants.MusikRedThemeKey
 import com.metrolist.music.constants.SongSortDescendingKey
 import com.metrolist.music.constants.SongSortType
 import com.metrolist.music.constants.SongSortTypeKey
@@ -474,6 +475,7 @@ private fun CachePlaylistHeader(
     modifier: Modifier = Modifier
 ) {
     val playerConnection = LocalPlayerConnection.current ?: return
+    val musikRedTheme by rememberPreference(MusikRedThemeKey, false)
     
     Column(
         modifier = modifier
@@ -545,7 +547,7 @@ private fun CachePlaylistHeader(
                     )
                 },
                 shape = androidx.compose.foundation.shape.CircleShape,
-                color = MaterialTheme.colorScheme.secondary,
+                color = if (musikRedTheme) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.surfaceVariant,
                 modifier = Modifier.size(48.dp)
             ) {
                 Box(
@@ -619,7 +621,7 @@ private fun CachePlaylistHeader(
                     }
                 },
                 shape = androidx.compose.foundation.shape.CircleShape,
-                color = MaterialTheme.colorScheme.tertiary,
+                color = if (musikRedTheme) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.surfaceVariant,
                 modifier = Modifier.size(48.dp)
             ) {
                 Box(

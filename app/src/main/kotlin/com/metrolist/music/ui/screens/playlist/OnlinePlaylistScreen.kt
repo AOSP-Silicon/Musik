@@ -88,6 +88,7 @@ import com.metrolist.music.LocalPlayerConnection
 import com.metrolist.music.LocalSyncUtils
 import com.metrolist.music.R
 import com.metrolist.music.constants.HideExplicitKey
+import com.metrolist.music.constants.MusikRedThemeKey
 import com.metrolist.music.constants.ThumbnailCornerRadius
 import com.metrolist.music.db.entities.Playlist
 import com.metrolist.music.db.entities.PlaylistEntity
@@ -499,6 +500,7 @@ private fun OnlinePlaylistHeader(
     val database = LocalDatabase.current
     val menuState = LocalMenuState.current
     val syncUtils = LocalSyncUtils.current
+    val musikRedTheme by rememberPreference(MusikRedThemeKey, false)
 
     Column(
         modifier =
@@ -660,7 +662,7 @@ private fun OnlinePlaylistHeader(
                     }
                 },
                 shape = CircleShape,
-                color = MaterialTheme.colorScheme.secondary,
+                color = if (musikRedTheme) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.surfaceVariant,
                 modifier = Modifier.size(48.dp),
             ) {
                 Box(
@@ -677,7 +679,7 @@ private fun OnlinePlaylistHeader(
                             if (dbPlaylist?.playlist?.bookmarkedAt != null) {
                                 MaterialTheme.colorScheme.error
                             } else {
-                                MaterialTheme.colorScheme.onSecondary
+                                if (musikRedTheme) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.onSurfaceVariant
                             },
                         modifier = Modifier.size(24.dp),
                     )
@@ -728,7 +730,7 @@ private fun OnlinePlaylistHeader(
                     }
                 },
                 shape = CircleShape,
-                color = MaterialTheme.colorScheme.tertiary,
+                color = if (musikRedTheme) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.surfaceVariant,
                 modifier = Modifier.size(48.dp),
             ) {
                 Box(

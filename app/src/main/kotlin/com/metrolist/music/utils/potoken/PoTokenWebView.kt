@@ -76,6 +76,14 @@ class PoTokenWebView private constructor(
         webViewSettings.userAgentString = USER_AGENT
         webViewSettings.blockNetworkLoads = true // the WebView does not need internet access
 
+        // Harden settings to match standard browser
+        webViewSettings.domStorageEnabled = true
+        webViewSettings.databaseEnabled = false
+        webViewSettings.allowFileAccess = false
+        webViewSettings.allowContentAccess = false
+        webViewSettings.setSupportZoom(false)
+        webViewSettings.builtInZoomControls = false
+
         // so that we can run async functions and get back the result
         webView.addJavascriptInterface(this, JS_INTERFACE)
 
@@ -152,7 +160,26 @@ class PoTokenWebView private constructor(
             }
 
             // calls downloadAndRunBotguard() when the page has finished loading
+            val cloakingJs = """
+                <script>
+                    (function() {
+                        // Cloak navigator properties
+                        Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+                        Object.defineProperty(navigator, 'platform', { get: () => 'Linux armv8l' });
+
+                        // Hide/protect the native bridge
+                        var originalBridge = window.$JS_INTERFACE;
+                        Object.defineProperty(window, '$JS_INTERFACE', {
+                            get: function() { return originalBridge; },
+                            configurable: false,
+                            enumerable: false
+                        });
+                    })();
+                </script>
+            """.trimIndent()
+
             val data = html.replaceFirst("</script>", "\n$JS_INTERFACE.downloadAndRunBotguard()</script>")
+                .replaceFirst("<head>", "<head>\n$cloakingJs")
             webView.loadDataWithBaseURL("https://www.youtube.com", data, "text/html", "utf-8", null)
         }
     }
@@ -444,7 +471,7 @@ class PoTokenWebView private constructor(
         private const val GOOGLE_API_KEY = "AIzaSyDyT5W0Jh49F30Pqqtyfdf7pDLFKLJoAnw"
         private const val REQUEST_KEY = "O43z0dpjhgX20SCx4KAo"
         private const val USER_AGENT = com.metrolist.innertube.models.YouTubeClient.USER_AGENT_WEB
-        private const val JS_INTERFACE = "PoTokenWebView"
+        private const val JS_INTERFACE = "__native_bridge"
 
         // Init does network round-trips (botguard Create/GenerateIT) + JS execution; a WebView
         // that hasn't finished after this long has a dead/wedged renderer or dead network.

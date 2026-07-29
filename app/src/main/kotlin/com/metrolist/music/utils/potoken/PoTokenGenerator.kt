@@ -21,6 +21,7 @@ class PoTokenGenerator {
     private var webPoTokenSessionId: String? = null
     private var webPoTokenStreamingPot: String? = null
     private var webPoTokenGenerator: PoTokenWebView? = null
+    private val poTokenCache = mutableMapOf<String, String>()
 
     fun getWebClientPoToken(videoId: String, sessionId: String): PoTokenResult? {
         Timber.tag(TAG).d("getWebClientPoToken called: videoId=$videoId, sessionId=$sessionId")
@@ -109,6 +110,7 @@ class PoTokenGenerator {
                     webPoTokenGenerator = null
                     webPoTokenStreamingPot = null
                     webPoTokenSessionId = null
+                    poTokenCache.clear()
 
                     val newGenerator = PoTokenWebView.getNewPoTokenGenerator(CipherDeobfuscator.appContext)
 
@@ -131,6 +133,13 @@ class PoTokenGenerator {
                 Triple(webPoTokenGenerator!!, webPoTokenStreamingPot!!, shouldRecreate)
             }
 
+        webPoTokenGenLock.withLock {
+            poTokenCache[videoId]?.let {
+                Timber.tag(TAG).d("Returning cached PoToken for videoId=$videoId")
+                return PoTokenResult(streamingPot, it)
+            }
+        }
+
         val playerPot = try {
             poTokenGenerator.generatePoToken(videoId)
         } catch (throwable: Throwable) {
@@ -146,6 +155,8 @@ class PoTokenGenerator {
                 return getWebClientPoToken(videoId = videoId, sessionId = sessionId, forceRecreate = true)
             }
         }
+
+        webPoTokenGenLock.withLock { poTokenCache[videoId] = playerPot }
 
         Timber.tag(TAG).d("poToken generated successfully: session=${streamingPot.take(20)}..., video=${playerPot.take(20)}...")
 

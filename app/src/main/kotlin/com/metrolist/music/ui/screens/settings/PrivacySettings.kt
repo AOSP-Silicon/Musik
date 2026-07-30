@@ -129,6 +129,39 @@ fun PrivacySettings(
         mutableStateOf(false)
     }
 
+    var showClearLogsDialog by remember {
+        mutableStateOf(false)
+    }
+
+    if (showClearLogsDialog) {
+        DefaultDialog(
+            onDismiss = { showClearLogsDialog = false },
+            content = {
+                Text(
+                    text = "Are you sure you want to clear the logs?",
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(horizontal = 18.dp),
+                )
+            },
+            buttons = {
+                TextButton(
+                    onClick = { showClearLogsDialog = false },
+                ) {
+                    Text(text = stringResource(android.R.string.cancel))
+                }
+
+                TextButton(
+                    onClick = {
+                        showClearLogsDialog = false
+                        LoggingTree.clearLogs()
+                    },
+                ) {
+                    Text(text = stringResource(android.R.string.ok))
+                }
+            },
+        )
+    }
+
     if (showClearSearchHistoryDialog) {
         DefaultDialog(
             onDismiss = { showClearSearchHistoryDialog = false },
@@ -289,13 +322,16 @@ fun PrivacySettings(
                     },
                     onClick = { onEnableDebugLogsChange(!enableDebugLogs) }
                 ),
-                if (enableDebugLogs) {
-                    Material3SettingsItem(
-                        icon = painterResource(R.drawable.share),
-                        title = { Text("Share Debug Logs") },
-                        onClick = { shareLogs() }
-                    )
-                } else null
+                if (enableDebugLogs) Material3SettingsItem(
+                    icon = painterResource(R.drawable.share),
+                    title = { Text("Share Debug Logs") },
+                    onClick = { shareLogs() }
+                ) else null,
+                if (enableDebugLogs) Material3SettingsItem(
+                    icon = painterResource(R.drawable.delete_history),
+                    title = { Text("Clear Debug Logs") },
+                    onClick = { showClearLogsDialog = true }
+                ) else null
             )
         )
         Spacer(modifier = Modifier.height(16.dp))

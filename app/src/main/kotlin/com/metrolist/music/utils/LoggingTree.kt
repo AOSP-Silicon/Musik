@@ -69,6 +69,12 @@ object LoggingTree : Timber.Tree() {
     @Synchronized
     fun clearLogs() {
         logs.clear()
+        cacheDir?.let { dir ->
+            val logFile = File(dir, "app_logs.txt")
+            if (logFile.exists()) {
+                logFile.delete()
+            }
+        }
     }
 
     fun getLogsAsString(): String {

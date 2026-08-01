@@ -766,9 +766,9 @@ fun BottomSheetPlayer(
                         steps = (120 - 5) / 5 - 1,
                     )
 
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalAlignment = Alignment.CenterVertically,
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
                         if (isAtDefault) {
                             FilledIconButton(
@@ -1823,7 +1823,9 @@ fun BottomSheetPlayer(
                                             .size(32.dp)
                                             .padding(4.dp)
                                             .align(Alignment.Center)
-                                            .alpha(if (isListenTogetherGuest) 0.5f else 1f),
+                                            .alpha(
+                                                if (isListenTogetherGuest || repeatMode == Player.REPEAT_MODE_OFF) 0.5f else 1f,
+                                            ),
                                     enabled = !isListenTogetherGuest,
                                     onClick = {
                                         playerConnection.player.toggleRepeatMode()

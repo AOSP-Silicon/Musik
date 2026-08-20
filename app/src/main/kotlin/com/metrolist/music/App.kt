@@ -251,6 +251,15 @@ class App :
 
         applicationScope.launch(Dispatchers.IO) {
             dataStore.data
+                .map { it[InnerTubeAuthUserKey] ?: "0" }
+                .distinctUntilChanged()
+                .collect { authUser ->
+                    YouTube.authUser = authUser
+                }
+        }
+
+        applicationScope.launch(Dispatchers.IO) {
+            dataStore.data
                 .map { it[InnerTubeCookieKey] }
                 .distinctUntilChanged()
                 .collect { cookie ->
@@ -350,6 +359,7 @@ class App :
                 settings.remove(InnerTubeCookieKey)
                 settings.remove(VisitorDataKey)
                 settings.remove(DataSyncIdKey)
+                settings.remove(InnerTubeAuthUserKey)
                 settings.remove(AccountNameKey)
                 settings.remove(AccountEmailKey)
                 settings.remove(AccountChannelHandleKey)
@@ -370,6 +380,7 @@ class App :
             YouTube.cookie = null
             YouTube.visitorData = null
             YouTube.dataSyncId = null
+            YouTube.authUser = "0"
             Timber.d(
                 "forgetAccount: After - cookie=${YouTube.cookie}, visitorData=${YouTube.visitorData}, dataSyncId=${YouTube.dataSyncId}",
             )

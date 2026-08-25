@@ -1603,13 +1603,43 @@ interface DatabaseDao {
         previewSize: Int = Int.MAX_VALUE,
     ): Flow<List<Playlist>>
 
+    // Keep only the latest play per song in each section before Room hydrates song relations.
     @Transaction
-    @Query("SELECT * FROM event ORDER BY rowId DESC")
-    fun events(): Flow<List<EventWithSong>>
+    @Query(
+        """
+        SELECT event.*
+        FROM event
+        JOIN (
+            SELECT MAX(id) AS id
+            FROM event
+            GROUP BY songId,
+                CASE
+                    WHEN timestamp >= :tomorrowStart THEN 'this_week'
+                    WHEN timestamp >= :todayStart THEN 'today'
+                    WHEN timestamp >= :yesterdayStart THEN 'yesterday'
+                    WHEN timestamp >= :thisMondayStart THEN 'this_week'
+                    WHEN timestamp >= :lastMondayStart THEN 'last_week'
+                    ELSE strftime('%Y-%m', timestamp / 1000, 'unixepoch')
+                END
+        ) AS latest_event ON latest_event.id = event.id
+        ORDER BY event.id DESC
+        """,
+    )
+    fun historyEvents(
+        tomorrowStart: LocalDateTime,
+        todayStart: LocalDateTime,
+        yesterdayStart: LocalDateTime,
+        thisMondayStart: LocalDateTime,
+        lastMondayStart: LocalDateTime,
+    ): Flow<List<EventWithSong>>
 
     @Transaction
     @Query("SELECT * FROM event ORDER BY rowId ASC LIMIT 1")
     fun firstEvent(): Flow<EventWithSong?>
+
+    @Transaction
+    @Query("SELECT * FROM event ORDER BY rowId DESC LIMIT 1")
+    fun latestEvent(): Flow<EventWithSong?>
 
     @Query("SELECT COUNT(*) FROM event")
     fun eventCount(): Flow<Int>

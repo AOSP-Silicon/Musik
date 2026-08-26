@@ -4376,8 +4376,12 @@ class MusicService :
         // On Android O+, every startForegroundService() call requires
         // Service.startForeground() to be called within a short timeout.
         // Some OEMs (e.g. MIUI) strictly enforce this even when the
-        // service is already in the foreground, so always promote here.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        // service is already in the foreground, so promote here unless Media3 is handling a
+        // notification dismissal. Re-promoting that intent immediately restores the dismissed
+        // media control.
+        val isNotificationDismissal =
+            intent?.getBooleanExtra(MediaNotification.NOTIFICATION_DISMISSED_EVENT_KEY, false) == true
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !isNotificationDismissal) {
             if (!ensureForegroundWithLatestNotificationOrStop()) {
                 return START_NOT_STICKY
             }

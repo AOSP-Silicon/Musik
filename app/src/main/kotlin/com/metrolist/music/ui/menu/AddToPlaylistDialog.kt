@@ -149,6 +149,7 @@ fun AddToPlaylistDialog(
     }
     LaunchedEffect(isVisible, songIds, playlists) {
         if (!isVisible) {
+            songIds = null
             playlistsContainingSong = emptySet()
             return@LaunchedEffect
         }

@@ -1968,6 +1968,15 @@ interface DatabaseDao {
     @Update
     fun update(song: SongEntity)
 
+    @Query(
+        """
+        UPDATE song
+        SET thumbnailUrl = REPLACE(thumbnailUrl, '/maxresdefault.jpg', '/hqdefault.jpg')
+        WHERE thumbnailUrl LIKE 'https://i.ytimg.com/%/maxresdefault.jpg%'
+        """,
+    )
+    fun repairMissingVideoThumbnails()
+
     @Update
     fun update(artist: ArtistEntity)
 

@@ -4832,16 +4832,12 @@ class MusicService :
     private fun startCrossfade() {
         if (isCrossfading) return
 
-
-
-        // Preserve player state before creating the secondary player
-        // Use runBlocking to ensure we get the correct state from DataStore
-        val savedRepeatMode = runBlocking { dataStore.get(RepeatModeKey, REPEAT_MODE_OFF) }
-        val savedShuffleEnabled = runBlocking { dataStore.get(ShuffleModeKey, false) }
+        val repeatMode = player.repeatMode
+        val shuffleModeEnabled = player.shuffleModeEnabled
 
         // For repeat-one, crossfade back into the same track
         val targetIndex =
-            if (savedRepeatMode == REPEAT_MODE_ONE) {
+            if (repeatMode == REPEAT_MODE_ONE) {
                 player.currentMediaItemIndex
             } else {
                 player.nextMediaItemIndex
@@ -4864,8 +4860,8 @@ class MusicService :
 
         secPlayer.setPlaybackParameters(player.playbackParameters)
 
-        secPlayer.repeatMode = savedRepeatMode
-        secPlayer.shuffleModeEnabled = savedShuffleEnabled
+        secPlayer.repeatMode = repeatMode
+        secPlayer.shuffleModeEnabled = shuffleModeEnabled
         secPlayer.playbackParameters = player.playbackParameters
 
         try {
@@ -4881,7 +4877,7 @@ class MusicService :
 
         performCrossfadeSwap()
 
-        if (savedShuffleEnabled) {
+        if (shuffleModeEnabled) {
             val shufflePlaylistFirst = dataStore.get(ShufflePlaylistFirstKey, false)
             applyShuffleOrder(player.currentMediaItemIndex, player.mediaItemCount, shufflePlaylistFirst)
         }
@@ -4897,6 +4893,9 @@ class MusicService :
         _playerFlow.value = player
         secondaryPlayer = null
 
+        // Do not persist the retired player's temporary repeat-off state.
+        fadingPlayer?.removeListener(this)
+        sleepTimer?.let { timer -> fadingPlayer?.removeListener(timer) }
         fadingPlayer?.repeatMode = Player.REPEAT_MODE_OFF
         fadingPlayer?.let {
             val currentIndex = it.currentMediaItemIndex
@@ -4904,9 +4903,6 @@ class MusicService :
                 it.removeMediaItems(currentIndex + 1, it.mediaItemCount)
             }
         }
-
-        fadingPlayer?.removeListener(this)
-        sleepTimer?.let { timer -> fadingPlayer?.removeListener(timer) }
 
         player.addListener(
             object : Player.Listener {

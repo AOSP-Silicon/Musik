@@ -1184,6 +1184,7 @@ class MainActivity : ComponentActivity() {
                                         slimNav = slimNav,
                                         onSearchLongClick = onSearchLongClick,
                                         musikRedTheme = musikRedTheme,
+                                        onHomeLongHold = { showAccountDialog = true },
                                         modifier =
                                             Modifier
                                                 .align(Alignment.BottomCenter)
@@ -1301,6 +1302,7 @@ class MainActivity : ComponentActivity() {
                                     onItemClick = onRailItemClick,
                                     pureBlack = pureBlack,
                                     onSearchLongClick = onRailSearchLongClick,
+                                    onHomeLongHold = { showAccountDialog = true },
                                 )
                             }
                             Box(Modifier.weight(1f)) {

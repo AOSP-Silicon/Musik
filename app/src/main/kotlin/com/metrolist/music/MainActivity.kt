@@ -349,11 +349,7 @@ class MainActivity : ComponentActivity() {
             listenTogetherManager.disconnect()
         }
         super.onDestroy()
-        // Use effective playing state so Cast (local player paused, remote playing) is included.
-        val stopServiceOnClear =
-            dataStore.get(StopMusicOnTaskClearKey, false) &&
-                playerConnection?.isEffectivelyPlaying?.value == true &&
-                isFinishing
+        val stopServiceOnClear = dataStore.get(StopMusicOnTaskClearKey, false) && isFinishing
 
         // Full cleanup - only on actual destroy
         playerConnection?.dispose()

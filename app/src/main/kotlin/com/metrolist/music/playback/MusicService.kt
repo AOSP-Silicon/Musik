@@ -3901,7 +3901,11 @@ class MusicService :
             if (!shouldBypassCache) {
                 val usePlayerCache = dataStore.get(EnableSongCacheKey, true)
 
-                val contentLength = storedFormat?.contentLength
+                val contentLength =
+                    storedFormat?.contentLength
+                        ?: ContentMetadata
+                            .getContentLength(downloadCache.getContentMetadata(mediaId))
+                            .takeIf { it > 0L }
                 val requiredLength =
                     when {
                         dataSpec.length >= 0 -> dataSpec.length

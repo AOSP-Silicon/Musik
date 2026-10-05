@@ -191,9 +191,14 @@ constructor(
                 upsert(updatedSong)
             }
 
-            val streamUrl = playbackData.streamUrl.let {
-                "${it}&range=0-${actualContentLength}"
-            }
+            // googlevideo throttles unbounded requests to roughly playback speed; a range param covering
+            // the whole file lets the download run at full speed.
+            val streamUrl =
+                if (actualContentLength != null && "&range=" !in playbackData.streamUrl) {
+                    "${playbackData.streamUrl}&range=0-${actualContentLength - 1}"
+                } else {
+                    playbackData.streamUrl
+                }
 
             songUrlCache.put(
                 mediaId = mediaId,

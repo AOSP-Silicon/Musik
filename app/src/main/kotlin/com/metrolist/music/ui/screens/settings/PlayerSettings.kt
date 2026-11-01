@@ -103,7 +103,7 @@ fun PlayerSettings(
     )
     val (itagPriority, onItagPriorityChange) = rememberEnumPreference(
         PreferredItagOrderKey,
-        defaultValue = ItagPriority.PRIO_VERY_HIGH_OPUS
+        defaultValue = ItagPriority.PRIO_VERY_HIGH_AAC
     )
     val (crossfadeEnabled, onCrossfadeEnabledChange) = rememberPreference(
         CrossfadeEnabledKey,

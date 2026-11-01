@@ -195,7 +195,7 @@ private fun DeveloperSocials(
             onClick = { uriHandler.openUri("https://music.youtube.com/playlist?list=PL3LT5gX5mIed6lXBq-xoQQUddiZKLolrM") },
             modifier = Modifier.weight(1f).height(48.dp)
         ) {
-            Icon(painterResource(R.drawable.language), contentDescription = null)
+            Icon(painterResource(R.drawable.playlist_play), contentDescription = null)
         }
         FilledTonalButton(
             onClick = { uriHandler.openUri("https://github.com/GhostMaster69-dev") },

@@ -877,7 +877,7 @@ fun LocalPlaylistHeader(
 ) {
     val navController = LocalNavController.current
     val playerConnection = LocalPlayerConnection.current ?: return
-    val musikRedTheme by rememberPreference(MusikRedThemeKey, false)
+    val musikRedTheme by rememberPreference(MusikRedThemeKey, true)
     val context = LocalContext.current
     val database = LocalDatabase.current
     val menuState = LocalMenuState.current

@@ -118,7 +118,7 @@ fun ThemeScreen(
     navController: NavController,
 ) {
     val (darkMode, onDarkModeChange) = rememberEnumPreference(DarkModeKey, DarkMode.AUTO)
-    val musikRedTheme by rememberPreference(MusikRedThemeKey, defaultValue = false)
+    val musikRedTheme by rememberPreference(MusikRedThemeKey, defaultValue = true)
     val (pureBlack, onPureBlackChangeRaw) = rememberPreference(PureBlackKey, defaultValue = false)
     val (_, onPureBlackMiniPlayerChange) = rememberPreference(
         PureBlackMiniPlayerKey,

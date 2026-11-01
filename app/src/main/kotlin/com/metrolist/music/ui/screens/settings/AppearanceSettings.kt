@@ -164,7 +164,7 @@ fun AppearanceSettings(
     val (musikRedTheme, onMusikRedThemeChange) =
         rememberPreference(
             MusikRedThemeKey,
-            defaultValue = false,
+            defaultValue = true,
         )
     // Check if user has selected a custom color (not the default/dynamic color)
     val isUsingCustomColor = selectedThemeColorInt != DefaultThemeColor.toArgb()

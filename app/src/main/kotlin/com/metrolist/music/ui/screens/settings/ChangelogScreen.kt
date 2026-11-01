@@ -160,7 +160,7 @@ fun ChangelogScreen(
 
 @Composable
 fun ReleaseItem(release: ReleaseInfo) {
-    val musikRedTheme by rememberPreference(MusikRedThemeKey, defaultValue = false)
+    val musikRedTheme by rememberPreference(MusikRedThemeKey, defaultValue = true)
 
     Column(modifier = Modifier.fillMaxWidth()) {
         Row(

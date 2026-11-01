@@ -475,7 +475,7 @@ private fun CachePlaylistHeader(
     modifier: Modifier = Modifier
 ) {
     val playerConnection = LocalPlayerConnection.current ?: return
-    val musikRedTheme by rememberPreference(MusikRedThemeKey, false)
+    val musikRedTheme by rememberPreference(MusikRedThemeKey, true)
     
     Column(
         modifier = modifier

@@ -521,7 +521,7 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        val musikRedTheme by rememberPreference(MusikRedThemeKey, defaultValue = false)
+        val musikRedTheme by rememberPreference(MusikRedThemeKey, defaultValue = true)
 
         val enableDynamicTheme by rememberPreference(DynamicThemeKey, defaultValue = true)
         val enableHighRefreshRate by rememberPreference(EnableHighRefreshRateKey, defaultValue = true)

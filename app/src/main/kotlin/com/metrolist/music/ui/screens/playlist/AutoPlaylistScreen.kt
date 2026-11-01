@@ -878,7 +878,7 @@ private fun AutoPlaylistHeader(
 ) {
     val playerConnection = LocalPlayerConnection.current ?: return
     val context = LocalContext.current
-    val musikRedTheme by rememberPreference(MusikRedThemeKey, false)
+    val musikRedTheme by rememberPreference(MusikRedThemeKey, true)
 
     Column(
         modifier =

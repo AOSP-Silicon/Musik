@@ -500,7 +500,7 @@ private fun OnlinePlaylistHeader(
     val database = LocalDatabase.current
     val menuState = LocalMenuState.current
     val syncUtils = LocalSyncUtils.current
-    val musikRedTheme by rememberPreference(MusikRedThemeKey, false)
+    val musikRedTheme by rememberPreference(MusikRedThemeKey, true)
 
     Column(
         modifier =

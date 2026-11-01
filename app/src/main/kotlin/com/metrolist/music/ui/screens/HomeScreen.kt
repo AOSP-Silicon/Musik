@@ -215,7 +215,7 @@ fun CommunityPlaylistCard(
     val isListenTogetherGuest = listenTogetherManager?.let { it.isInRoom && !it.isHost } ?: false
     val scope = rememberCoroutineScope()
     val isDark = isSystemInDarkTheme()
-    val musikRedTheme by rememberPreference(MusikRedThemeKey, defaultValue = false)
+    val musikRedTheme by rememberPreference(MusikRedThemeKey, defaultValue = true)
 
     val containerColor =
         if (isDark) {

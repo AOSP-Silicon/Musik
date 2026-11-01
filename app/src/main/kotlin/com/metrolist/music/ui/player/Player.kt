@@ -280,7 +280,7 @@ fun BottomSheetPlayer(
             defaultValue = true,
         )
     val (hidePlayerThumbnail, onHidePlayerThumbnailChange) = rememberPreference(HidePlayerThumbnailKey, false)
-    val (enableGlassmorphism, _) = rememberPreference(EnableGlassmorphismKey, defaultValue = false)
+    val (enableGlassmorphism, _) = rememberPreference(EnableGlassmorphismKey, defaultValue = true)
 
     val (hideStatusBarOnFullscreen) = rememberPreference(HideStatusBarOnFullscreenKey, false)
     val cropAlbumArt by rememberPreference(CropAlbumArtKey, false)

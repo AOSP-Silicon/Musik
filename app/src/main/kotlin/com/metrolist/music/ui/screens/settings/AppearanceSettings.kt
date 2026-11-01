@@ -144,7 +144,7 @@ fun AppearanceSettings(
     val (enableGlassmorphism, onEnableGlassmorphismChange) =
         rememberPreference(
             EnableGlassmorphismKey,
-            defaultValue = false,
+            defaultValue = true,
         )
     val (enableHighRefreshRate, onEnableHighRefreshRateChange) =
         rememberPreference(

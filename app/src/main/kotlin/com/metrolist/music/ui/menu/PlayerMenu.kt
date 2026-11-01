@@ -289,7 +289,7 @@ fun PlayerMenu(
                         if (isCasting) {
                             castHandler?.setVolume(volume)
                         } else {
-                            playerConnection.service.playerVolume.value = volume
+                            playerConnection.service.setPlayerVolume(volume)
                         }
                     },
                     modifier = Modifier.weight(1f),

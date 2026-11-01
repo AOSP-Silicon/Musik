@@ -373,6 +373,11 @@ class MusicService :
         applyEffectiveVolume()
     }
 
+    fun setPlayerVolume(volume: Float) {
+        playerVolume.value = volume.coerceIn(0f, 1f)
+        applyEffectiveVolume()
+    }
+
     private fun calculateEffectiveVolume(
         volume: Float = playerVolume.value,
         muted: Boolean = isMuted.value,

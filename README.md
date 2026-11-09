@@ -50,6 +50,12 @@ This project continues development separately while respecting and crediting the
 <img src="https://raw.githubusercontent.com/AOSP-Silicon/Musik/main/fastlane/metadata/android/en-US/images/screenshots/screenshot_4.png" width="30%"/>
 <img src="https://raw.githubusercontent.com/AOSP-Silicon/Musik/main/fastlane/metadata/android/en-US/images/screenshots/screenshot_5.png" width="30%"/>
 <img src="https://raw.githubusercontent.com/AOSP-Silicon/Musik/main/fastlane/metadata/android/en-US/images/screenshots/screenshot_6.png" width="30%"/>
+<img src="https://raw.githubusercontent.com/AOSP-Silicon/Musik/main/fastlane/metadata/android/en-US/images/screenshots/screenshot_7.png" width="30%"/>
+<img src="https://raw.githubusercontent.com/AOSP-Silicon/Musik/main/fastlane/metadata/android/en-US/images/screenshots/screenshot_8.png" width="30%"/>
+<img src="https://raw.githubusercontent.com/AOSP-Silicon/Musik/main/fastlane/metadata/android/en-US/images/screenshots/screenshot_9.png" width="30%"/>
+<img src="https://raw.githubusercontent.com/AOSP-Silicon/Musik/main/fastlane/metadata/android/en-US/images/screenshots/screenshot_10.png" width="30%"/>
+<img src="https://raw.githubusercontent.com/AOSP-Silicon/Musik/main/fastlane/metadata/android/en-US/images/screenshots/screenshot_11.png" width="30%"/>
+<img src="https://raw.githubusercontent.com/AOSP-Silicon/Musik/main/fastlane/metadata/android/en-US/images/screenshots/screenshot_12.png" width="30%"/>
 
 </div>
 
